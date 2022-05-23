@@ -22,23 +22,7 @@ export default function RegisterScreen({ navigation }) {
   const [role, setRole] = useState("help_givers");
   const [status, setStatus] = useState("");
 
-  const onSignUpPressed = () => {
-    const firstnameError = nameValidator(firstname.value);
-    const lastnameError = nameValidator(lastname.value);
-    const emailError = emailValidator(email.value);
-    const passwordError = passwordValidator(password.value);
-    if (emailError || passwordError || firstnameError || lastnameError) {
-      setFirstname({ ...firstname, error: firstnameError });
-      setLastame({ ...lastname, error: lastnameError });
-      setEmail({ ...email, error: emailError });
-      setPassword({ ...password, error: passwordError });
-      return;
-    }
-    navigation.reset({
-      index: 0,
-      routes: [{ name: "TabNavigator" }],
-    });
-  };
+
 
   return (
     <Background>
@@ -98,15 +82,14 @@ export default function RegisterScreen({ navigation }) {
         secureTextEntry
       />
     
-        <TextInput
+    <TextInput
         label="status"
         dense={true}
-        returnKeyType="done"
+        returnKeyType="next"
         value={status.value}
         onChangeText={(text) => setStatus(text)}
         error={!!status.error}
         errorText={status.error}
-        secureTextEntry
       />
       <View style={{ flexDirection: "row" }}>
         <TouchableRipple
@@ -147,7 +130,8 @@ export default function RegisterScreen({ navigation }) {
           })
             .then((response) => {
              
-                console.log(response.data);
+                // console.log(response.data);
+                alert(response.data);
               
             })
             .catch((error) => {
