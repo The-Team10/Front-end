@@ -119,7 +119,7 @@ export default function Home(props) {
       </View>
       <View>
         <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
-          {renderInnerView("hand-holding-heart", "Help ", "Donation")}
+          {renderInnerView("hand-holding-heart", "Help ")}
           {renderInnerView("hand-holding", "Help me")}
         </View>
         <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
