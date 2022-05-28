@@ -1,5 +1,5 @@
 const Constants = {
-  primaryColor: "#5FC1F7",
+  primaryColor: "#2196f3",
   primaryColorRouter: "#5FC1F7",
   white: "white",
 };

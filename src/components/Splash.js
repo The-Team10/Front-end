@@ -15,11 +15,11 @@ const windowHeight = Dimensions.get("window").height;
 const spashAllIn = require("../images/spashAllIn.png");
 
 const Splash = ({ navigation }) => {
-    useEffect(() => {
+  useEffect(() => {
     setTimeout(() => {
       navigation.navigate("StartUpScreens");
     }, 3000);
-  }, []);  
+  }, []);
   return (
     <View style={styles.center}>
       <LinearGradient
@@ -42,11 +42,13 @@ const Splash = ({ navigation }) => {
             width: windowWidth * 0.8,
             height: windowHeight * 0.3,
             borderRadius: 110,
+            borderRadius: 100,
           }}
         />
         <Text
           style={{
             color: "white",
+            color: Constants.primaryColorRouter,
             fontSize: 21,
             paddingVertical: 20,
             fontWeigth: "bold",

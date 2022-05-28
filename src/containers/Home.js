@@ -57,7 +57,7 @@ export default function Home(props) {
   const renderInnerView = (IconName, title, route) => {
     return (
       <TouchableOpacity
-        Onpress={() => navigation.navigate(route)}
+        onPress={() => props?.navigation.navigate(route)}
         style={{
           backgroundColor: Constants.primaryColor,
           width: windowWidth * 0.45,
@@ -119,8 +119,16 @@ export default function Home(props) {
       </View>
       <View>
         <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
-          {renderInnerView("hand-holding-heart", "Help ")}
-          {renderInnerView("hand-holding", "Help me")}
+          {renderInnerView(
+            "hand-holding-heart",
+            "Donation material",
+            "DonationMaterial"
+          )}
+          {renderInnerView(
+            "hand-holding",
+            "Donation financial",
+            "DonationFinancial"
+          )}
         </View>
         <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
           {renderInnerView("calendar-alt", "Events")}
