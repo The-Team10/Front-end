@@ -1,10 +1,10 @@
 import * as React from "react";
 import { Text, View } from "react-native";
 
-export default function Help() {
+export default function HelpRequest() {
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Help!</Text>
+      <Text>HelpRequest!</Text>
     </View>
   );
 }

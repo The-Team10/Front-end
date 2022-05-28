@@ -10,25 +10,10 @@ import BackButton from "../components/BackButton";
 import { theme } from "../core/theme";
 import { emailValidator } from "../helpers/emailValidator";
 import { passwordValidator } from "../helpers/passwordValidator";
-
+import axios from "axios";
 export default function LoginScreen({ navigation }) {
-  const [email, setEmail] = useState({ value: "", error: "" });
-  const [password, setPassword] = useState({ value: "", error: "" });
-
-  const onLoginPressed = () => {
-    const emailError = emailValidator(email.value);
-    const passwordError = passwordValidator(password.value);
-    if (emailError || passwordError) {
-      setEmail({ ...email, error: emailError });
-      setPassword({ ...password, error: passwordError });
-      return;
-    }
-    navigation.reset({
-      index: 0,
-      routes: [{ name: "TabNavigator" }],
-    });
-  };
-
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   return (
     <Background>
       <BackButton goBack={navigation.goBack} />
@@ -38,7 +23,7 @@ export default function LoginScreen({ navigation }) {
         label="Email"
         returnKeyType="next"
         value={email.value}
-        onChangeText={(text) => setEmail({ value: text, error: "" })}
+        onChangeText={(text) => setEmail(text)}
         error={!!email.error}
         errorText={email.error}
         autoCapitalize="none"
@@ -50,7 +35,7 @@ export default function LoginScreen({ navigation }) {
         label="Password"
         returnKeyType="done"
         value={password.value}
-        onChangeText={(text) => setPassword({ value: text, error: "" })}
+        onChangeText={(text) => setPassword(text)}
         error={!!password.error}
         errorText={password.error}
         secureTextEntry
@@ -62,7 +47,33 @@ export default function LoginScreen({ navigation }) {
           <Text style={styles.forgot}>Forgot your password?</Text>
         </TouchableOpacity>
       </View>
-      <Button mode="contained" onPress={onLoginPressed}>
+      <Button
+        mode="contained"
+        onPress={() => {
+          navigation.reset({
+            //   // index: 0,
+            routes: [{ name: "Dashboard" }],
+          });
+          /*     axios({
+            method: "post",
+            url: `http://192.168.11.218:3000/api/contributors/login`,
+            data: { email, password },
+          })
+            .then((response) => {
+              if (response.data === "login successful") {
+                navigation.reset({
+                  //   // index: 0,
+                  routes: [{ name: "Dashboard" }],
+                });
+              }
+              // console.log(response.data);
+              alert(response.data);
+            })
+            .catch((error) => {
+              console.log(error);
+            }); */
+        }}
+      >
         Login
       </Button>
       <View style={styles.row}>
@@ -74,7 +85,6 @@ export default function LoginScreen({ navigation }) {
     </Background>
   );
 }
-
 const styles = StyleSheet.create({
   forgotPassword: {
     width: "100%",

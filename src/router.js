@@ -5,6 +5,9 @@ import TabNavigator from "./navigation/TabNavigator";
 import { createStackNavigator } from "@react-navigation/stack";
 import StartUpScreens from "./navigation/StartUpScreens";
 import SignInAndOut from "./navigation/SignInAndOut";
+import DonationMaterial from "./containers/DonationMaterial";
+import DonationFinancial from "./containers/DonationFinancial";
+
 import { Provider } from "react-native-paper";
 import { theme } from "./core/theme";
 
@@ -19,6 +22,11 @@ export default function Router() {
           <Stack.Screen name="StartUpScreens" component={StartUpScreens} />
           <Stack.Screen name="SignInAndOut" component={SignInAndOut} />
           <Stack.Screen name="TabNavigator" component={TabNavigator} />
+          <Stack.Screen
+            name="DonationFinancial"
+            component={DonationFinancial}
+          />
+          <Stack.Screen name="DonationMaterial" component={DonationMaterial} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
