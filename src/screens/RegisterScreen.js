@@ -11,66 +11,44 @@ import { theme } from "../core/theme";
 import { emailValidator } from "../helpers/emailValidator";
 import { passwordValidator } from "../helpers/passwordValidator";
 import { nameValidator } from "../helpers/nameValidator";
-
+import axios from "axios";
 export default function RegisterScreen({ navigation }) {
-  const [firstname, setFirstname] = useState({ value: "", error: "" });
-  const [lastname, setLastname] = useState({ value: "", error: "" });
-  const [email, setEmail] = useState({ value: "", error: "" });
-  const [password, setPassword] = useState({ value: "", error: "" });
-  const [confirmPassword, setConfirmPassword] = useState({
-    value: "",
-    error: "",
-  });
-  const [role, setRole] = React.useState("help_givers");
-
-  const onSignUpPressed = () => {
-    const firstnameError = nameValidator(firstname.value);
-    const lastnameError = nameValidator(lastname.value);
-    const emailError = emailValidator(email.value);
-    const passwordError = passwordValidator(password.value);
-    if (emailError || passwordError || firstnameError || lastnameError) {
-      setFirstname({ ...firstname, error: firstnameError });
-      setLastame({ ...lastname, error: lastnameError });
-      setEmail({ ...email, error: emailError });
-      setPassword({ ...password, error: passwordError });
-      return;
-    }
-    navigation.reset({
-      index: 0,
-      routes: [{ name: "TabNavigator" }],
-    });
-  };
-
+  const [first_name, setFirstname] = useState("");
+  const [last_name, setLastname] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [role, setRole] = useState("help_givers");
   return (
     <Background>
       <BackButton goBack={navigation.goBack} />
       <Logo />
       <Header>Create Account</Header>
-
+      
       <TextInput
         label="First name"
         dense={true}
         returnKeyType="next"
-        value={firstname.value}
-        onChangeText={(text) => setFirstname({ value: text, error: "" })}
-        error={!!firstname.error}
-        errorText={firstname.error}
+        value={first_name.value}
+        onChangeText={(text) => setFirstname(text)}
+        error={!!first_name.error}
+        errorText={first_name.error}
       />
       <TextInput
         label="Last name"
         dense={true}
         returnKeyType="next"
-        value={lastname.value}
-        onChangeText={(text) => setLastname({ value: text, error: "" })}
-        error={!!lastname.error}
-        errorText={lastname.error}
+        value={last_name.value}
+        onChangeText={(text) => setLastname(text)}
+        error={!!last_name.error}
+        errorText={last_name.error}
       />
       <TextInput
         label="Email"
         dense={true}
         returnKeyType="next"
         value={email.value}
-        onChangeText={(text) => setEmail({ value: text, error: "" })}
+        onChangeText={(text) => setEmail(text)}
         error={!!email.error}
         errorText={email.error}
         autoCapitalize="none"
@@ -83,7 +61,7 @@ export default function RegisterScreen({ navigation }) {
         dense={true}
         returnKeyType="done"
         value={password.value}
-        onChangeText={(text) => setPassword({ value: text, error: "" })}
+        onChangeText={(text) => setPassword(text)}
         error={!!password.error}
         errorText={password.error}
         secureTextEntry
@@ -93,11 +71,20 @@ export default function RegisterScreen({ navigation }) {
         dense={true}
         returnKeyType="done"
         value={confirmPassword.value}
-        onChangeText={(text) => setConfirmPassword({ value: text, error: "" })}
+        onChangeText={(text) => setConfirmPassword(text)}
         error={!!confirmPassword.error}
         errorText={confirmPassword.error}
         secureTextEntry
       />
+      {/* <TextInput
+        label="status"
+        dense={true}
+        returnKeyType="next"
+        value={status.value}
+        onChangeText={(text) => setStatus(text)}
+        error={!!status.error}
+        errorText={status.error}
+      /> */}
       <View style={{ flexDirection: "row" }}>
         <TouchableRipple
           onPress={() => setRole("help_givers")}
@@ -129,7 +116,27 @@ export default function RegisterScreen({ navigation }) {
       </View>
       <Button
         mode="contained"
-        onPress={onSignUpPressed}
+        onPress={() => {
+          axios({
+            method: "post",
+            url: `http://192.168.11.218:3000/api/contributors/signup`,
+            data: {
+              first_name,
+              last_name,
+              email,
+              password,
+              confirmPassword,
+              role,
+            },
+          })
+            .then((response) => {
+              // console.log(response.data);
+              alert(response.data);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }}
         style={{ marginTop: 24 }}
       >
         Sign Up
@@ -143,7 +150,6 @@ export default function RegisterScreen({ navigation }) {
     </Background>
   );
 }
-
 const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
