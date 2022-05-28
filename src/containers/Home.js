@@ -78,7 +78,7 @@ export default function Home(props) {
       </TouchableOpacity>
     );
   };
-  return (
+  return ( 
     <View
       style={{
         flex: 1,

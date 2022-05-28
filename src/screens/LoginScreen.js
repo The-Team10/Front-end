@@ -14,7 +14,6 @@ import axios from "axios";
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   return (
     <Background>
       <BackButton goBack={navigation.goBack} />
@@ -53,18 +52,19 @@ export default function LoginScreen({ navigation }) {
         onPress={() => {
           axios({
             method: "post",
-            url: `http://192.168.11.97:3000/api/contributors/login`,
+            url: `http://192.168.11.101:3000/api/contributors/login`,
             data: { email, password },
           })
             .then((response) => {
               if (response.data === "login successful") {
                 navigation.reset({
-                  //   // index: 0,
                   routes: [{ name: "Dashboard" }],
                 });
+                alert(response.data)
+
               }
-              // console.log(response.data);
-              alert(response.data);
+               console.log(response.data);
+               alert(response.data);
             })
             .catch((error) => {
               console.log(error);
@@ -82,7 +82,6 @@ export default function LoginScreen({ navigation }) {
     </Background>
   );
 }
-
 const styles = StyleSheet.create({
   forgotPassword: {
     width: "100%",
