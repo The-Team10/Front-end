@@ -46,7 +46,7 @@ const StartingPageOne = ({ navigation }) => {
           fontWeigth: "bold",
         }}
       >
-        Always together
+        Always together 
       </Text>
       <TouchableOpacity
         style={{
@@ -54,7 +54,7 @@ const StartingPageOne = ({ navigation }) => {
           position: "absolute",
           bottom: 50,
           paddingHorizontal: 40,
-          backgroundColor: Constants.primaryColor,
+          backgroundColor: "#55A4F3",
           borderRadius: 10,
           alignItems: "center",
           justifyContent: "center",

@@ -12,7 +12,6 @@ import { emailValidator } from "../helpers/emailValidator";
 import { passwordValidator } from "../helpers/passwordValidator";
 import { nameValidator } from "../helpers/nameValidator";
 import axios from "axios";
-
 export default function RegisterScreen({ navigation }) {
   const [first_name, setFirstname] = useState("");
   const [last_name, setLastname] = useState("");
@@ -20,16 +19,12 @@ export default function RegisterScreen({ navigation }) {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [role, setRole] = useState("help_givers");
-  const [status, setStatus] = useState("");
-
-
-
   return (
     <Background>
       <BackButton goBack={navigation.goBack} />
       <Logo />
       <Header>Create Account</Header>
-
+      
       <TextInput
         label="First name"
         dense={true}
@@ -81,8 +76,7 @@ export default function RegisterScreen({ navigation }) {
         errorText={confirmPassword.error}
         secureTextEntry
       />
-    
-    <TextInput
+      {/* <TextInput
         label="status"
         dense={true}
         returnKeyType="next"
@@ -90,7 +84,7 @@ export default function RegisterScreen({ navigation }) {
         onChangeText={(text) => setStatus(text)}
         error={!!status.error}
         errorText={status.error}
-      />
+      /> */}
       <View style={{ flexDirection: "row" }}>
         <TouchableRipple
           onPress={() => setRole("help_givers")}
@@ -125,19 +119,23 @@ export default function RegisterScreen({ navigation }) {
         onPress={() => {
           axios({
             method: "post",
-            url: `http://192.168.11.97:3000/api/contributors/signup`,
-            data: {first_name, last_name,email,password,confirmPassword,role,status},
+            url: `http://192.168.11.218:3000/api/contributors/signup`,
+            data: {
+              first_name,
+              last_name,
+              email,
+              password,
+              confirmPassword,
+              role,
+            },
           })
             .then((response) => {
-             
-                // console.log(response.data);
-                alert(response.data);
-              
+              // console.log(response.data);
+              alert(response.data);
             })
             .catch((error) => {
               console.log(error);
             });
-          
         }}
         style={{ marginTop: 24 }}
       >
@@ -152,7 +150,6 @@ export default function RegisterScreen({ navigation }) {
     </Background>
   );
 }
-
 const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
