@@ -20,7 +20,7 @@ const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 const img1 = require("../images/img1.jpg");
 const img2 = require("../images/img2.jpg");
 const img3 = require("../images/img3.jpg");
-
+const materialDonationLogo = require("../images/materialDonationLogo.png");
 export default function Home(props) {
   useEffect(() => {
     BackHandler.addEventListener("hardwareBackPress", handleBackPress);
@@ -43,6 +43,12 @@ export default function Home(props) {
     },
   ]);
   const [index, setIndex] = React.useState(0);
+  const [user, setUser] = React.useState({
+    id: "jhdkah54d54sads45",
+    name: "haythme",
+    lastName: "boudhina",
+    role: "HelpGivers",
+  });
 
   const isCarousel = React.useRef(null);
 
@@ -54,7 +60,7 @@ export default function Home(props) {
     );
   };
 
-  const renderInnerView = (IconName, title, route) => {
+  const renderInnerView = (IconName, title, route, image) => {
     return (
       <TouchableOpacity
         onPress={() => props?.navigation.navigate(route)}
@@ -68,12 +74,17 @@ export default function Home(props) {
           justifyContent: "center",
         }}
       >
-        <FontAwesome5
-          style={{ bottom: 5 }}
-          name={IconName}
-          size={60}
-          color={Constants.white}
-        />
+        {image ? (
+          <Image source={materialDonationLogo} style={styles.image} />
+        ) : (
+          <FontAwesome5
+            style={{ bottom: 5 }}
+            name={IconName}
+            size={60}
+            color={Constants.white}
+          />
+        )}
+
         <Text style={{ color: "white" }}>{title}</Text>
       </TouchableOpacity>
     );
@@ -118,18 +129,27 @@ export default function Home(props) {
         />
       </View>
       <View>
-        <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
-          {renderInnerView(
-            "hand-holding-heart",
-            "Donation material",
-            "DonationMaterial"
-          )}
-          {renderInnerView(
-            "hand-holding",
-            "Donation financial",
-            "DonationFinancial"
-          )}
-        </View>
+        {user.role === "HelpGivers" && (
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-around" }}
+          >
+            {renderInnerView(
+              "hand-holding-heart",
+              "Donation material",
+              "DonationMaterial"
+            )}
+            {renderInnerView(
+              "donate",
+              "Donation financial",
+              "DonationFinancial"
+            )}
+          </View>
+        )}
+        {user.role === "HelpSeekers" && (
+          <View style={{ alignItems: "center" }}>
+            {renderInnerView("hand-holding", "Help request", "HelpRequest")}
+          </View>
+        )}
         <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
           {renderInnerView("calendar-alt", "Events")}
           {renderInnerView("user-friends", "Contact us")}

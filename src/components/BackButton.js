@@ -3,15 +3,15 @@ import { TouchableOpacity, Image, StyleSheet } from "react-native";
 import { getStatusBarHeight } from "react-native-status-bar-height";
 import { Constants } from "../commun/Constants";
 
-export default function BackButton({ goBack }) {
+export default function BackButton({ goBack, white, inTop }) {
   return (
     <TouchableOpacity
       hitSlop={{ top: 20, bottom: 20, left: 50, right: 50 }}
       onPress={goBack}
-      style={styles.container}
+      style={[styles.container, inTop && { top: 15 }]}
     >
       <Image
-        tintColor={Constants.primaryColor}
+        tintColor={white ? "white" : Constants.primaryColor}
         style={styles.image}
         source={require("../assets/arrow_back.png")}
       />
