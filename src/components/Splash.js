@@ -48,7 +48,6 @@ const Splash = ({ navigation }) => {
         <Text
           style={{
             color: "white",
-            color: Constants.primaryColorRouter,
             fontSize: 21,
             paddingVertical: 20,
             fontWeigth: "bold",
