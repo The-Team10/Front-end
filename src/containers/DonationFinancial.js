@@ -1,118 +1,126 @@
 import * as React from "react";
-import { Text, View, ScrollView, TouchableOpacity } from "react-native";
-import TextInput from "../components/TextInput";
+import {
+  Text,
+  View,
+  ScrollView,
+  TouchableOpacity,
+  TextInput,
+  Image,
+  Dimensions,
+  Switch,
+  StatusBar,
+} from "react-native";
 import Header from "../components/Header";
 import { Constants } from "../commun/Constants";
+import BackButton from "../components/BackButton";
+const windowWidth = Dimensions.get("window").width;
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import { LinearGradient } from "expo-linear-gradient";
+const education = require("../images/education.png");
+const emergency = require("../images/emergency.jpg");
+const food = require("../images/food.jpg");
+export default function DonationMaterial({ navigation }) {
+  const [emergncy, setEmergency] = React.useState("");
+  const [foods, setFoods] = React.useState("");
+  const [educatn, setEducatn] = React.useState("");
 
-export default function DonationFinancial() {
-  const [firstName, setFirstName] = React.useState("");
-  const [lastName, setLastName] = React.useState("");
-  const [donationName, setDonationName] = React.useState("");
-  const [typeDonation, setTypeDonation] = React.useState("");
-  const [adress, setAdress] = React.useState("");
-  const [imageUrl, setImageUrl] = React.useState("");
-  const [phone, setPhone] = React.useState("");
-  const [description, setDescription] = React.useState("");
-
-  return (
-    <View>
-      <Header top>Donation Financial</Header>
-
-      <ScrollView>
-        <Text
+  const renderInnerView = (title, image, state, setState) => {
+    return (
+      <View
+        style={{
+          backgroundColor: "gray",
+          width: windowWidth * 0.9,
+          //  height: windowWidth * 0.2,
+          marginVertical: 8,
+          borderRadius: 20,
+          flexDirection: "column",
+          alignSelf: "center",
+          elevation: 10,
+        }}
+      >
+        <Image
+          source={image}
           style={{
-            color: "black",
-            fontSize: 17,
-            paddingVertical: 5,
-            paddingHorizontal: 10,
-            textAlign: "left",
-            fontWeigth: "bold",
+            width: "100%",
+            height: windowWidth * 0.2,
+            borderTopLeftRadius: 15,
+            borderTopRightRadius: 15,
+          }}
+        />
+        <View
+          style={{
+            backgroundColor: "white",
+            borderTopLeftRadius: 15,
+            borderTopRightRadius: 15,
+            justifyContent: "center",
           }}
         >
-          My donitor is for{" "}
-        </Text>
-        
-        <View style={{ flex: 1, paddingBottom: 100, marginHorizontal: 10 }}>
-          <TextInput
-            label="First name"
-            returnKeyType="next"
-            value={firstName}
-            onChangeText={(text) => setFirstName(text)}
-            autoCapitalize="none"
-            style={{ borderRadius: 10 }}
-          />
-          <TextInput
-            label="Last name"
-            returnKeyType="next"
-            value={lastName}
-            onChangeText={(text) => setLastName(text)}
-            autoCapitalize="none"
-            style={{ borderRadius: 10 }}
-          />
-          <TextInput
-            label="Donation name"
-            returnKeyType="next"
-            value={donationName}
-            onChangeText={(text) => setDonationName(text)}
-            autoCapitalize="none"
-            style={{ borderRadius: 10 }}
-          />
-          <TextInput
-            label="type donation"
-            returnKeyType="next"
-            value={typeDonation}
-            onChangeText={(text) => setTypeDonation(text)}
-            autoCapitalize="none"
-            style={{ borderRadius: 10 }}
-          />
-          <TextInput
-            label="Adress"
-            returnKeyType="next"
-            value={adress}
-            onChangeText={(text) => setAdress(text)}
-            autoCapitalize="none"
-            style={{ borderRadius: 10 }}
-          />
-          <TextInput
-            label="Image url"
-            returnKeyType="next"
-            value={imageUrl}
-            onChangeText={(text) => setImageUrl(text)}
-            autoCapitalize="none"
-            style={{ borderRadius: 10 }}
-          />
-          <TextInput
-            label="Phone"
-            returnKeyType="next"
-            value={phone}
-            onChangeText={(text) => setPhone(text)}
-            autoCapitalize="none"
-            style={{ borderRadius: 10 }}
-          />
-          <TextInput
-            label="Description"
-            returnKeyType="next"
-            value={description}
-            onChangeText={(text) => setDescription(text)}
-            autoCapitalize="none"
-            style={{ borderRadius: 10 }}
-          />
-          <TouchableOpacity
+          <Text
             style={{
-              paddingVertical: 15,
-              //    position: "absolute",
-              //     bottom: 50,
-              paddingHorizontal: 40,
-              backgroundColor: Constants.primaryColor,
-              borderRadius: 10,
-              alignItems: "center",
-              justifyContent: "center",
+              color: "black",
+              fontSize: 15,
+              fontWeight: "700",
+              top: "30%",
+              left: 20,
             }}
           >
-            <Text style={{ color: "white", fontSize: 16 }}>Submit</Text>
-          </TouchableOpacity>
+            {title}
+          </Text>
+
+          <Switch
+            style={{ right: 15, bottom: 10 }}
+            trackColor={{ false: "gray", true: "#81b0ff" }}
+            thumbColor={Constants.primaryColor}
+            onValueChange={() => setState(!state)}
+            value={state}
+          />
+        </View>
+      </View>
+    );
+  };
+
+  return (
+    <View style={{ flex: 1 }}>
+      <StatusBar animated={true} backgroundColor={"#0072FF"} />
+      <LinearGradient
+        colors={["#0072FF", "rgba(33,150,243,0.7)"]}
+        style={{
+          width: windowWidth,
+        }}
+      >
+        <BackButton inTop white goBack={navigation.goBack} />
+        <Header white>Categories</Header>
+      </LinearGradient>
+
+      <ScrollView>
+        <View style={{ flex: 1, flexDirection: "column", paddingTop: 15 }}>
+          {renderInnerView("Education", education, educatn, setEducatn)}
+          {renderInnerView("Emergency", emergency, emergncy, setEmergency)}
+
+          {renderInnerView("Food", food, foods, setFoods)}
         </View>
       </ScrollView>
+
+      <TouchableOpacity
+        onPress={() => navigation.navigate("CreditCard")}
+        style={{
+          paddingVertical: 15,
+          //    position: "absolute",
+          //     bottom: 50,
+          paddingHorizontal: 40,
+          backgroundColor: Constants.primaryColor,
+          borderTopLeftRadius: 20,
+          borderTopRightRadius: 20,
+          alignItems: "center",
+          justifyContent: "center",
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
+        }}
+      >
+        <Text style={{ color: "white", fontSize: 16 }}>Submit</Text>
+      </TouchableOpacity>
     </View>
   );
 }
