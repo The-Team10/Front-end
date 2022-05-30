@@ -100,11 +100,6 @@ export default function Donation({ props, navigation }) {
         colors={["#0072FF", "rgba(33,150,243,0.7)"]}
         style={{
           width: windowWidth,
-          // height: windowHeight,
-          //  flex: 1,
-          //   justifyContent: "center",
-          //   alignItems: "center",
-          //   textAlign: "center",
         }}
       >
         <BackButton inTop white goBack={navigation.goBack} />
