@@ -12,6 +12,7 @@ import Header from "../components/Header";
 import { Constants } from "../commun/Constants";
 import BackButton from "../components/BackButton";
 import { LinearGradient } from "expo-linear-gradient";
+import axios from "axios";
 const windowWidth = Dimensions.get("window").width;
 
 export default function HelpMe({ navigation }) {
@@ -25,6 +26,19 @@ export default function HelpMe({ navigation }) {
   const [status, setStatus] = React.useState("");
 
   const input = (title, state, setState) => {
+    // axios({
+    //   method :"post",
+    //   url:`http://localhost:3000/api/helpseekers/needs`,
+    //   data:{ first_name, last_name, need_name, CIN,description,adress,status},
+
+    // })
+    // .then((response)=>{
+    //   if(response.data === 200) {
+    //     alert("sended succsseful")
+    //   }
+    // }).catch((error) => {
+    //   console.log(error);
+    // });
     return (
       <TextInput
         //  label={title}

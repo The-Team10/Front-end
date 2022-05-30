@@ -24,7 +24,7 @@ const img8 = require("../images/img8.jpg");
 const img9 = require("../images/img9.jpg");
 const img10 = require("../images/img10.png");
 const materialDonationLogo = require("../images/materialDonationLogo.png");
-export default function Donation({ props, navigation }) {
+export default function Donation({ navigation }) {
   useEffect(() => {
     BackHandler.addEventListener("hardwareBackPress", handleBackPress);
     return () =>
@@ -60,7 +60,7 @@ export default function Donation({ props, navigation }) {
   const renderInnerView = (IconName, title, route, image) => {
     return (
       <TouchableOpacity
-        onPress={() => props?.navigation.navigate(route)}
+        onPress={() => navigation.navigate(route)}
         style={{
           backgroundColor: Constants.primaryColor,
           width: windowWidth * 0.45,

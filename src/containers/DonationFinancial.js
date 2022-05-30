@@ -1,6 +1,12 @@
-import * as React from "react";
+import  React, { Component } from "react";
+import{
+  Platform,
+  StyleSheet,
+  ToastAndroid
+} from 'react-native';
 import {
   Text,
+  Container,
   View,
   ScrollView,
   TouchableOpacity,
@@ -10,34 +16,55 @@ import {
   Switch,
   StatusBar,
 } from "react-native";
+import RadioForm, {
+  RadioButton,
+  RadioButtonInput,
+  RadioButtonLabel
+} from "react-native-simple-radio-button";
 import Header from "../components/Header";
 import { Constants } from "../commun/Constants";
 import BackButton from "../components/BackButton";
+const rows = 3;
+const cols = 2;
+const marginHorizontal = 4;
+const marginVertical = 4;
+const width = (Dimensions.get('window').width / cols) - (marginHorizontal * (cols + 1));
+const height = (Dimensions.get('window').height / rows) - (marginVertical * (rows + 1));
 const windowWidth = Dimensions.get("window").width;
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+//import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { LinearGradient } from "expo-linear-gradient";
-const education = require("../images/education.png");
-const emergency = require("../images/emergency.jpg");
+// import { CheckBox, Button } from "react-native-elements";
+const ambulance = require("../images/ambulance.jpg");
+const education1 = require("../images/education1.jpeg");
 const food = require("../images/food.jpg");
+const transport  = require("../images/transport.jpg");
 export default function DonationMaterial({ navigation }) {
-  const [emergncy, setEmergency] = React.useState("");
+  const [emergency, setEmergency] = React.useState("");
   const [foods, setFoods] = React.useState("");
   const [educatn, setEducatn] = React.useState("");
-
+  const [transports, setTransport] = React.useState("");
+  const [state, setstate] = React.useState("");
+  const [value, setValue] = React.useState("");
+  console.log(value)
+  const type = [
+    {label: "One Time", value: "One Time"},
+    {label: "Monthly", value: "Monthly"}
+  ];
+  const suggestedAmount = [
+    {label: "25 TND", value: 25},
+    {label: "50 TND",value: 50},
+    {label: "100",value: 100},
+    {label: "Other", value: "Other"},
+  ];
+  const suggestedAmounte = [
+    {label: "25 TND", value: 25},
+    {label: "50 TND", value: 50},
+    {label: "100", value: 100},
+    {label: "Other", value: "Other"},
+  ];
   const renderInnerView = (title, image, state, setState) => {
     return (
-      <View
-        style={{
-          backgroundColor: "gray",
-          width: windowWidth * 0.9,
-          //  height: windowWidth * 0.2,
-          marginVertical: 8,
-          borderRadius: 20,
-          flexDirection: "column",
-          alignSelf: "center",
-          elevation: 10,
-        }}
-      >
+      <View>
         <Image
           source={image}
           style={{
@@ -49,10 +76,9 @@ export default function DonationMaterial({ navigation }) {
         />
         <View
           style={{
-            backgroundColor: "white",
-            borderTopLeftRadius: 15,
-            borderTopRightRadius: 15,
-            justifyContent: "center",
+            borderTopLeftRadius: 10,
+            borderTopRightRadius: 10,
+            borderRadius: 10,
           }}
         >
           <Text
@@ -60,16 +86,16 @@ export default function DonationMaterial({ navigation }) {
               color: "black",
               fontSize: 15,
               fontWeight: "700",
-              top: "30%",
+              alignSelf: "center",
+              top: "70%",
               left: 20,
             }}
           >
             {title}
           </Text>
-
           <Switch
             style={{ right: 15, bottom: 10 }}
-            trackColor={{ false: "gray", true: "#81b0ff" }}
+            trackColor={{ false: "gray", true: "#81B0FF" }}
             thumbColor={Constants.primaryColor}
             onValueChange={() => setState(!state)}
             value={state}
@@ -78,41 +104,76 @@ export default function DonationMaterial({ navigation }) {
       </View>
     );
   };
-
   return (
-    <View style={{ flex: 1 }}>
-      <StatusBar
-        animated={true}
-        backgroundColor={"#0072FF"}
-        //  barStyle={statusBarStyle}
-        //  showHideTransition={statusBarTransition}
-        //    hidden={hidden}
-      />
+    <><View style={{ flex: 1 }}>
+      <StatusBar animated={true} backgroundColor={"#0072FF"} />
       <LinearGradient
         // Background Linear Gradient
         colors={["#0072FF", "rgba(33,150,243,0.7)"]}
         style={{
           width: windowWidth,
-          // height: windowHeight,
-          //  flex: 1,
-          //   justifyContent: "center",
-          //   alignItems: "center",
-          //   textAlign: "center",
         }}
       >
         <BackButton inTop white goBack={navigation.goBack} />
         <Header white>Categories </Header>
       </LinearGradient>
-
       <ScrollView>
-        <View style={{ flex: 1, flexDirection: "column", paddingTop: 15 }}>
-          {renderInnerView("Education", education, educatn, setEducatn)}
-          {renderInnerView("Emergency", emergency, emergncy, setEmergency)}
-
-          {renderInnerView("Food", food, foods, setFoods)}
-        </View>
-      </ScrollView>
-
+        <View style={ styles.box}>
+          <View style={ styles.boxx}>
+          <View style={ styles.boxxx}>{renderInnerView("Emergency", ambulance, emergency, setEmergency)}</View>
+          <View style={ styles.boxxx}>{renderInnerView("Education", education1, educatn, setEducatn)}</View>
+          <View style={ styles.boxxx}>{renderInnerView("Food", food, foods, setFoods)}</View>
+          <View style={ styles.boxxx}>{renderInnerView("Transport", transport,transports,  setTransport)}</View>
+          </View>
+        </View><View >
+        <Text black>Donation Type</Text>
+        <RadioForm
+          radio_props={type}
+          initial={2}
+          onPress={(value) => { ToastAndroid.show(value.toString(), ToastAndroid.SHORT),setValue(value) } }
+          buttonSize={15}
+          buttonOuterSize={25}
+          selectedButtonColor={'blue'}
+          selectedLabelColor={'blue'}
+          labelStyle={{ fontSize: 15, }}
+          disabled={false}
+          formHorizontal={false} />
+      </View>
+      <View>
+      <Text black>Donation Amount</Text>
+      <RadioForm
+          radio_props={suggestedAmount}
+          initial={2}
+          onPress={(value) => { ToastAndroid.show(value.toString(), ToastAndroid.SHORT); } }
+          buttonSize={15}
+          buttonOuterSize={25}
+          selectedButtonColor={'blue'}
+          selectedLabelColor={'blue'}
+          labelStyle={{ fontSize: 15, }}
+          disabled={false}
+          formHorizontal={true} />
+      {
+          value === "Monthly" ?
+          <>
+                <Text black>Monthly Donation Amount</Text>
+                    <RadioForm
+          radio_props={suggestedAmounte}
+          initial={2}
+          onPress={(value) => { ToastAndroid.show(value.toString(), ToastAndroid.SHORT); } }
+          buttonSize={15}
+          buttonOuterSize={25}
+          selectedButtonColor={'blue'}
+          selectedLabelColor={'blue'}
+          labelStyle={{ fontSize: 15, }}
+          disabled={false}
+          formHorizontal={true} />
+                <Text black>For How Many Months</Text>
+          </>
+          :
+          null
+        }
+     </View>
+     </ScrollView>
       <TouchableOpacity
         onPress={() => navigation.navigate("CreditCard")}
         style={{
@@ -134,6 +195,44 @@ export default function DonationMaterial({ navigation }) {
       >
         <Text style={{ color: "white", fontSize: 16 }}>Submit</Text>
       </TouchableOpacity>
-    </View>
+    </View></>
   );
-}
+};
+const styles = StyleSheet.create({
+  box: {
+    // width: windowWidth * 0.3,
+    //    height: windowWidth * 0.2,
+      flex: 1,
+  },
+  boxx: {
+    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  boxxx:{
+    marginTop:-50,
+    marginBottom: marginVertical,
+    marginLeft: marginHorizontal,
+    marginRight: marginHorizontal,
+    width: width,
+    height: height,
+     justifyContent: 'center',
+    // alignItems: 'center',
+  }
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+

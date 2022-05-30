@@ -31,12 +31,11 @@ export default function Router() {
           <Stack.Screen name="Donation" component={Donation} />
           <Stack.Screen name="HelpMe" component={HelpMe} />
 
-          <Stack.Screen
-            name="DonationFinancial"
-            component={DonationFinancial}
-          />
-          <Stack.Screen name="DonationMaterial" component={DonationMaterial} />
+          <Stack.Screen name="DonationFinancial"component={DonationFinancial}/>
           <Stack.Screen name="Contact" component={Contact} />
+
+          {/* <Stack.Screen name="DonationMaterial" component={DonationMaterial} /> */}
+       
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

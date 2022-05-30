@@ -327,7 +327,7 @@ export default function Home(props) {
 
       <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
         {renderInnerView("calendar-alt", "Events")}
-        {renderInnerView("user-friends", "Contact us")}
+        {renderInnerView("user-friends", "Contact us","Contact")}
       </View>
     </View>
   );
