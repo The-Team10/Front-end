@@ -4,6 +4,7 @@ import {
     ScrollView,
     TouchableOpacity,
     TextInput,
+    ActivityIndicator
   } from "react-native";
   import React from "react";
   import { Formik } from "formik";
@@ -12,7 +13,7 @@ import {
   import styled from "styled-components/native";
   import Canstants from "expo-constants";
   import { StatusBar } from "expo-status-bar";
-  
+  import axios from "axios"
   const StatusBarHeight = Canstants.statusBarHeight;
   export const Colors = {
     primary: "#ffffff",
@@ -95,7 +96,29 @@ import {
     font-size: 16px;
   `;
   const ContactUs = ({ navigation }) => {
-    const handleLogin = (Credentials, setSubmitting) => {};
+    const handleLogin = (credentials, setSubmitting) => {
+
+        axios({
+            method: "post",
+            url: `http://192.168.1.171:3000/api/contact/contact`,
+           data:credentials
+          })
+          .then((response) => {
+            if (response.status === 200) {
+            
+              alert("successful");
+
+            }
+            setSubmitting(false)
+             
+          })
+          .catch((error) => {
+            console.log(error);
+            setSubmitting(false)
+          });
+      }
+    
+    
     return (
         
       <>
@@ -162,9 +185,15 @@ import {
                 </ContactBox>
               </ContactContainer>
               <Formik
-                initialValues={{ email: "", password: "" }}
+                initialValues={{  first_name:"", last_name:"",adressEmail:"", phone:"",adress:"",description:""}}
                 onSubmit={(values, { setSubmitting }) => {
-                  handleLogin(values, setSubmitting);
+                 if(values.first_name == "" || values.last_name == "" || values.adressEmail == ""|| values.phone == "" || values.adress=="" || values.description==""){
+                     alert ('champ vide')
+                     setSubmitting(false)
+                 } else {
+                    handleLogin(values, setSubmitting);
+                 }
+                   
                 }}
               >
                 {({
@@ -180,28 +209,28 @@ import {
                       icon="person"
                       placeholder=""
                       placeholderTextColor={darklight}
-                      onChangeText={handleChange("first")}
-                      onBlur={handleBlur("first")}
-                      value={values.first}
+                      onChangeText={handleChange("first_name")}
+                      onBlur={handleBlur("first_name")}
+                      value={values.first_name}
                     />
                     <Input
                       label="Last Name"
                       icon="person"
                       placeholder=""
                       placeholderTextColor={darklight}
-                      onChangeText={handleChange("last")}
-                      onBlur={handleBlur("last")}
-                      value={values.last}
+                      onChangeText={handleChange("last_name")}
+                      onBlur={handleBlur("last_name")}
+                      value={values.last_name}
                     />
                     <Input
                       label="Addresse email"
                       icon="mail"
                       placeholder="email@email.com"
                       placeholderTextColor={darklight}
-                      onChangeText={handleChange("email")}
-                      onBlur={handleBlur("email")}
+                      onChangeText={handleChange("adressEmail")}
+                      onBlur={handleBlur("adressEmail")}
                       keyboardType="email-address"
-                      value={values.email}
+                      value={values.adressEmail}
                     />
                     <Input
                       label="Phone"
@@ -218,9 +247,9 @@ import {
                       icon="location"
                       placeholder="9 rue ibn khaldoun nabeul"
                       placeholderTextColor={darklight}
-                      onChangeText={handleChange("address")}
-                      onBlur={handleBlur("address")}
-                      value={values.address}
+                      onChangeText={handleChange("adress")}
+                      onBlur={handleBlur("adress")}
+                      value={values.adress}
                     />
                     <StyledInputLabel>Description</StyledInputLabel>
                     <StyledTextInput
@@ -228,14 +257,22 @@ import {
                       numberOfLines={5}
                       placeholder="We love to hear from you"
                       placeholderTextColor={darklight}
-                      onChangeText={handleChange("feedback")}
-                      onBlur={handleBlur("feedback")}
-                      value={values.feedback}
+                      onChangeText={handleChange("description")}
+                      onBlur={handleBlur("description")}
+                      value={values.description}
                     />
                     <View style={{ margin: 5 }} />
-                    <StyledButton onPress={handleSubmit}>
-                      <ButtonText>Submit</ButtonText>
-                    </StyledButton>
+                    {
+                        !isSubmitting &&  <StyledButton onPress={handleSubmit}>
+                        <ButtonText>Submit</ButtonText>
+                      </StyledButton>
+                    }
+                    {
+                        isSubmitting && <StyledButton disabled={true}>
+                       <ActivityIndicator size="large" color={primary}/>
+                      </StyledButton>
+                    }
+                   
                     <View style={{ margin: 7 }} />
                   </View>
                 )}
@@ -245,7 +282,7 @@ import {
         </KeyboardWrapper>
       </>
     );
-  };
+                };
   
   export default ContactUs;
   

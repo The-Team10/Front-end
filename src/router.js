@@ -7,7 +7,7 @@ import StartUpScreens from "./navigation/StartUpScreens";
 import SignInAndOut from "./navigation/SignInAndOut";
 import DonationMaterial from "./containers/DonationMaterial";
 import DonationFinancial from "./containers/DonationFinancial";
-
+import Contact from "./screens/Contact"
 import { Provider } from "react-native-paper";
 import { theme } from "./core/theme";
 
@@ -27,6 +27,7 @@ export default function Router() {
             component={DonationFinancial}
           />
           <Stack.Screen name="DonationMaterial" component={DonationMaterial} />
+          <Stack.Screen name="Contact" component={Contact} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
