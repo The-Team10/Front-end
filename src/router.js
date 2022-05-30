@@ -8,7 +8,8 @@ import SignInAndOut from "./navigation/SignInAndOut";
 import DonationMaterial from "./containers/DonationMaterial";
 import DonationFinancial from "./containers/DonationFinancial";
 import CreditCard from "./containers/CreditCard";
-import HelpRequest from "./containers/HelpRequest";
+import HelpMe from "./containers/HelpMe";
+import Donation from "./containers/Donation";
 
 import { Provider } from "react-native-paper";
 import { theme } from "./core/theme";
@@ -26,7 +27,8 @@ export default function Router() {
           <Stack.Screen name="TabNavigator" component={TabNavigator} />
           <Stack.Screen name="CreditCard" component={CreditCard} />
           <Stack.Screen name="DonationMaterial" component={DonationMaterial} />
-          <Stack.Screen name="HelpRequest" component={HelpRequest} />
+          <Stack.Screen name="Donation" component={Donation} />
+          <Stack.Screen name="HelpMe" component={HelpMe} />
 
           <Stack.Screen
             name="DonationFinancial"
