@@ -7,6 +7,7 @@ import StartUpScreens from "./navigation/StartUpScreens";
 import SignInAndOut from "./navigation/SignInAndOut";
 import DonationMaterial from "./containers/DonationMaterial";
 import DonationFinancial from "./containers/DonationFinancial";
+import Contact from "./screens/Contact";
 import CreditCard from "./containers/CreditCard";
 import HelpMe from "./containers/HelpMe";
 import Donation from "./containers/Donation";
@@ -33,6 +34,7 @@ export default function Router() {
           />
           <Stack.Screen name="Donation" component={Donation} />
           <Stack.Screen name="HelpMe" component={HelpMe} />
+          <Stack.Screen name="Contact" component={Contact} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

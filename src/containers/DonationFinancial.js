@@ -1,5 +1,15 @@
+<<<<<<< HEAD
 import React, { Component } from "react";
 import { Platform, StyleSheet, ToastAndroid } from "react-native";
+=======
+import  React, { Component } from "react";
+// import SelectDropdown from 'react-native-select-dropdown';
+import{
+  Platform,
+  StyleSheet,
+  ToastAndroid
+} from 'react-native';
+>>>>>>> 50427361b6ef6cf2cd8b2e99d2f81a4b121bd69e
 import {
   Text,
   Container,
@@ -98,7 +108,7 @@ export default function DonationMaterial({ navigation }) {
 
           <Switch
             style={{ right: 15, bottom: 10 }}
-            trackColor={{ false: "gray", true: "#81b0ff" }}
+            trackColor={{ false: "gray", true: "#81B0FF" }}
             thumbColor={Constants.primaryColor}
             onValueChange={() => setState(!state)}
             value={state}
@@ -108,6 +118,7 @@ export default function DonationMaterial({ navigation }) {
     );
   };
   return (
+<<<<<<< HEAD
     <>
       <View style={{ flex: 1 }}>
         <StatusBar animated={true} backgroundColor={"#0072FF"} />
@@ -207,6 +218,28 @@ export default function DonationMaterial({ navigation }) {
                 />
               </>
             )}
+=======
+    <><View style={{ flex: 1 }}>
+      <StatusBar animated={true} backgroundColor={"#0072FF"} />
+      <LinearGradient
+        // Background Linear Gradient
+        colors={["#0072FF", "rgba(33,150,243,0.7)"]}
+        style={{
+          width: windowWidth,
+         
+        }}
+      >
+        <BackButton inTop white goBack={navigation.goBack} />
+        <Header white>Categories </Header>
+      </LinearGradient>
+      <ScrollView>
+        <View style={ styles.box}>
+          <View style={ styles.boxx}>
+          <View style={ styles.boxxx}>{renderInnerView("Emergency", ambulance, emergency, setEmergency)}</View>
+          <View style={ styles.boxxx}>{renderInnerView("Education", education1, educatn, setEducatn)}</View>
+          <View style={ styles.boxxx}>{renderInnerView("Food", food, foods, setFoods)}</View>
+          <View style={ styles.boxxx}>{renderInnerView("Transport", transport,transports,  setTransport)}</View> 
+>>>>>>> 50427361b6ef6cf2cd8b2e99d2f81a4b121bd69e
           </View>
         </ScrollView>
         <TouchableOpacity
@@ -238,7 +271,11 @@ const styles = StyleSheet.create({
   box: {
     // width: windowWidth * 0.3,
     //    height: windowWidth * 0.2,
+<<<<<<< HEAD
     flex: 1,
+=======
+      flex: 1,
+>>>>>>> 50427361b6ef6cf2cd8b2e99d2f81a4b121bd69e
   },
   boxx: {
     flex: 1,
