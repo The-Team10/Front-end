@@ -81,15 +81,27 @@ export default function DonationMaterial({ navigation }) {
 
   return (
     <View style={{ flex: 1 }}>
-      <StatusBar animated={true} backgroundColor={"#0072FF"} />
+      <StatusBar
+        animated={true}
+        backgroundColor={"#0072FF"}
+        //  barStyle={statusBarStyle}
+        //  showHideTransition={statusBarTransition}
+        //    hidden={hidden}
+      />
       <LinearGradient
+        // Background Linear Gradient
         colors={["#0072FF", "rgba(33,150,243,0.7)"]}
         style={{
           width: windowWidth,
+          // height: windowHeight,
+          //  flex: 1,
+          //   justifyContent: "center",
+          //   alignItems: "center",
+          //   textAlign: "center",
         }}
       >
         <BackButton inTop white goBack={navigation.goBack} />
-        <Header white>Categories</Header>
+        <Header white>Categories </Header>
       </LinearGradient>
 
       <ScrollView>
@@ -105,18 +117,19 @@ export default function DonationMaterial({ navigation }) {
         onPress={() => navigation.navigate("CreditCard")}
         style={{
           paddingVertical: 15,
-          //    position: "absolute",
-          //     bottom: 50,
           paddingHorizontal: 40,
           backgroundColor: Constants.primaryColor,
-          borderTopLeftRadius: 20,
-          borderTopRightRadius: 20,
+          borderTopLeftRadius: 30,
+          borderTopRightRadius: 30,
+          borderBottomLeftRadius: 30,
+          borderBottomRightRadius: 30,
           alignItems: "center",
           justifyContent: "center",
           position: "absolute",
-          bottom: 0,
-          left: 0,
-          right: 0,
+          bottom: 20,
+          left: 90,
+          right: 90,
+          borderRadius: 10,
         }}
       >
         <Text style={{ color: "white", fontSize: 16 }}>Submit</Text>

@@ -7,7 +7,11 @@ import {
   StyleSheet,
   TouchableOpacity,
   BackHandler,
+  StatusBar,
 } from "react-native";
+import Header from "../components/Header";
+import BackButton from "../components/BackButton";
+import { LinearGradient } from "expo-linear-gradient";
 import Carousel, { Pagination } from "react-native-snap-carousel";
 import { Constants } from "../commun/Constants";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
@@ -20,7 +24,7 @@ const img8 = require("../images/img8.jpg");
 const img9 = require("../images/img9.jpg");
 const img10 = require("../images/img10.png");
 const materialDonationLogo = require("../images/materialDonationLogo.png");
-export default function Donation(props) {
+export default function Donation({ props, navigation }) {
   useEffect(() => {
     BackHandler.addEventListener("hardwareBackPress", handleBackPress);
     return () =>
@@ -83,52 +87,82 @@ export default function Donation(props) {
     );
   };
   return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: "white",
-        paddingTop: 60,
-      }}
-    >
-      <View
-        style={{ height: windowHeight * 0.4, alignSelf: "center", top: 10 }}
+    <View style={{ flex: 1 }}>
+      <StatusBar
+        animated={true}
+        backgroundColor={"#0072FF"}
+        //  barStyle={statusBarStyle}
+        //  showHideTransition={statusBarTransition}
+        //    hidden={hidden}
+      />
+      <LinearGradient
+        // Background Linear Gradient
+        colors={["#0072FF", "rgba(33,150,243,0.7)"]}
+        style={{
+          width: windowWidth,
+          // height: windowHeight,
+          //  flex: 1,
+          //   justifyContent: "center",
+          //   alignItems: "center",
+          //   textAlign: "center",
+        }}
       >
-        <Carousel
-          layout="default"
-          layoutCardOffset={9}
-          ref={isCarousel}
-          data={entries}
-          renderItem={renderItem}
-          sliderWidth={SLIDER_WIDTH}
-          itemWidth={ITEM_WIDTH}
-          inactiveSlideShift={0}
-          useScrollView={true}
-          onSnapToItem={(index) => setIndex(index)}
-        />
-        <Pagination
-          dotsLength={entries.length}
-          activeDotIndex={index}
-          carouselRef={isCarousel}
-          dotStyle={{
-            width: 10,
-            height: 10,
-            borderRadius: 5,
-            marginHorizontal: 0,
-            backgroundColor: "rgba(0, 0, 0, 0.92)",
-          }}
-          inactiveDotOpacity={0.4}
-          inactiveDotScale={0.6}
-          tappableDots={true}
-        />
-      </View>
-      <View>
-        <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
-          {renderInnerView(
-            "hand-holding-heart",
-            "Donation material",
-            "DonationMaterial"
-          )}
-          {renderInnerView("donate", "Donation financial", "DonationFinancial")}
+        <BackButton inTop white goBack={navigation.goBack} />
+        <Header white>Donate </Header>
+      </LinearGradient>
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: "white",
+          paddingTop: 60,
+        }}
+      >
+        <View
+          style={{ height: windowHeight * 0.4, alignSelf: "center", top: 10 }}
+        >
+          <Carousel
+            layout="default"
+            layoutCardOffset={9}
+            ref={isCarousel}
+            data={entries}
+            renderItem={renderItem}
+            sliderWidth={SLIDER_WIDTH}
+            itemWidth={ITEM_WIDTH}
+            inactiveSlideShift={0}
+            useScrollView={true}
+            onSnapToItem={(index) => setIndex(index)}
+          />
+          <Pagination
+            dotsLength={entries.length}
+            activeDotIndex={index}
+            carouselRef={isCarousel}
+            dotStyle={{
+              width: 10,
+              height: 10,
+              borderRadius: 5,
+              marginHorizontal: 0,
+              backgroundColor: "rgba(0, 0, 0, 0.92)",
+            }}
+            inactiveDotOpacity={0.4}
+            inactiveDotScale={0.6}
+            tappableDots={true}
+          />
+        </View>
+        <View>
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-around" }}
+          >
+            {renderInnerView(
+              "hand-holding-heart",
+              "Donation material",
+              "DonationMaterial"
+            )}
+            {renderInnerView(
+              "donate",
+              "Donation financial",
+              "DonationFinancial"
+            )}
+          </View>
         </View>
       </View>
     </View>

@@ -6,18 +6,17 @@ import {
   TouchableOpacity,
   TextInput,
   Image,
+  StatusBar,
   Dimensions,
-  KeyboardAvoidingView,
-  SafeAreaView,
 } from "react-native";
 //import TextInput from "../components/TextInput";
-import Header from "../components/Header";
 import { Constants } from "../commun/Constants";
+import Header from "../components/Header";
 import BackButton from "../components/BackButton";
+import { LinearGradient } from "expo-linear-gradient";
 import * as ImagePicker from "expo-image-picker";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { Alert, Modal, StyleSheet, Pressable } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 const placeholder = require("../images/placeholder-image.png");
@@ -82,6 +81,13 @@ export default function DonationMaterial({ navigation }) {
 
   return (
     <View style={{ flex: 1 }}>
+      <StatusBar
+        animated={true}
+        backgroundColor={"#0072FF"}
+        //  barStyle={statusBarStyle}
+        //  showHideTransition={statusBarTransition}
+        //    hidden={hidden}
+      />
       <LinearGradient
         // Background Linear Gradient
         colors={["#0072FF", "rgba(33,150,243,0.7)"]}
@@ -94,10 +100,8 @@ export default function DonationMaterial({ navigation }) {
           //   textAlign: "center",
         }}
       >
-        <BackButton white goBack={navigation.goBack} />
-        <Header white top>
-          Donation Material
-        </Header>
+        <BackButton inTop white goBack={navigation.goBack} />
+        <Header white>Material Donate </Header>
       </LinearGradient>
 
       <ScrollView style={{ flex: 1 }}>
@@ -132,18 +136,19 @@ export default function DonationMaterial({ navigation }) {
         <TouchableOpacity
           style={{
             paddingVertical: 15,
-            //    position: "absolute",
-            //     bottom: 50,
             paddingHorizontal: 40,
             backgroundColor: Constants.primaryColor,
-            borderTopLeftRadius: 20,
-            borderTopRightRadius: 20,
+            borderTopLeftRadius: 30,
+            borderTopRightRadius: 30,
+            borderBottomLeftRadius: 30,
+            borderBottomRightRadius: 30,
             alignItems: "center",
             justifyContent: "center",
             position: "absolute",
-            left: 0,
-            bottom: 0,
-            right: 0, //   borderRadius: 10,
+            bottom: 20,
+            left: 90,
+            right: 90,
+            borderRadius: 10,
           }}
         >
           <Text style={{ color: "white", fontSize: 16 }}>Submit</Text>
