@@ -6,7 +6,11 @@ import { theme } from "../core/theme";
 export default function Header(props) {
   return (
     <Text
-      style={[styles.header, props?.top && { paddingTop: 50 }]}
+      style={[
+        styles.header,
+        props?.white && { color: "white" },
+        props?.top && { paddingTop: 50 },
+      ]}
       {...props}
     />
   );

@@ -6,15 +6,19 @@ import {
   TouchableOpacity,
   TextInput,
   Image,
+  StatusBar,
+  Dimensions,
 } from "react-native";
 //import TextInput from "../components/TextInput";
-import Header from "../components/Header";
 import { Constants } from "../commun/Constants";
+import Header from "../components/Header";
 import BackButton from "../components/BackButton";
+import { LinearGradient } from "expo-linear-gradient";
 import * as ImagePicker from "expo-image-picker";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { Alert, Modal, StyleSheet, Pressable } from "react-native";
-
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 const placeholder = require("../images/placeholder-image.png");
 
 export default function DonationMaterial({ navigation }) {
@@ -77,23 +81,30 @@ export default function DonationMaterial({ navigation }) {
 
   return (
     <View style={{ flex: 1 }}>
-      <BackButton goBack={navigation.goBack} />
-      <Header top>Donation Material</Header>
+      <StatusBar
+        animated={true}
+        backgroundColor={"#0072FF"}
+        //  barStyle={statusBarStyle}
+        //  showHideTransition={statusBarTransition}
+        //    hidden={hidden}
+      />
+      <LinearGradient
+        // Background Linear Gradient
+        colors={["#0072FF", "rgba(33,150,243,0.7)"]}
+        style={{
+          width: windowWidth,
+          // height: windowHeight,
+          //  flex: 1,
+          //   justifyContent: "center",
+          //   alignItems: "center",
+          //   textAlign: "center",
+        }}
+      >
+        <BackButton inTop white goBack={navigation.goBack} />
+        <Header white>Material Donate </Header>
+      </LinearGradient>
 
-      <ScrollView>
-        {/*         <Text
-          style={{
-            color: "#6F7170",
-            fontSize: 17,
-            paddingVertical: 5,
-            paddingHorizontal: 10,
-            textAlign: "left",
-            fontWeight: "600",
-            textDecorationLine: "underline",
-          }}
-        >
-          Contact informations :
-        </Text> */}
+      <ScrollView style={{ flex: 1 }}>
         <View style={{ alignItems: "center", paddingTop: 40 }}>
           <Image
             //     tintColor={Constants.primaryColor}
@@ -122,28 +133,28 @@ export default function DonationMaterial({ navigation }) {
           {input("Donation name", donationName, setDonationName)}
           {input("Description", description, setDescription)}
         </View>
+        <TouchableOpacity
+          style={{
+            paddingVertical: 15,
+            paddingHorizontal: 40,
+            backgroundColor: Constants.primaryColor,
+            borderTopLeftRadius: 30,
+            borderTopRightRadius: 30,
+            borderBottomLeftRadius: 30,
+            borderBottomRightRadius: 30,
+            alignItems: "center",
+            justifyContent: "center",
+            position: "absolute",
+            bottom: 20,
+            left: 90,
+            right: 90,
+            borderRadius: 10,
+          }}
+        >
+          <Text style={{ color: "white", fontSize: 16 }}>Submit</Text>
+        </TouchableOpacity>
       </ScrollView>
 
-      <TouchableOpacity
-        style={{
-          paddingVertical: 15,
-          //    position: "absolute",
-          //     bottom: 50,
-          paddingHorizontal: 40,
-          backgroundColor: Constants.primaryColor,
-          borderTopLeftRadius: 20,
-          borderTopRightRadius: 20,
-          alignItems: "center",
-          justifyContent: "center",
-          position: "absolute",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          //   borderRadius: 10,
-        }}
-      >
-        <Text style={{ color: "white", fontSize: 16 }}>Submit</Text>
-      </TouchableOpacity>
       <Modal
         animationType="slide"
         transparent={true}
