@@ -54,13 +54,19 @@ const StartingPageTwo = ({ navigation }) => {
       <TouchableOpacity
         style={{
           paddingVertical: 15,
-          position: "absolute",
-          bottom: 50,
           paddingHorizontal: 40,
           backgroundColor: Constants.primaryColor,
-          borderRadius: 10,
+          borderTopLeftRadius: 30,
+          borderTopRightRadius: 30,
+          borderBottomLeftRadius: 30,
+          borderBottomRightRadius: 30,
           alignItems: "center",
           justifyContent: "center",
+          position: "absolute",
+          bottom: 20,
+          left: 90,
+          right: 90,
+          borderRadius: 10,
         }}
         onPress={() => navigation.navigate("StartingPageThree")}
       >

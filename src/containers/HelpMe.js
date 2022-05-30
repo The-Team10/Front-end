@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import {
   Text,
   View,
@@ -9,27 +8,26 @@ import {
   Dimensions,
   StatusBar,
 } from "react-native";
-//import TextInput from "../components/TextInput";
 import Header from "../components/Header";
 import { Constants } from "../commun/Constants";
 import BackButton from "../components/BackButton";
 import { LinearGradient } from "expo-linear-gradient";
 const windowWidth = Dimensions.get("window").width;
-const windowHeight = Dimensions.get("window").height;
 
-export default function HelpRequest({ navigation }) {
+export default function HelpMe({ navigation }) {
   const [firstName, setFirstName] = React.useState("");
   const [lastName, setLastName] = React.useState("");
-  const [donationName, setDonationName] = React.useState("");
+  const [helpName, setHelpName] = React.useState("");
   const [adress, setAdress] = React.useState("");
   const [phone, setPhone] = React.useState("");
   const [description, setDescription] = React.useState("");
-  const [image, setImage] = React.useState(null);
-  const [modalVisible, setModalVisible] = React.useState(false);
+  const [cin, setCin] = React.useState("");
+  const [status, setStatus] = React.useState("");
 
   const input = (title, state, setState) => {
     return (
       <TextInput
+        //  label={title}
         placeholder={title}
         placeholderStyle={{ size: 10 }}
         underlineColorAndroid={"gray"}
@@ -49,46 +47,45 @@ export default function HelpRequest({ navigation }) {
 
   return (
     <View style={{ flex: 1 }}>
-      <StatusBar
-        animated={true}
-        backgroundColor={"#0072FF"}
-        //  barStyle={statusBarStyle}
-        //  showHideTransition={statusBarTransition}
-        //    hidden={hidden}
-      />
+      <StatusBar animated={true} backgroundColor={"#0072FF"} />
       <LinearGradient
-        // Background Linear Gradient
         colors={["#0072FF", "rgba(33,150,243,0.7)"]}
         style={{
           width: windowWidth,
-          // height: windowHeight,
-          //  flex: 1,
-          //   justifyContent: "center",
-          //   alignItems: "center",
-          //   textAlign: "center",
         }}
       >
         <BackButton inTop white goBack={navigation.goBack} />
-        <Header white>Credit Card </Header>
+        <Header white>Help me </Header>
       </LinearGradient>
+
       <ScrollView style={{ flex: 1 }}>
         <View style={{ flex: 1, paddingBottom: 100, top: 0 }}>
           {input("Firstname", firstName, setFirstName)}
           {input("LastName", lastName, setLastName)}
+          {input("Cin", cin, setCin)}
+          {input("Status", status, setStatus)}
           {input("Adress", adress, setAdress)}
           {input("Phone", phone, setPhone)}
-          {input("Donation name", donationName, setDonationName)}
+          {input("Help name", helpName, setHelpName)}
           {input("Description", description, setDescription)}
         </View>
+
         <TouchableOpacity
           style={{
             paddingVertical: 15,
             paddingHorizontal: 40,
             backgroundColor: Constants.primaryColor,
-            borderTopLeftRadius: 20,
-            borderTopRightRadius: 20,
+            borderTopLeftRadius: 30,
+            borderTopRightRadius: 30,
+            borderBottomLeftRadius: 30,
+            borderBottomRightRadius: 30,
             alignItems: "center",
             justifyContent: "center",
+            position: "absolute",
+            bottom: 20,
+            left: 90,
+            right: 90,
+            borderRadius: 10,
           }}
         >
           <Text style={{ color: "white", fontSize: 16 }}>Submit</Text>
