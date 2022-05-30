@@ -12,6 +12,8 @@ import Header from "../components/Header";
 import { Constants } from "../commun/Constants";
 import BackButton from "../components/BackButton";
 import { LinearGradient } from "expo-linear-gradient";
+import axios from "axios";
+import { Formik } from "formik";
 const windowWidth = Dimensions.get("window").width;
 
 export default function HelpMe({ navigation }) {
@@ -25,6 +27,24 @@ export default function HelpMe({ navigation }) {
   const [status, setStatus] = React.useState("");
 
   const input = (title, state, setState) => {
+  
+// const fn =()=>{
+
+//    axios({
+//        method :"post",
+//        url:`http://localhost:3000/api/helpseekers/needs`,
+//       data:{ firstName, lastName,helpName, cin,description,adress,status},
+
+//     })
+//     .then((response)=>{
+//       if(response.data === 200) {
+//         alert("sended succsseful")
+//       }
+//     }).catch((error) => {
+//       console.log(error);
+//     });
+// }
+
     return (
       <TextInput
         //  label={title}
@@ -55,7 +75,9 @@ export default function HelpMe({ navigation }) {
         }}
       >
         <BackButton inTop white goBack={navigation.goBack} />
+
         <Header white>Help me </Header>
+        
       </LinearGradient>
 
       <ScrollView style={{ flex: 1 }}>
@@ -72,22 +94,6 @@ export default function HelpMe({ navigation }) {
 
         <TouchableOpacity
           style={{
-<<<<<<< HEAD:src/containers/HelpRequest.js
-          paddingVertical: 15,
-          paddingHorizontal: 40,
-          backgroundColor: Constants.primaryColor,
-          borderTopLeftRadius: 30,
-          borderTopRightRadius: 30,
-          borderBottomLeftRadius: 30,
-          borderBottomRightRadius: 30,
-          alignItems: "center",
-          justifyContent: "center",
-          position: "absolute",
-          bottom: 20,
-          left: 90,
-          right: 90,
-          borderRadius: 10,
-=======
             paddingVertical: 15,
             paddingHorizontal: 40,
             backgroundColor: Constants.primaryColor,
@@ -102,10 +108,11 @@ export default function HelpMe({ navigation }) {
             left: 90,
             right: 90,
             borderRadius: 10,
->>>>>>> ca4d0a2ea605623088774836d0c39695b777dacd:src/containers/HelpMe.js
           }}
         >
-          <Text style={{ color: "white", fontSize: 16 }}>Submit</Text>
+          <Text style={{ color: "white", fontSize: 16 }} 
+          // onPress={fn()}  
+          >Submit</Text>
         </TouchableOpacity>
       </ScrollView>
     </View>

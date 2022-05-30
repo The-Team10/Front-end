@@ -5,7 +5,6 @@ import{
   StyleSheet,
   ToastAndroid
 } from 'react-native';
-
 import {
   Text,
   Container,
@@ -23,7 +22,6 @@ import RadioForm, {
   RadioButtonInput,
   RadioButtonLabel
 } from "react-native-simple-radio-button";
-
 import Header from "../components/Header";
 import { Constants } from "../commun/Constants";
 import BackButton from "../components/BackButton";
@@ -42,7 +40,6 @@ const education1 = require("../images/education1.jpeg");
 const food = require("../images/food.jpg");
 const transport  = require("../images/transport.jpg");
 export default function DonationMaterial({ navigation }) {
-
   const [emergency, setEmergency] = React.useState("");
   const [foods, setFoods] = React.useState("");
   const [educatn, setEducatn] = React.useState("");
@@ -121,7 +118,7 @@ export default function DonationMaterial({ navigation }) {
          
           <Switch
             style={{ right: 15, bottom: 10 }}
-            trackColor={{ false: "gray", true: "#81b0ff" }}
+            trackColor={{ false: "gray", true: "#81B0FF" }}
             thumbColor={Constants.primaryColor}
             onValueChange={() => setState(!state)}
             value={state}
@@ -131,7 +128,6 @@ export default function DonationMaterial({ navigation }) {
      
     );
   };
-
   return (
     <><View style={{ flex: 1 }}>
       <StatusBar animated={true} backgroundColor={"#0072FF"} />
@@ -146,7 +142,6 @@ export default function DonationMaterial({ navigation }) {
         <BackButton inTop white goBack={navigation.goBack} />
         <Header white>Categories </Header>
       </LinearGradient>
-
       <ScrollView>
         <View style={ styles.box}>
           <View style={ styles.boxx}>
@@ -268,7 +263,6 @@ const styles = StyleSheet.create({
     // width: windowWidth * 0.3,
     //    height: windowWidth * 0.2,
       flex: 1,
-
   },
   boxx: {
     flex: 1,

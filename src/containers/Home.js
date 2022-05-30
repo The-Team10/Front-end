@@ -89,7 +89,7 @@ export default function Home(props) {
       </TouchableOpacity>
     );
   };
-  return (
+  return ( 
     <View
       style={{
         flex: 1,
@@ -152,7 +152,7 @@ export default function Home(props) {
         )}
         <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
           {renderInnerView("calendar-alt", "Events")}
-          {renderInnerView("user-friends", "Contact us")}
+          {renderInnerView("user-friends", "Contact us","Contact")}
         </View>
       </View>
     </View>
@@ -327,7 +327,7 @@ export default function Home(props) {
 
       <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
         {renderInnerView("calendar-alt", "Events")}
-        {renderInnerView("user-friends", "Contact us")}
+        {renderInnerView("user-friends", "Contact us","Contact")}
       </View>
     </View>
   );
