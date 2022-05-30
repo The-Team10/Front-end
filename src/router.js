@@ -22,6 +22,10 @@ export default function Router() {
     <Provider theme={theme}>
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen
+            name="DonationFinancial"
+            component={DonationFinancial}
+          />
           <Stack.Screen name="Splash" component={Splash} />
           <Stack.Screen name="StartUpScreens" component={StartUpScreens} />
           <Stack.Screen name="SignInAndOut" component={SignInAndOut} />
@@ -36,6 +40,7 @@ export default function Router() {
 
           {/* <Stack.Screen name="DonationMaterial" component={DonationMaterial} /> */}
        
+         
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

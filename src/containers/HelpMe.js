@@ -86,6 +86,22 @@ export default function HelpMe({ navigation }) {
 
         <TouchableOpacity
           style={{
+<<<<<<< HEAD:src/containers/HelpRequest.js
+          paddingVertical: 15,
+          paddingHorizontal: 40,
+          backgroundColor: Constants.primaryColor,
+          borderTopLeftRadius: 30,
+          borderTopRightRadius: 30,
+          borderBottomLeftRadius: 30,
+          borderBottomRightRadius: 30,
+          alignItems: "center",
+          justifyContent: "center",
+          position: "absolute",
+          bottom: 20,
+          left: 90,
+          right: 90,
+          borderRadius: 10,
+=======
             paddingVertical: 15,
             paddingHorizontal: 40,
             backgroundColor: Constants.primaryColor,
@@ -100,6 +116,7 @@ export default function HelpMe({ navigation }) {
             left: 90,
             right: 90,
             borderRadius: 10,
+>>>>>>> ca4d0a2ea605623088774836d0c39695b777dacd:src/containers/HelpMe.js
           }}
         >
           <Text style={{ color: "white", fontSize: 16 }}>Submit</Text>
