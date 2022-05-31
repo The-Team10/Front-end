@@ -24,7 +24,7 @@ const img8 = require("../images/img8.jpg");
 const img9 = require("../images/img9.jpg");
 const img10 = require("../images/img10.png");
 const materialDonationLogo = require("../images/materialDonationLogo.png");
-export default function Donation({props, navigation }) {
+export default function Donation({ navigation }) {
   useEffect(() => {
     BackHandler.addEventListener("hardwareBackPress", handleBackPress);
     return () =>
@@ -89,23 +89,11 @@ export default function Donation({props, navigation }) {
   };
   return (
     <View style={{ flex: 1 }}>
-      <StatusBar
-        animated={true}
-        backgroundColor={"#0072FF"}
-        //  barStyle={statusBarStyle}
-        //  showHideTransition={statusBarTransition}
-        //    hidden={hidden}
-      />
+      <StatusBar animated={true} backgroundColor={"#0072FF"} />
       <LinearGradient
-        // Background Linear Gradient
         colors={["#0072FF", "rgba(33,150,243,0.7)"]}
         style={{
           width: windowWidth,
-          // height: windowHeight,
-          //  flex: 1,
-          //   justifyContent: "center",
-          //   alignItems: "center",
-          //   textAlign: "center",
         }}
       >
         <BackButton inTop white goBack={navigation.goBack} />
@@ -175,7 +163,6 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 8,
     width: windowWidth * 0.8,
-    //  paddingBottom: 40,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
