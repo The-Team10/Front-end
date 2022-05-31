@@ -85,18 +85,19 @@ export default function CreditCard({ navigation }) {
       <TouchableOpacity
         style={{
           paddingVertical: 15,
-          //    position: "absolute",
-          //     bottom: 50,
           paddingHorizontal: 40,
           backgroundColor: Constants.primaryColor,
-          borderTopLeftRadius: 20,
-          borderTopRightRadius: 20,
+          borderTopLeftRadius: 30,
+          borderTopRightRadius: 30,
+          borderBottomLeftRadius: 30,
+          borderBottomRightRadius: 30,
           alignItems: "center",
           justifyContent: "center",
           position: "absolute",
-          left: 0,
-          bottom: 0,
-          right: 0, //   borderRadius: 10,
+          bottom: 20,
+          left: 90,
+          right: 90,
+          borderRadius: 10,
         }}
       >
         <Text style={{ color: "white", fontSize: 16 }}>Submit</Text>

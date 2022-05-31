@@ -82,13 +82,20 @@ export default function HelpRequest({ navigation }) {
         </View>
         <TouchableOpacity
           style={{
-            paddingVertical: 15,
-            paddingHorizontal: 40,
-            backgroundColor: Constants.primaryColor,
-            borderTopLeftRadius: 20,
-            borderTopRightRadius: 20,
-            alignItems: "center",
-            justifyContent: "center",
+          paddingVertical: 15,
+          paddingHorizontal: 40,
+          backgroundColor: Constants.primaryColor,
+          borderTopLeftRadius: 30,
+          borderTopRightRadius: 30,
+          borderBottomLeftRadius: 30,
+          borderBottomRightRadius: 30,
+          alignItems: "center",
+          justifyContent: "center",
+          position: "absolute",
+          bottom: 20,
+          left: 90,
+          right: 90,
+          borderRadius: 10,
           }}
         >
           <Text style={{ color: "white", fontSize: 16 }}>Submit</Text>
