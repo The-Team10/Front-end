@@ -136,6 +136,7 @@ export default function DonationMaterial({ navigation }) {
     <><View style={{ flex: 1 }}>
       <StatusBar animated={true} backgroundColor={"#0072FF"} />
       <LinearGradient
+        // Background Linear Gradient
         colors={["#0072FF", "rgba(33,150,243,0.7)"]}
         style={{
           width: windowWidth,
@@ -143,7 +144,7 @@ export default function DonationMaterial({ navigation }) {
         }}
       >
         <BackButton inTop white goBack={navigation.goBack} />
-        <Header white>Categories</Header>
+        <Header white>Categories </Header>
       </LinearGradient>
 
       <ScrollView>
