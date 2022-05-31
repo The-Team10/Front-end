@@ -33,8 +33,7 @@ export default function Router() {
           <Stack.Screen name="DonationMaterial" component={DonationMaterial} />
           <Stack.Screen name="Donation" component={Donation} />
           <Stack.Screen name="HelpMe" component={HelpMe} />
-
-         
+          
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

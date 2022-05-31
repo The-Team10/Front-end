@@ -1,5 +1,5 @@
 import  React, { Component } from "react";
-// import SelectDropdown from 'react-native-select-dropdown';
+
 import{
   Platform,
   StyleSheet,
@@ -49,7 +49,7 @@ export default function DonationMaterial({ navigation }) {
   const [transports, setTransport] = React.useState("");
   const [state, setstate] = React.useState("");
   const [value, setValue] = React.useState("");
-  const options = ["One Month","Three Months", "Six Months", "Twelve Months"]
+ 
   console.log(value)
   const type = [
     {label: "One Time", value: "One Time"},
@@ -71,21 +71,7 @@ export default function DonationMaterial({ navigation }) {
 
   const renderInnerView = (title, image, state, setState) => {
     return (
-      <View
-        // style={{
-        
-        //   width: windowWidth * 0.3,
-        //   //  height: windowWidth * 0.2,
-          
-        //   marginVertical: 8,
-        //   borderRadius: 20,
-        //   flexDirection: 'row',
-        //   alignSelf: "center",
-          
-         
-        //   elevation: 20,
-        // }}
-      >
+      <View>
         
         <Image
           source={image}
@@ -94,6 +80,8 @@ export default function DonationMaterial({ navigation }) {
             height: windowWidth * 0.2,
             borderTopLeftRadius: 15,
             borderTopRightRadius: 15,
+            borderBottomLeftRadius: 15,
+            borderBottomRightRadius:15,
           }}
         />
         <View
@@ -102,7 +90,6 @@ export default function DonationMaterial({ navigation }) {
             borderTopLeftRadius: 10,
             borderTopRightRadius: 10,
             borderRadius: 10,
-            
           }}
         >
           <Text
@@ -110,9 +97,8 @@ export default function DonationMaterial({ navigation }) {
               color: "black",
               fontSize: 15,
               fontWeight: "700",
-             
-              alignSelf: "center",
-              top: "70%",
+              alignSelf: "flex-start",
+              top: "35%",
               left: 20,
             }}
           >
@@ -172,22 +158,11 @@ export default function DonationMaterial({ navigation }) {
           
       </View>
       <View>
-      <Text black>Donation Amount</Text> 
+      {/* <Text black>Donation Amount</Text>  */}
 
 
 
-      <RadioForm
-        
-          radio_props={suggestedAmount}
-          initial={2}
-          onPress={(value) => { ToastAndroid.show(value.toString(), ToastAndroid.SHORT); } }
-          buttonSize={15}
-          buttonOuterSize={25}
-          selectedButtonColor={'blue'}
-          selectedLabelColor={'blue'}
-          labelStyle={{ fontSize: 15, }}
-          disabled={false}
-          formHorizontal={true} />
+      
       {
           value === "Monthly" ?
           <>
@@ -206,28 +181,27 @@ export default function DonationMaterial({ navigation }) {
           disabled={false}
           formHorizontal={true} />
                 <Text black>For How Many Months</Text> 
-                 {/* <SelectDropdown
-	data={options}
-	onSelect={(selectedItem, index) => {
-		console.log(selectedItem, index)
-	}}
-	buttonTextAfterSelection={(selectedItem, index) => {
-		(slectedItem === "Monthly"){
-      
-    }
-		 
-		return selectedItem
-	}}
-	rowTextForSelection={(item, index) => {
-		// text represented for each item in dropdown
-		// if data array is an array of objects then return item.property to represent item in dropdown
-		return item
-	}}
-/>  */}
+  
           </>
-          :
-          null
+          :<>
+          <Text black>Donation Amount</Text> 
+          <RadioForm
+        
+          radio_props={suggestedAmount}
+          initial={2}
+          onPress={(value) => { ToastAndroid.show(value.toString(), ToastAndroid.SHORT); } }
+          buttonSize={15}
+          buttonOuterSize={25}
+          selectedButtonColor={'blue'}
+          selectedLabelColor={'blue'}
+          labelStyle={{ fontSize: 15, }}
+          disabled={false}
+          formHorizontal={true} />
+        
+</>
         }
+        
+
      </View>
       
 

@@ -46,7 +46,7 @@ const StartingPageOne = ({ navigation }) => {
           fontWeigth: "bold",
         }}
       >
-        Always together
+        Always Together
       </Text>
       <TouchableOpacity
         style={{
