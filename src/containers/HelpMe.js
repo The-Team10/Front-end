@@ -13,37 +13,38 @@ import { Constants } from "../commun/Constants";
 import BackButton from "../components/BackButton";
 import { LinearGradient } from "expo-linear-gradient";
 import axios from "axios";
-import { Formik } from "formik";
+// import { Formik } from "formik";
 const windowWidth = Dimensions.get("window").width;
 
 export default function HelpMe({ navigation }) {
-  const [firstName, setFirstName] = React.useState("");
-  const [lastName, setLastName] = React.useState("");
-  const [helpName, setHelpName] = React.useState("");
-  const [adress, setAdress] = React.useState("");
-  const [phone, setPhone] = React.useState("");
+//   const [first_name, setFirstName] = React.useState("");
+//   const [last_name, setLastName] = React.useState("");
+//   const [need_name, setHelpName] = React.useState("");
+//   const [adress, setAdress] = React.useState("");
+  // const [phone, setPhone] = React.useState("");
   const [description, setDescription] = React.useState("");
-  const [cin, setCin] = React.useState("");
-  const [status, setStatus] = React.useState("");
+//   const [CIN, setCin] = React.useState("");
+//   const [status, setStatus] = React.useState("");
 
   const input = (title, state, setState) => {
-  
-// const fn =()=>{
 
-//    axios({
-//        method :"post",
-//        url:`http://localhost:3000/api/helpseekers/needs`,
-//       data:{ firstName, lastName,helpName, cin,description,adress,status},
+const fn =()=>{
 
-//     })
-//     .then((response)=>{
-//       if(response.data === 200) {
-//         alert("sended succsseful")
-//       }
-//     }).catch((error) => {
-//       console.log(error);
-//     });
-// }
+ axios({
+     method :"post",
+     url:`http://localhost:3000/api/helpseekers/needs`,
+    // data:{ firstName, lastName,helpName, cin,description,adress,status},
+    data:{ description},
+
+  })
+  .then((response)=>{
+    if(response.status === 200) {
+      alert("sended succsseful")
+    }
+  }).catch((error) => {
+    console.log(error);
+  });
+}
 
     return (
       <TextInput
@@ -77,18 +78,18 @@ export default function HelpMe({ navigation }) {
         <BackButton inTop white goBack={navigation.goBack} />
 
         <Header white>Help me </Header>
-        
+
       </LinearGradient>
 
       <ScrollView style={{ flex: 1 }}>
         <View style={{ flex: 1, paddingBottom: 100, top: 0 }}>
-          {input("Firstname", firstName, setFirstName)}
-          {input("LastName", lastName, setLastName)}
-          {input("Cin", cin, setCin)}
+          {/* {input("Firstname", first_name, setFirstName)}
+          {input("LastName", last_name, setLastName)}
+          {input("Cin", CIN, setCin)}
           {input("Status", status, setStatus)}
-          {input("Adress", adress, setAdress)}
-          {input("Phone", phone, setPhone)}
-          {input("Help name", helpName, setHelpName)}
+          {input("Adress", adress, setAdress)} */}
+          {/* {input("Phone", phone, setPhone)} */}
+          {/* {input("Help name", need_name, setHelpName)} */}
           {input("Description", description, setDescription)}
         </View>
 
@@ -109,9 +110,24 @@ export default function HelpMe({ navigation }) {
             right: 90,
             borderRadius: 10,
           }}
+          onPress={()=>{
+            axios({
+              method :"post",
+              url:`http://192.168.11.241:3000/api/helpseekers/needs`,
+             data:{ first_name, last_name,need_name,CIN,description,adress,status},
+
+           })
+           .then((response)=>{
+             if(response.status === 200) {
+               alert("sended succsseful")
+             }
+           }).catch((error) => {
+             console.log(error);
+           });
+          }}
         >
-          <Text style={{ color: "white", fontSize: 16 }} 
-          // onPress={fn()}  
+          <Text style={{ color: "white", fontSize: 16 }}
+          // onPress={fn()}
           >Submit</Text>
         </TouchableOpacity>
       </ScrollView>
