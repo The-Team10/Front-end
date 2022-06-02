@@ -73,7 +73,7 @@ export default function DonationMaterial({ navigation }) {
           borderRadius: 10,
           height: 60,
           fontSize: 14,
-          margin: 10,
+          margin: 10, 
         }}
       />
     );
