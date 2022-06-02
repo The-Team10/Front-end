@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect ,useContext} from "react";
 import { TouchableOpacity, StyleSheet, View } from "react-native";
 import { Text } from "react-native-paper";
 import Background from "../components/Background";
@@ -10,23 +10,48 @@ import BackButton from "../components/BackButton";
 import { theme } from "../core/theme";
 import { emailValidator } from "../helpers/emailValidator";
 import { passwordValidator } from "../helpers/passwordValidator";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import jwt from "jwt-decode";
+import { userData } from "../components/Context";
+import axios from "axios";
 export default function LoginScreen({ navigation }) {
-  const [email, setEmail] = useState({ value: "", error: "" });
-  const [password, setPassword] = useState({ value: "", error: "" });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+//  const[data,setData]=useContext(userData)
 
-  const onLoginPressed = () => {
-    /*     const emailError = emailValidator(email.value);
-    const passwordError = passwordValidator(password.value);
-    if (emailError || passwordError) {
-      setEmail({ ...email, error: emailError });
-      setPassword({ ...password, error: passwordError });
-      return;
-    } */
-    navigation.reset({
-      index: 0,
-      routes: [{ name: "Dashboard" }],
+
+  useEffect(() => {
+    AsyncStorage.getAllKeys((err, keys) => {
+      AsyncStorage.multiGet(keys, (error, stores) => {
+        stores.map((result, i, store) => {
+          // console.log({ [store[i][0]]: store[i][1] }, "lol");
+          return true;
+        });
+      });
     });
+  });
+
+  const login = () => {
+    axios({
+      method: "POST",
+      url: `http://192.168.11.134:3000/api/contributors/login`,
+      data: { email, password },
+    })
+      .then((response) => {
+        if (response.status == 200) {
+          AsyncStorage.setItem("UsertokenInfo", response.data.token);
+          decoded = jwt(response.data.token)
+          navigation.navigate("Dashboard");
+        //  setData(decoded.user)
+        //  console.log(data)
+          
+        } else {
+          alert(response.data);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (

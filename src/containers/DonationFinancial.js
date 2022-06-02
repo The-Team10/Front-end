@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 // import SelectDropdown from 'react-native-select-dropdown';
 import { Platform, StyleSheet, ToastAndroid } from "react-native";
+import axios from "axios"
 import {
   Text,
   Container,
@@ -63,18 +64,10 @@ export default function DonationMaterial({ navigation }) {
     { label: "Other", value: "Other" },
   ];
   const renderInnerView = (title, image, state, setState) => {
+    const fn = () => {};
     return (
-      <View
-      // style={{
-      //   width: windowWidth * 0.3,
-      //   //  height: windowWidth * 0.2,
-      //   marginVertical: 8,
-      //   borderRadius: 20,
-      //   flexDirection: 'row',
-      //   alignSelf: "center",
-      //   elevation: 20,
-      // }}
-      >
+      <View>
+        
         <Image
           source={image}
           style={{
@@ -82,6 +75,8 @@ export default function DonationMaterial({ navigation }) {
             height: windowWidth * 0.2,
             borderTopLeftRadius: 15,
             borderTopRightRadius: 15,
+            borderBottomLeftRadius: 15,
+            borderBottomRightRadius:15,
           }}
         />
         <View
@@ -96,8 +91,8 @@ export default function DonationMaterial({ navigation }) {
               color: "black",
               fontSize: 15,
               fontWeight: "700",
-              alignSelf: "center",
-              top: "70%",
+              alignSelf: "flex-start",
+              top: "35%",
               left: 20,
             }}
           >
@@ -208,12 +203,13 @@ export default function DonationMaterial({ navigation }) {
                 />
                 <Text black>For How Many Months</Text>
                 {/* <SelectDropdown
-  data={options}
-  onSelect={(selectedItem, index) => {
-    console.log(selectedItem, index)
-  }}
-  buttonTextAfterSelection={(selectedItem, index) => {
-    (slectedItem === "Monthly"){
+	data={options}
+	onSelect={(selectedItem, index) => {
+		console.log(selectedItem, index)
+	}}
+	buttonTextAfterSelection={(selectedItem, index) => {
+		(slectedItem === "Monthly"){
+      
     }
     return selectedItem
   }}
@@ -228,7 +224,24 @@ export default function DonationMaterial({ navigation }) {
           </View>
         </ScrollView>
         <TouchableOpacity
-          onPress={() => navigation.navigate("CreditCard")}
+          onPress={() => {
+            navigation.navigate("CreditCard");
+            
+              axios({
+                method :"post",
+                url:`http://192.168.1.105:3000/api/helpgiver//donnationFin`,
+               data:{ typeAmount, amount,category},
+         
+             })
+             .then((response)=>{
+               if(response.status === 200) {
+                 alert("sended succsseful")
+               }
+             }).catch((error) => {
+               console.log(error);
+             });
+            }
+          }
           style={{
             paddingVertical: 15,
             paddingHorizontal: 40,
