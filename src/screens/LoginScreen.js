@@ -33,8 +33,8 @@ export default function LoginScreen({ navigation }) {
 
   const login = () => {
     axios({
-      method: "post",
-      url: `http://192.168.1.105:3000/api/contributors/login`,
+      method: "POST",
+      url: `http://192.168.11.134:3000/api/contributors/login`,
       data: { email, password },
     })
       .then((response) => {

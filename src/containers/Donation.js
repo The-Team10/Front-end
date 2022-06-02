@@ -58,6 +58,7 @@ export default function Donation({ navigation }) {
   };
 
   const renderInnerView = (IconName, title, route, image) => {
+
     return (
       <TouchableOpacity
         onPress={() => navigation.navigate(route)}
