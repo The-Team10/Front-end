@@ -35,10 +35,10 @@ const Splash = ({ navigation }) => {
           duraton="1500"
           source={spashAllIn}
           style={{
-            width: windowWidth * 0.8,
-            height: windowHeight * 0.3,
-            borderRadius: 110,
-            borderRadius: 100,
+            width: windowWidth * 0.6,
+            height: windowHeight * 0.2,
+            borderRadius: 90,
+            borderRadius: 90,
           }}
           resizeMode="stretch"
         />
@@ -98,7 +98,14 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
-    paddingVertical: 50,
+    borderBottomRightRadius: 30,
+    borderBottomLeftRadius: 30,
+   
+    // height: 40,
+    // justifyContent: "center",
+    // alignItems: "center",
+    // borderRadius: 50,
+    paddingVertical: 30,
     paddingHorizontal: 30,
   },
   logo: {

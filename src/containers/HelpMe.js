@@ -95,20 +95,20 @@ const fn =()=>{
 
         <TouchableOpacity
           style={{
-            paddingVertical: 15,
-            paddingHorizontal: 40,
-            backgroundColor: Constants.primaryColor,
-            borderTopLeftRadius: 30,
-            borderTopRightRadius: 30,
-            borderBottomLeftRadius: 30,
-            borderBottomRightRadius: 30,
-            alignItems: "center",
-            justifyContent: "center",
-            position: "absolute",
-            bottom: 20,
-            left: 90,
-            right: 90,
-            borderRadius: 10,
+          paddingVertical: 15,
+          paddingHorizontal: 40,
+          backgroundColor: Constants.primaryColor,
+          borderTopLeftRadius: 30,
+          borderTopRightRadius: 30,
+          borderBottomLeftRadius: 30,
+          borderBottomRightRadius: 30,
+          alignItems: "center",
+          justifyContent: "center",
+          position: "absolute",
+          bottom: 20,
+          left: 90,
+          right: 90,
+          borderRadius: 10,
           }}
           onPress={()=>{
             axios({
