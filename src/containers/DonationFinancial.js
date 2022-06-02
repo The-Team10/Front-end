@@ -1,15 +1,6 @@
-<<<<<<< HEAD
 import React, { Component } from "react";
-import { Platform, StyleSheet, ToastAndroid } from "react-native";
-=======
-import  React, { Component } from "react";
 // import SelectDropdown from 'react-native-select-dropdown';
-import{
-  Platform,
-  StyleSheet,
-  ToastAndroid
-} from 'react-native';
->>>>>>> 50427361b6ef6cf2cd8b2e99d2f81a4b121bd69e
+import { Platform, StyleSheet, ToastAndroid } from "react-native";
 import {
   Text,
   Container,
@@ -53,7 +44,7 @@ export default function DonationMaterial({ navigation }) {
   const [transports, setTransport] = React.useState("");
   const [state, setstate] = React.useState("");
   const [value, setValue] = React.useState("");
-
+  const options = ["One Month", "Three Months", "Six Months", "Twelve Months"];
   console.log(value);
   const type = [
     { label: "One Time", value: "One Time" },
@@ -71,10 +62,19 @@ export default function DonationMaterial({ navigation }) {
     { label: "100", value: 100 },
     { label: "Other", value: "Other" },
   ];
-
   const renderInnerView = (title, image, state, setState) => {
     return (
-      <View>
+      <View
+      // style={{
+      //   width: windowWidth * 0.3,
+      //   //  height: windowWidth * 0.2,
+      //   marginVertical: 8,
+      //   borderRadius: 20,
+      //   flexDirection: 'row',
+      //   alignSelf: "center",
+      //   elevation: 20,
+      // }}
+      >
         <Image
           source={image}
           style={{
@@ -82,8 +82,6 @@ export default function DonationMaterial({ navigation }) {
             height: windowWidth * 0.2,
             borderTopLeftRadius: 15,
             borderTopRightRadius: 15,
-            borderBottomLeftRadius: 15,
-            borderBottomRightRadius: 15,
           }}
         />
         <View
@@ -98,14 +96,13 @@ export default function DonationMaterial({ navigation }) {
               color: "black",
               fontSize: 15,
               fontWeight: "700",
-              alignSelf: "flex-start",
-              top: "35%",
+              alignSelf: "center",
+              top: "70%",
               left: 20,
             }}
           >
             {title}
           </Text>
-
           <Switch
             style={{ right: 15, bottom: 10 }}
             trackColor={{ false: "gray", true: "#81B0FF" }}
@@ -118,7 +115,6 @@ export default function DonationMaterial({ navigation }) {
     );
   };
   return (
-<<<<<<< HEAD
     <>
       <View style={{ flex: 1 }}>
         <StatusBar animated={true} backgroundColor={"#0072FF"} />
@@ -178,8 +174,21 @@ export default function DonationMaterial({ navigation }) {
             />
           </View>
           <View>
-            {/* <Text black>Donation Amount</Text>  */}
-
+            <Text black>Donation Amount</Text>
+            <RadioForm
+              radio_props={suggestedAmount}
+              initial={2}
+              onPress={(value) => {
+                ToastAndroid.show(value.toString(), ToastAndroid.SHORT);
+              }}
+              buttonSize={15}
+              buttonOuterSize={25}
+              selectedButtonColor={"blue"}
+              selectedLabelColor={"blue"}
+              labelStyle={{ fontSize: 15 }}
+              disabled={false}
+              formHorizontal={true}
+            />
             {value === "Monthly" ? (
               <>
                 <Text black>Monthly Donation Amount</Text>
@@ -198,48 +207,24 @@ export default function DonationMaterial({ navigation }) {
                   formHorizontal={true}
                 />
                 <Text black>For How Many Months</Text>
+                {/* <SelectDropdown
+  data={options}
+  onSelect={(selectedItem, index) => {
+    console.log(selectedItem, index)
+  }}
+  buttonTextAfterSelection={(selectedItem, index) => {
+    (slectedItem === "Monthly"){
+    }
+    return selectedItem
+  }}
+  rowTextForSelection={(item, index) => {
+    // text represented for each item in dropdown
+    // if data array is an array of objects then return item.property to represent item in dropdown
+    return item
+  }}
+/>  */}
               </>
-            ) : (
-              <>
-                <Text black>Donation Amount</Text>
-                <RadioForm
-                  radio_props={suggestedAmount}
-                  initial={2}
-                  onPress={(value) => {
-                    ToastAndroid.show(value.toString(), ToastAndroid.SHORT);
-                  }}
-                  buttonSize={15}
-                  buttonOuterSize={25}
-                  selectedButtonColor={"blue"}
-                  selectedLabelColor={"blue"}
-                  labelStyle={{ fontSize: 15 }}
-                  disabled={false}
-                  formHorizontal={true}
-                />
-              </>
-            )}
-=======
-    <><View style={{ flex: 1 }}>
-      <StatusBar animated={true} backgroundColor={"#0072FF"} />
-      <LinearGradient
-        // Background Linear Gradient
-        colors={["#0072FF", "rgba(33,150,243,0.7)"]}
-        style={{
-          width: windowWidth,
-         
-        }}
-      >
-        <BackButton inTop white goBack={navigation.goBack} />
-        <Header white>Categories </Header>
-      </LinearGradient>
-      <ScrollView>
-        <View style={ styles.box}>
-          <View style={ styles.boxx}>
-          <View style={ styles.boxxx}>{renderInnerView("Emergency", ambulance, emergency, setEmergency)}</View>
-          <View style={ styles.boxxx}>{renderInnerView("Education", education1, educatn, setEducatn)}</View>
-          <View style={ styles.boxxx}>{renderInnerView("Food", food, foods, setFoods)}</View>
-          <View style={ styles.boxxx}>{renderInnerView("Transport", transport,transports,  setTransport)}</View> 
->>>>>>> 50427361b6ef6cf2cd8b2e99d2f81a4b121bd69e
+            ) : null}
           </View>
         </ScrollView>
         <TouchableOpacity
@@ -271,11 +256,7 @@ const styles = StyleSheet.create({
   box: {
     // width: windowWidth * 0.3,
     //    height: windowWidth * 0.2,
-<<<<<<< HEAD
     flex: 1,
-=======
-      flex: 1,
->>>>>>> 50427361b6ef6cf2cd8b2e99d2f81a4b121bd69e
   },
   boxx: {
     flex: 1,

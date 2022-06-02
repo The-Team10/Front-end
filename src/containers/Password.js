@@ -9,61 +9,63 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 import { theme } from "../core/theme";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function confirmPassword({ navigation}) {
-  const [password,setPassword]=useState("");
-const [email,setEmail] = useState("")
+export default function confirmPassword({ navigation }) {
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
 
-useEffect(() => {
- 
-  fetchData()
-})
-const fetchData = async () =>{
-  var token =await AsyncStorage.getItem('UsertokenInfo')
-  console.log(token,'tokennn')
-  try{
-    axios.get('http://192.168.1.101:3000/api/contributors',{headers:{token:token}}
-    ).then((response) =>{
-      console.log(response.data)
-      setEmail(response.data[0].email)
-    })
-  }catch{
-  console.log('first')
-  }
-}
+  useEffect(() => {
+    // fetchData()
+  });
+  const fetchData = async () => {
+    var token = await AsyncStorage.getItem("UsertokenInfo");
+    console.log(token, "tokennn");
+    try {
+      axios
+        .get("http://192.168.1.101:3000/api/contributors", {
+          headers: { token: token },
+        })
+        .then((response) => {
+          console.log(response.data);
+          setEmail(response.data[0].email);
+        });
+    } catch {
+      console.log("first");
+    }
+  };
 
- const checkpassword=()=>{
-     if(password===email){
-navigation.navigate('Update')
-     }else{
-alert('wrong information')
-     }
- }
-
-
+  const checkpassword = () => {
+    if (password === email) {
+      navigation.navigate("Update");
+    } else {
+      alert("wrong information");
+    }
+  };
 
   return (
     <ScrollView style={styles.container}>
-    <TextInput
-          label="email"
-          mode="contained"
-          style={styles.textInput}
-          dense={false}
-          returnKeyType="next"
-          onChangeText={(text) =>{setPassword(text)}}
-          autoCapitalize="none"
-        />
+      <TextInput
+        label="email"
+        mode="contained"
+        style={styles.textInput}
+        dense={false}
+        returnKeyType="next"
+        onChangeText={(text) => {
+          setPassword(text);
+        }}
+        autoCapitalize="none"
+      />
 
-<Button
-          mode="contained"
-          color={theme.colors.primary}
-          style={{ borderRadius: 50 }}
-          icon={() => (
-            <AntDesign size={17} name="edit" color={theme.colors.primary} />
-          )}
-          onPress={checkpassword}
-        >
-          confirm
-        </Button>
+      <Button
+        mode="contained"
+        color={theme.colors.primary}
+        style={{ borderRadius: 50 }}
+        icon={() => (
+          <AntDesign size={17} name="edit" color={theme.colors.primary} />
+        )}
+        onPress={checkpassword}
+      >
+        confirm
+      </Button>
     </ScrollView>
   );
 }
