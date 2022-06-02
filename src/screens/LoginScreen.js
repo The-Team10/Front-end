@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect ,useContext} from "react";
 import { TouchableOpacity, StyleSheet, View } from "react-native";
 import { Text } from "react-native-paper";
 import Background from "../components/Background";
@@ -11,17 +11,20 @@ import { theme } from "../core/theme";
 import { emailValidator } from "../helpers/emailValidator";
 import { passwordValidator } from "../helpers/passwordValidator";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
+import jwt from "jwt-decode";
+import { userData } from "../components/Context";
 import axios from "axios";
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+//  const[data,setData]=useContext(userData)
+
 
   useEffect(() => {
     AsyncStorage.getAllKeys((err, keys) => {
       AsyncStorage.multiGet(keys, (error, stores) => {
         stores.map((result, i, store) => {
-          console.log({ [store[i][0]]: store[i][1] }, "lol");
+          // console.log({ [store[i][0]]: store[i][1] }, "lol");
           return true;
         });
       });
@@ -31,25 +34,17 @@ export default function LoginScreen({ navigation }) {
   const login = () => {
     axios({
       method: "post",
-      url: `http://192.168.11.171:3000/api/contributors/login`,
+      url: `http://192.168.1.105:3000/api/contributors/login`,
       data: { email, password },
     })
       .then((response) => {
-        if (response.data.msg) {
-          if (response.data.msg === "hi help seekers") {
-            // alert("hi help seekers");
-            console.log("help_seekers")
-            AsyncStorage.setItem("UsertokenInfo", response.data.token);
-
-            navigation.navigate("Dashboard");
-          } else if ((response.data.msg = "hi help giver")) {
-            alert("hi help giver");
-            AsyncStorage.setItem("UsertokenInfo", response.data.token);
-
-            navigation.navigate("Dashboard");
-          } else {
-            alert(response.data);
-          }
+        if (response.status == 200) {
+          AsyncStorage.setItem("UsertokenInfo", response.data.token);
+          decoded = jwt(response.data.token)
+          navigation.navigate("Dashboard");
+        //  setData(decoded.user)
+        //  console.log(data)
+          
         } else {
           alert(response.data);
         }
