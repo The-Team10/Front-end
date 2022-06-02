@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect ,useContext} from "react";
 import { TouchableOpacity, StyleSheet, View } from "react-native";
 import { Text } from "react-native-paper";
 import Background from "../components/Background";
@@ -10,10 +10,49 @@ import BackButton from "../components/BackButton";
 import { theme } from "../core/theme";
 import { emailValidator } from "../helpers/emailValidator";
 import { passwordValidator } from "../helpers/passwordValidator";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import jwt from "jwt-decode";
+import { userData } from "../components/Context";
 import axios from "axios";
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+//  const[data,setData]=useContext(userData)
+
+
+  useEffect(() => {
+    AsyncStorage.getAllKeys((err, keys) => {
+      AsyncStorage.multiGet(keys, (error, stores) => {
+        stores.map((result, i, store) => {
+          // console.log({ [store[i][0]]: store[i][1] }, "lol");
+          return true;
+        });
+      });
+    });
+  });
+
+  const login = () => {
+    axios({
+      method: "post",
+      url: `http://192.168.1.105:3000/api/contributors/login`,
+      data: { email, password },
+    })
+      .then((response) => {
+        if (response.status == 200) {
+          AsyncStorage.setItem("UsertokenInfo", response.data.token);
+          decoded = jwt(response.data.token)
+          navigation.navigate("Dashboard");
+        //  setData(decoded.user)
+        //  console.log(data)
+          
+        } else {
+          alert(response.data);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <Background>
       <BackButton goBack={navigation.goBack} />
@@ -47,33 +86,7 @@ export default function LoginScreen({ navigation }) {
           <Text style={styles.forgot}>Forgot your password?</Text>
         </TouchableOpacity>
       </View>
-      <Button
-        mode="contained"
-        onPress={() => {
-          navigation.reset({
-            //   // index: 0,
-            routes: [{ name: "Dashboard" }],
-          });
-          /*     axios({
-            method: "post",
-            url: `http://192.168.11.218:3000/api/contributors/login`,
-            data: { email, password },
-          })
-            .then((response) => {
-              if (response.data === "login successful") {
-                navigation.reset({
-                  //   // index: 0,
-                  routes: [{ name: "Dashboard" }],
-                });
-              }
-              // console.log(response.data);
-              alert(response.data);
-            })
-            .catch((error) => {
-              console.log(error);
-            }); */
-        }}
-      >
+      <Button mode="contained" onPress={login}>
         Login
       </Button>
       <View style={styles.row}>

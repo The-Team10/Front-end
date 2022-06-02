@@ -5,6 +5,7 @@ import AboutUs from "../containers/AboutUs";
 import Reviews from "../containers/Reviews";
 import Statistics from "../containers/Statistics";
 import AntDesign from "react-native-vector-icons/AntDesign";
+import Profile from "../containers/Profile";
 import { Text } from "react-native";
 import { Constants } from "../commun/Constants";
 
@@ -36,6 +37,9 @@ export default function TabNavigator() {
           }
           if (route.name === "Statistics") {
             iconName = "barschart";
+          }
+          if (route.name === "Profile") {
+            iconName = "user";
           } else if (route.name === "AboutUs") {
             iconName = "team";
           }
@@ -55,6 +59,9 @@ export default function TabNavigator() {
           }
           if (route.name === "Statistics") {
             title = "Statistics";
+          }
+          if (route.name === "Profile") {
+            title = "Profile";
           } else if (route.name === "AboutUs") {
             title = "About Us";
           }
@@ -81,6 +88,7 @@ export default function TabNavigator() {
       <Tab.Screen name="AboutUs" component={AboutUs} />
       <Tab.Screen name="Reviews" component={Reviews} />
       <Tab.Screen name="Statistics" component={Statistics} />
+      <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
   );
 }
@@ -115,4 +123,3 @@ export default function TabNavigator() {
 //     </Background>
 //   )
 // }
-

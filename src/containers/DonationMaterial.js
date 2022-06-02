@@ -17,14 +17,15 @@ import { LinearGradient } from "expo-linear-gradient";
 import * as ImagePicker from "expo-image-picker";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { Alert, Modal, StyleSheet, Pressable } from "react-native";
+import axios from "axios"
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 const placeholder = require("../images/placeholder-image.png");
 
 export default function DonationMaterial({ navigation }) {
-  const [firstName, setFirstName] = React.useState("");
-  const [lastName, setLastName] = React.useState("");
-  const [donationName, setDonationName] = React.useState("");
+  const [first_name, setFirstName] = React.useState("");
+  const [last_name, setLastName] = React.useState("");
+  const [Donation_name, setDonationName] = React.useState("");
   const [adress, setAdress] = React.useState("");
   const [phone, setPhone] = React.useState("");
   const [description, setDescription] = React.useState("");
@@ -59,6 +60,7 @@ export default function DonationMaterial({ navigation }) {
   };
 
   const input = (title, state, setState) => {
+    const fn =()=>{}
     return (
       <TextInput
         //  label={title}
@@ -73,8 +75,9 @@ export default function DonationMaterial({ navigation }) {
           borderRadius: 10,
           height: 60,
           fontSize: 14,
-          margin: 10,
+          margin: 10, 
         }}
+        
       />
     );
   };
@@ -126,11 +129,11 @@ export default function DonationMaterial({ navigation }) {
         </View>
 
         <View style={{ flex: 1, paddingBottom: 100, top: 0 }}>
-          {input("Firstname", firstName, setFirstName)}
-          {input("LastName", lastName, setLastName)}
+          {input("Firstname", first_name, setFirstName)}
+          {input("LastName", last_name, setLastName)}
           {input("Adress", adress, setAdress)}
           {input("Phone", phone, setPhone)}
-          {input("Donation name", donationName, setDonationName)}
+          {input("Donation name", Donation_name, setDonationName)}
           {input("Description", description, setDescription)}
         </View>
         <TouchableOpacity
@@ -149,6 +152,21 @@ export default function DonationMaterial({ navigation }) {
             left: 90,
             right: 90,
             borderRadius: 10,
+          }}
+          onPress={()=>{
+            axios({
+              method :"post",
+              url:`http://192.168.11.241:3000/api/helpgiver/donnationMat`,
+             data:{ first_name, last_name,Donation_name, phone,description,adress},
+       
+           })
+           .then((response)=>{
+             if(response.status === 200) {
+               alert("sended succsseful")
+             }
+           }).catch((error) => {
+             console.log(error);
+           });
           }}
         >
           <Text style={{ color: "white", fontSize: 16 }}>Submit</Text>
@@ -228,7 +246,9 @@ export default function DonationMaterial({ navigation }) {
                   justifyContent: "center",
                   alignSelf: "center",
                 }}
+            
                 onPress={() => pickImageLibrary()}
+                
               >
                 <Text
                   style={{ color: "white", fontSize: 15, fontWeight: "600" }}
