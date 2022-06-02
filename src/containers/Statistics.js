@@ -10,10 +10,10 @@ const img8 = require("../images/img8.jpg");
 
 import AntDesign from "react-native-vector-icons/FontAwesome5";
 export default function Statistics(props) {
-  const [n, setN] = React.useState(10);
-  const [m, setM] = React.useState(20);
+  const [n, setN] = React.useState(50);
+  const [m, setM] = React.useState(25);
   const [x, setX] = React.useState(40);
-  const [y, setY] = React.useState(50);
+  const [y, setY] = React.useState(15);
 
   /*   const renderTexture = (firstText, secondText) => {
     return (
@@ -39,6 +39,39 @@ export default function Statistics(props) {
       </View>
     );
   }; */
+  const renderTexturee = (firstText, secondText, icon) => {
+    return (
+      <View
+        style={{
+          height: windowWidth * 0.42,
+          width: windowWidth,
+          backgroundColor: "white",
+          borderRadius: 25,
+          borderBottomLeftRadius: 0,
+          borderBottomRightRadius: 0,
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
+        <View
+          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+        >
+          <Text style={{ fontWeight: "300", fontSize: 18, marginTop: 20 }}>
+            Your Portfolio Ballance
+          </Text>
+          <Text
+            style={{
+              marginTop: -80,
+              fontWeigth: "900",
+              fontSize: 30,
+            }}
+          >
+            12,724.33 DN
+          </Text>
+        </View>
+      </View>
+    );
+  };
 
   const renderTexture = (firstText, secondText, icon) => {
     return (
@@ -46,25 +79,30 @@ export default function Statistics(props) {
         style={{
           height: windowWidth * 0.42,
           width: windowWidth * 0.42,
-          backgroundColor: "white",
+          backgroundColor: "#0CD3C3",
           borderRadius: 25,
           alignItems: "center",
           justifyContent: "space-between",
         }}
       >
-        <AntDesign
-          size={25}
-          name={icon}
-          color={Constants.primaryColor}
-          style={{ flex: 0.3, alignSelf: "flex-start", left: 20, top: 20 }}
-        />
-        <View style={{ flex: 0.3, alignItems: "center" }}>
-          <Text style={{ fontWeight: "500", fontSize: 15 }}>{firstText}</Text>
+        <View style={{ flex: 0.5, alignItems: "center" }}>
           <Text
             style={{
-              color: "rgba(0,0,0,0.3)",
-              fontweigth: "500",
-              fontsize: 13,
+              fontWeight: "500",
+              fontSize: 15,
+              color: "white",
+              marginTop: 20,
+            }}
+          >
+            {firstText}
+          </Text>
+          <Text
+            style={{
+              alignItems: "center",
+              fontweigth: "bold",
+              fontSize: 30,
+              color: "white",
+              marginTop: 30,
             }}
           >
             {secondText}
@@ -74,7 +112,15 @@ export default function Statistics(props) {
     );
   };
 
-  const renderSlider = (value, setValue, maximumValue, icon, number, color) => {
+  const renderSlider = (
+    value,
+    setValue,
+    maximumValue,
+    icon,
+    number,
+    color,
+    width
+  ) => {
     return (
       <View
         style={{
@@ -82,6 +128,7 @@ export default function Statistics(props) {
           alignItems: "center",
           flex: 0.25,
           backgroundColor: "transparent",
+          size: 800,
         }}
       >
         <Slider
@@ -100,17 +147,18 @@ export default function Statistics(props) {
             height: windowHeight * 0.2,
             top: 20,
           }}
+          width={width}
         />
         <View style={{ position: "absolute", bottom: 0 }}></View>
         <AntDesign
           size={17}
           name={icon}
-          color={color}
+          color={"white"}
           style={{ paddingTop: 15 }}
         />
         <Text
           style={{
-            color: "black",
+            color: "white",
             fontWeight: "600",
             paddingTop: 10,
             fontSize: 14,
@@ -150,17 +198,15 @@ export default function Statistics(props) {
             width: windowWidth,
             //   marginVertical: 20,
             flexDirection: "row",
-            paddingBottom: 80,
-            borderBottomLeftRadius: 25,
-            borderBottomRightRadius: 25,
+            paddingBottom: 100,
 
             // flex: 1,
           }}
         >
-          {renderSlider(n, setN, 50, "hand-holding-heart", 133, "red")}
-          {renderSlider(m, setM, 50, "hand-holding-heart", 133, "yellow")}
-          {renderSlider(x, setX, 50, "hand-holding-heart", 133, "green")}
-          {renderSlider(y, setY, 50, "hand-holding-heart", 133, "white")}
+          {renderSlider(n, setN, 50, "book", 133, "#031F73", "10%")}
+          {renderSlider(m, setM, 50, "heartbeat", 133, "red")}
+          {renderSlider(x, setX, 50, "hamburger", 133, "green")}
+          {renderSlider(y, setY, 50, "bus", 133, "#D9E00E")}
         </LinearGradient>
       </View>
       <View
@@ -175,13 +221,12 @@ export default function Statistics(props) {
       <View
         style={{
           // paddingTop: 30,
-          top: -25,
+          top: -50,
           flexDirection: "row",
-          justifyContent: "space-around",
+          justifyContent: "center",
         }}
       >
-        {renderTexture("Food", "19 10 2010", "hand-holding-heart")}
-        {renderTexture("Givers", "19 10 2010", "hand-holding-heart")}
+        {renderTexturee("Food", "19 10 2010", "hand-holding-heart")}
       </View>
       <View
         style={{
@@ -191,8 +236,8 @@ export default function Statistics(props) {
           justifyContent: "space-around",
         }}
       >
-        {renderTexture("Donators", "19 10 2010", "hand-holding-heart")}
-        {renderTexture("Seekers", "19 10 2010", "hand-holding-heart")}
+        {renderTexture("Help Givers", "98")}
+        {renderTexture("Help Seekers", "120")}
       </View>
     </View>
   );
