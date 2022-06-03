@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 // import SelectDropdown from 'react-native-select-dropdown';
 import { Platform, StyleSheet, ToastAndroid } from "react-native";
+
 import axios from "axios"
+
 import {
   Text,
   Container,
@@ -66,8 +68,22 @@ export default function DonationMaterial({ navigation }) {
   const renderInnerView = (title, image, state, setState) => {
     const fn = () => {};
     return (
+
+      <View
+      // style={{
+      //   width: windowWidth * 0.3,
+      //   //  height: windowWidth * 0.2,
+      //   marginVertical: 8,
+      //   borderRadius: 20,
+      //   flexDirection: 'row',
+      //   alignSelf: "center",
+      //   elevation: 20,
+      // }}
+      >
+
       <View>
         
+
         <Image
           source={image}
           style={{
@@ -91,14 +107,21 @@ export default function DonationMaterial({ navigation }) {
               color: "black",
               fontSize: 15,
               fontWeight: "700",
+
+              alignSelf: "center",
+              top: "70%",
+
               alignSelf: "flex-start",
               top: "35%",
+
               left: 20,
             }}
           >
             {title}
           </Text>
+
           <Switch
+
             style={{ right: 15, bottom: 10 }}
             trackColor={{ false: "gray", true: "#81B0FF" }}
             thumbColor={Constants.primaryColor}
@@ -203,13 +226,14 @@ export default function DonationMaterial({ navigation }) {
                 />
                 <Text black>For How Many Months</Text>
                 {/* <SelectDropdown
-	data={options}
-	onSelect={(selectedItem, index) => {
-		console.log(selectedItem, index)
-	}}
-	buttonTextAfterSelection={(selectedItem, index) => {
-		(slectedItem === "Monthly"){
-      
+
+  data={options}
+  onSelect={(selectedItem, index) => {
+    console.log(selectedItem, index)
+  }}
+  buttonTextAfterSelection={(selectedItem, index) => {
+    (slectedItem === "Monthly"){
+
     }
     return selectedItem
   }}
@@ -224,6 +248,7 @@ export default function DonationMaterial({ navigation }) {
           </View>
         </ScrollView>
         <TouchableOpacity
+
           onPress={() => {
             navigation.navigate("CreditCard");
             
@@ -242,6 +267,7 @@ export default function DonationMaterial({ navigation }) {
              });
             }
           }
+
           style={{
             paddingVertical: 15,
             paddingHorizontal: 40,

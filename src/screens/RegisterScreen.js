@@ -254,6 +254,7 @@ export default function RegisterScreen({ navigation }) {
               />
             </View>
           </TouchableRipple>
+
           <TouchableRipple
             onPress={() => setAnonyme(!anonyme)}
             rippleColor="rgba(0, 0, 0, .32)"
@@ -270,6 +271,7 @@ export default function RegisterScreen({ navigation }) {
               {console.log(anonyme)}
             </View>
           </TouchableRipple>
+
           <TouchableRipple
             onPress={() => setRole("help_seekers")}
             rippleColor="rgba(0, 0, 0, .32)"
@@ -284,7 +286,13 @@ export default function RegisterScreen({ navigation }) {
             </View>
           </TouchableRipple>
         </View>
+
         <Button mode="contained" onPress={register} style={{ marginTop: 24 }}>
+
+
+         
+
+       
           Sign Up
         </Button>
         <View style={styles.row}>
