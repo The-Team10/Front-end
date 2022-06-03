@@ -5,6 +5,7 @@ import AboutUs from "../containers/AboutUs";
 import Reviews from "../containers/Reviews";
 import Statistics from "../containers/Statistics";
 import AntDesign from "react-native-vector-icons/AntDesign";
+import Password from "../containers/Password";
 import { Text } from "react-native";
 import { Constants } from "../commun/Constants";
 
@@ -81,6 +82,7 @@ export default function TabNavigator() {
       <Tab.Screen name="AboutUs" component={AboutUs} />
       <Tab.Screen name="Reviews" component={Reviews} />
       <Tab.Screen name="Statistics" component={Statistics} />
+      <Tab.Screen name="Password" component={Password} />
     </Tab.Navigator>
   );
 }
