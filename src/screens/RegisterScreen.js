@@ -254,21 +254,7 @@ export default function RegisterScreen({ navigation }) {
               />
             </View>
           </TouchableRipple>
-          <TouchableRipple   onPress={() => setAnonyme(!anonyme)} rippleColor="rgba(0, 0, 0, .32)">
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <Text>Anonyme </Text>
 
-              <RadioButton
-                onPress={() => setAnonyme(!anonyme)}
-                value="anonyme"
-                style={{ color: "#000" }}
-                status={anonyme == true ? "checked" : "unchecked"}
-             
-
-              />
-                {console.log(anonyme)} 
-            </View>
-          </TouchableRipple>
           <TouchableRipple
             onPress={() => setRole("help_seekers")}
             rippleColor="rgba(0, 0, 0, .32)"
@@ -285,7 +271,39 @@ export default function RegisterScreen({ navigation }) {
         </View>
         <Button
           mode="contained"
+
+          onPress={() => {}}
+          /* onPress={() => {
+            axios({
+              method: "post",
+              url: `192.168.11.86:3000/api/contributors/signup`,
+              data: {
+                first_name,
+                last_name,
+                email,
+                password,
+                confirmPassword,
+                role,
+                photo,
+              },
+            })
+              .then((response) => {
+                if (response.data === "signup successful") {
+                  navigation.reset({
+                    routes: [{ name: "LoginScreen" }],
+                  });
+                  alert(response.data);
+                }
+                // console.log(response.data);
+                alert(response.data);
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          }} */
+
           onPress={register}
+
           style={{ marginTop: 24 }}
         >
           Sign Up
