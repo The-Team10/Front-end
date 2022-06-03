@@ -39,7 +39,7 @@ export default function TabNavigator() {
             iconName = "barschart";
           }
           if (route.name === "Profile") {
-            iconName = "barschart";
+            iconName = "user";
           } else if (route.name === "AboutUs") {
             iconName = "team";
           }
@@ -88,7 +88,7 @@ export default function TabNavigator() {
       <Tab.Screen name="AboutUs" component={AboutUs} />
       <Tab.Screen name="Reviews" component={Reviews} />
       <Tab.Screen name="Statistics" component={Statistics} />
-       <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
   );
 }
