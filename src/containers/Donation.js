@@ -58,6 +58,7 @@ export default function Donation({ navigation }) {
   };
 
   const renderInnerView = (IconName, title, route, image) => {
+
     return (
       <TouchableOpacity
         onPress={() => navigation.navigate(route)}
@@ -88,23 +89,11 @@ export default function Donation({ navigation }) {
   };
   return (
     <View style={{ flex: 1 }}>
-      <StatusBar
-        animated={true}
-        backgroundColor={"#0072FF"}
-        //  barStyle={statusBarStyle}
-        //  showHideTransition={statusBarTransition}
-        //    hidden={hidden}
-      />
+      <StatusBar animated={true} backgroundColor={"#0072FF"} />
       <LinearGradient
-        // Background Linear Gradient
         colors={["#0072FF", "rgba(33,150,243,0.7)"]}
         style={{
           width: windowWidth,
-          // height: windowHeight,
-          //  flex: 1,
-          //   justifyContent: "center",
-          //   alignItems: "center",
-          //   textAlign: "center",
         }}
       >
         <BackButton inTop white goBack={navigation.goBack} />
@@ -174,7 +163,6 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 8,
     width: windowWidth * 0.8,
-    //  paddingBottom: 40,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,

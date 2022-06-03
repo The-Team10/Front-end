@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 // import SelectDropdown from 'react-native-select-dropdown';
 import { Platform, StyleSheet, ToastAndroid } from "react-native";
+
 import axios from "axios"
+
 import {
   Text,
   Container,
@@ -63,24 +65,25 @@ export default function DonationMaterial({ navigation }) {
     { label: "100", value: 100 },
     { label: "Other", value: "Other" },
   ];
-
   const renderInnerView = (title, image, state, setState) => {
     const fn = () => {};
     return (
+
       <View
       // style={{
-
       //   width: windowWidth * 0.3,
       //   //  height: windowWidth * 0.2,
-
       //   marginVertical: 8,
       //   borderRadius: 20,
       //   flexDirection: 'row',
       //   alignSelf: "center",
-
       //   elevation: 20,
       // }}
       >
+
+      <View>
+        
+
         <Image
           source={image}
           style={{
@@ -88,6 +91,8 @@ export default function DonationMaterial({ navigation }) {
             height: windowWidth * 0.2,
             borderTopLeftRadius: 15,
             borderTopRightRadius: 15,
+            borderBottomLeftRadius: 15,
+            borderBottomRightRadius:15,
           }}
         />
         <View
@@ -105,6 +110,10 @@ export default function DonationMaterial({ navigation }) {
 
               alignSelf: "center",
               top: "70%",
+
+              alignSelf: "flex-start",
+              top: "35%",
+
               left: 20,
             }}
           >
@@ -112,6 +121,7 @@ export default function DonationMaterial({ navigation }) {
           </Text>
 
           <Switch
+
             style={{ right: 15, bottom: 10 }}
             trackColor={{ false: "gray", true: "#81B0FF" }}
             thumbColor={Constants.primaryColor}
@@ -184,7 +194,6 @@ export default function DonationMaterial({ navigation }) {
           </View>
           <View>
             <Text black>Donation Amount</Text>
-
             <RadioForm
               radio_props={suggestedAmount}
            
@@ -203,7 +212,6 @@ export default function DonationMaterial({ navigation }) {
             {value === "Monthly" ? (
               <>
                 <Text black>Monthly Donation Amount</Text>
-
                 <RadioForm
                   radio_props={suggestedAmounte}
                  
@@ -221,28 +229,29 @@ export default function DonationMaterial({ navigation }) {
                 />
                 <Text black>For How Many Months</Text>
                 {/* <SelectDropdown
-	data={options}
-	onSelect={(selectedItem, index) => {
-		console.log(selectedItem, index)
-	}}
-	buttonTextAfterSelection={(selectedItem, index) => {
-		(slectedItem === "Monthly"){
-      
+
+  data={options}
+  onSelect={(selectedItem, index) => {
+    console.log(selectedItem, index)
+  }}
+  buttonTextAfterSelection={(selectedItem, index) => {
+    (slectedItem === "Monthly"){
+
     }
-		 
-		return selectedItem
-	}}
-	rowTextForSelection={(item, index) => {
-		// text represented for each item in dropdown
-		// if data array is an array of objects then return item.property to represent item in dropdown
-		return item
-	}}
+    return selectedItem
+  }}
+  rowTextForSelection={(item, index) => {
+    // text represented for each item in dropdown
+    // if data array is an array of objects then return item.property to represent item in dropdown
+    return item
+  }}
 />  */}
               </>
             ) : null}
           </View>
         </ScrollView>
         <TouchableOpacity
+
           onPress={() => {
             navigation.navigate("CreditCard");
             
@@ -261,6 +270,7 @@ export default function DonationMaterial({ navigation }) {
              });
             }
           }
+
           style={{
             paddingVertical: 15,
             paddingHorizontal: 40,
@@ -284,7 +294,6 @@ export default function DonationMaterial({ navigation }) {
     </>
   );
 }
-
 const styles = StyleSheet.create({
   box: {
     // width: windowWidth * 0.3,

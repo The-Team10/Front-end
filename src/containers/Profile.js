@@ -13,11 +13,12 @@ export default function Profile({ navigation }) {
   const [loading, setLoading] = useState(false);
   const [monitor, setMonitor] = useState("");
   const [name, setName] = useState("");
-  const [lastName, setLastName]= useState("")
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
-const [photo, setPhoto] = useState('')
+  const [photo, setPhoto] = useState("");
+
 
 
 useEffect(() => {
@@ -41,6 +42,7 @@ const fetchData = async () =>{
   }
 }
 
+
   // const populateForm = (params) => {
   //   setEmail({ value: "", error: "" });
   //   setPhone({ value: "", error: "" });
@@ -54,19 +56,14 @@ const fetchData = async () =>{
     onHandleUpdate(payload);
   };
 
-
-
-
-
-
   return (
     <ScrollView style={styles.container}>
       <View style={styles.avatar}>
-         <Avatar.Image
+        <Avatar.Image
           style={{ backgroundColor: theme.colors.secondary }}
           size={100}
-          source={{uri:photo}}
-        /> 
+          source={{ uri: photo }}
+        />
       </View>
       <View style={styles.fullname}>
         <Text style={{ fontSize: 28, fontWeight: "bold" }}>
@@ -98,7 +95,7 @@ const fetchData = async () =>{
           error={!!name.error}
           errorText={name.error}
         />
-          <TextInput
+        <TextInput
           label="last Name"
           mode="contained"
           style={styles.textInput}
@@ -109,8 +106,7 @@ const fetchData = async () =>{
           error={!!name.error}
           errorText={name.error}
         />
-        
-       
+
         <TextInput
           label="email"
           mode="contained"
@@ -146,9 +142,11 @@ const fetchData = async () =>{
           icon={() => (
             <AntDesign size={17} name="edit" color={theme.colors.primary} />
           )}
-          onPress={()=>{navigation.navigate('Password')}}
+          onPress={() => {
+            navigation.navigate("Password");
+          }}
         >
-         UPDATE
+          UPDATE
         </Button>
       </View>
     </ScrollView>
