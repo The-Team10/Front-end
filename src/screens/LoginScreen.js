@@ -1,4 +1,4 @@
-import React, { useState, useEffect ,useContext} from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { TouchableOpacity, StyleSheet, View } from "react-native";
 import { Text } from "react-native-paper";
 import Background from "../components/Background";
@@ -17,8 +17,7 @@ import axios from "axios";
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-//  const[data,setData]=useContext(userData)
-
+  //  const[data,setData]=useContext(userData)
 
   useEffect(() => {
     AsyncStorage.getAllKeys((err, keys) => {
@@ -33,21 +32,20 @@ export default function LoginScreen({ navigation }) {
 
   const login = () => {
     axios({
-      method: "POST",
-      url: `http://192.168.11.134:3000/api/contributors/login`,
+      method: "post",
+      url: `http://192.168.1.17:3000/api/contributors/login`,
       data: { email, password },
     })
       .then((response) => {
-        if (response.status == 200) {
-          AsyncStorage.setItem("UsertokenInfo", response.data.token);
-          decoded = jwt(response.data.token)
+       console.log(response.data.message,"response");
+        if (response.data.message === "login successful") {
+         /*  AsyncStorage.setItem("UsertokenInfo", response.data.token);
+          decoded = jwt(response.data.token); */
           navigation.navigate("Dashboard");
-        //  setData(decoded.user)
-        //  console.log(data)
-          
-        } else {
-          alert(response.data);
+          //  setData(decoded.user)
+          //  console.log(data)
         }
+        else if (response.data.message !== "login successful") alert("login failed")
       })
       .catch((error) => {
         console.log(error);
@@ -63,7 +61,7 @@ export default function LoginScreen({ navigation }) {
         label="Email"
         returnKeyType="next"
         value={email.value}
-        onChangeText={(text) => setEmail({ value: text, error: "" })}
+        onChangeText={(text) => setEmail(text)}
         error={!!email.error}
         errorText={email.error}
         autoCapitalize="none"
@@ -75,7 +73,7 @@ export default function LoginScreen({ navigation }) {
         label="Password"
         returnKeyType="done"
         value={password.value}
-        onChangeText={(text) => setPassword({ value: text, error: "" })}
+        onChangeText={(text) => setPassword(text)}
         error={!!password.error}
         errorText={password.error}
         secureTextEntry
@@ -87,7 +85,7 @@ export default function LoginScreen({ navigation }) {
           <Text style={styles.forgot}>Forgot your password?</Text>
         </TouchableOpacity>
       </View>
-      <Button mode="contained" onPress={onLoginPressed}>
+      <Button mode="contained" onPress={login}>
         Login
       </Button>
       <View style={styles.row}>

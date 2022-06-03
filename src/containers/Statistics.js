@@ -64,6 +64,7 @@ export default function Statistics(props) {
               marginTop: -80,
               fontWeigth: "900",
               fontSize: 30,
+              color: "#2196f3",
             }}
           >
             12,724.33 DN
@@ -146,6 +147,7 @@ export default function Statistics(props) {
             width: windowWidth * 0.4,
             height: windowHeight * 0.2,
             top: 20,
+            scaleY: 2.2,
           }}
           width={width}
         />
@@ -203,9 +205,9 @@ export default function Statistics(props) {
             // flex: 1,
           }}
         >
-          {renderSlider(n, setN, 50, "book", 133, "#031F73", "10%")}
+          {renderSlider(n, setN, 50, "book", 133, "#D418C1", "10%")}
           {renderSlider(m, setM, 50, "heartbeat", 133, "red")}
-          {renderSlider(x, setX, 50, "hamburger", 133, "green")}
+          {renderSlider(x, setX, 50, "hamburger", 133, "#3FF819rr")}
           {renderSlider(y, setY, 50, "bus", 133, "#D9E00E")}
         </LinearGradient>
       </View>

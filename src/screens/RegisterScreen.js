@@ -104,7 +104,7 @@ export default function RegisterScreen({ navigation }) {
       .catch((err) => console.log(err));
   };
   let register = () => {
-    let  data= {
+    let data = {
       first_name,
       last_name,
       email,
@@ -112,26 +112,26 @@ export default function RegisterScreen({ navigation }) {
       role,
       photo,
       anonyme,
-    }
-    console.log(data,'dataaaaaaa')
-   
-    axios.post(`http://192.168.22.143:3000/api/contributors`, data)
+    };
+    console.log(data, "dataaaaaaa");
+
+    axios
+      .post(`http://192.168.1.17:3000/api/contributors`, data)
       .then((response) => {
-        // console.log(response,"response")
-        // if (response.data === "signup successful") {
-        //   navigation.reset({
-        //     routes: [{ name: "LoginScreen" }],
-        //   });
-        //   alert(response.data);
-        // }
-        // // console.log(response.data);
-        // alert(response.data);
+        console.log(response, "response");
+        if (response.data === "signup successful") {
+          navigation.reset({
+            routes: [{ name: "LoginScreen" }],
+          });
+          alert(response.data);
+        }
+        console.log(response.data);
+        alert(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
-  }
-  
+  };
 
   return (
     <ScrollView>
@@ -254,7 +254,10 @@ export default function RegisterScreen({ navigation }) {
               />
             </View>
           </TouchableRipple>
-          <TouchableRipple   onPress={() => setAnonyme(!anonyme)} rippleColor="rgba(0, 0, 0, .32)">
+          <TouchableRipple
+            onPress={() => setAnonyme(!anonyme)}
+            rippleColor="rgba(0, 0, 0, .32)"
+          >
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <Text>Anonyme </Text>
 
@@ -263,10 +266,8 @@ export default function RegisterScreen({ navigation }) {
                 value="anonyme"
                 style={{ color: "#000" }}
                 status={anonyme == true ? "checked" : "unchecked"}
-             
-
               />
-                {console.log(anonyme)} 
+              {console.log(anonyme)}
             </View>
           </TouchableRipple>
           <TouchableRipple
@@ -283,11 +284,7 @@ export default function RegisterScreen({ navigation }) {
             </View>
           </TouchableRipple>
         </View>
-        <Button
-          mode="contained"
-          onPress={register}
-          style={{ marginTop: 24 }}
-        >
+        <Button mode="contained" onPress={register} style={{ marginTop: 24 }}>
           Sign Up
         </Button>
         <View style={styles.row}>
