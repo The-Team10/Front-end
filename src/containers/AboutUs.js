@@ -10,7 +10,7 @@ const StatusBarHeight = Canstants.statusBarHeight;
 const HeaderText = styled.Text`
   font-size: 32px;
   font-weight: bold;
-  color: #1E90FF;
+  color: #2986cc;
   letter-spacing: 1px;
   text-align: left;
   margin-left: 20px;

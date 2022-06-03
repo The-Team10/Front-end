@@ -28,10 +28,7 @@ export default function Router() {
           <Stack.Screen name="TabNavigator" component={TabNavigator} />
 
 
-        <Stack.Screen
-            name="DonationFinancial"
-            component={DonationFinancial}
-          />
+       
 
           <Stack.Screen name="Splash" component={Splash} />
           <Stack.Screen name="StartUpScreens" component={StartUpScreens} />
@@ -49,6 +46,11 @@ export default function Router() {
             name="DonationFinancial"
             component={DonationFinancial}
           />
+
+          <Stack.Screen name="HelpMe" component={HelpMe} />
+          {/* <Stack.Screen name="DonationFinancial"component={DonationFinancial}/> */}
+        
+
 
 
           

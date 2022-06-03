@@ -26,6 +26,7 @@ import {
   ];
   
   const swiper = (props) => {
+   
     return (
       <View style={{opacity:0.8}}>
         <ImageBackground

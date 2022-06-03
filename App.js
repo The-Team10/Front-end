@@ -1,14 +1,14 @@
-import { StyleSheet} from "react-native";
+import { StyleSheet } from "react-native";
 import Router from "./src/router";
-import Reviews from "./src/containers/Reviews";
-import AboutUs from "./src/containers/AboutUs"
-
-import Contact from "./src/screens/Contact"
 
 export default function App() {
-  console.disableYellowBox = true;
- return <Router />;
-//  return <ResetPassword/>
+
+ 
+     return <Router />
+  
+  
+  //  return <Router />;
+  //  return <ResetPassword/>
 }
 
 const styles = StyleSheet.create({

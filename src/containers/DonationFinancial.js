@@ -177,6 +177,7 @@ export default function DonationMaterial({ navigation }) {
             <Text black>Donation Type</Text>
             <RadioForm
               radio_props={type}
+             
               initial={2}
               onPress={(value) => {
                 ToastAndroid.show(value.toString(), ToastAndroid.SHORT),
@@ -195,6 +196,7 @@ export default function DonationMaterial({ navigation }) {
             <Text black>Donation Amount</Text>
             <RadioForm
               radio_props={suggestedAmount}
+           
               initial={2}
               onPress={(value) => {
                 ToastAndroid.show(value.toString(), ToastAndroid.SHORT);
@@ -212,6 +214,7 @@ export default function DonationMaterial({ navigation }) {
                 <Text black>Monthly Donation Amount</Text>
                 <RadioForm
                   radio_props={suggestedAmounte}
+                 
                   initial={2}
                   onPress={(value) => {
                     ToastAndroid.show(value.toString(), ToastAndroid.SHORT);

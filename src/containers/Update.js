@@ -25,7 +25,7 @@ const update = async () =>{
           first_name:name,
           last_name:lastName,
           email:email      }
-    axios.put('192.168.11.171:3000/api/contributors/update/1',data
+    axios.put('http://192.168.11.163:3000/api/contributors/update/7',data
     ).then((response) =>{
     
     })

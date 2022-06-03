@@ -9,9 +9,36 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 import { theme } from "../core/theme";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function confirmPassword({ navigation }) {
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
+export default function ConfirmPassword({ navigation}) {
+  const [password,setPassword]=useState("");
+const [email,setEmail] = useState("")
+
+useEffect(() => {
+ 
+  fetchData()
+})
+const fetchData = async () =>{
+  var token =await AsyncStorage.getItem('UsertokenInfo')
+  console.log(token,'tokennn')
+  try{
+    axios.get('http://192.168.1.101:3000/api/contributors',{headers:{token:token}}
+    ).then((response) =>{
+      console.log(response.data)
+      setEmail(response.data[0].email)
+    })
+  }catch{
+  console.log('first')
+  }
+}
+
+ const checkpassword=()=>{
+     if(password===email){
+navigation.navigate('Update')
+     }else{
+alert('wrong information')
+     }
+ }
+
 
   useEffect(() => {
     // fetchData()
