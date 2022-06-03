@@ -259,7 +259,7 @@ export default function RegisterScreen({ navigation }) {
           onPress={() => {
             axios({
               method: "post",
-              url: `http://192.168.1.105:3000/api/contributors/signup`,
+              url: `http://192.168.11.163:3000/api/contributors/signup`,
               data: {
                 first_name,
                 last_name,
