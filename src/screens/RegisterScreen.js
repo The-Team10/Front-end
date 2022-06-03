@@ -272,8 +272,8 @@ export default function RegisterScreen({ navigation }) {
         <Button
           mode="contained"
 
-          onPress={() => {}}
-          /* onPress={() => {
+          // onPress={() => {}}
+           onPress={() => {
             axios({
               method: "post",
               url: `192.168.11.86:3000/api/contributors/signup`,
@@ -300,9 +300,9 @@ export default function RegisterScreen({ navigation }) {
               .catch((error) => {
                 console.log(error);
               });
-          }} */
+          }} 
 
-          onPress={register}
+          // onPress={register}
 
           style={{ marginTop: 24 }}
         >

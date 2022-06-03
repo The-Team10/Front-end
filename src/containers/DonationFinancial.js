@@ -1,9 +1,9 @@
+
 import React, { Component } from "react";
-// import SelectDropdown from 'react-native-select-dropdown';
+import { MultiSelect } from 'react-native-element-dropdown';
 import { Platform, StyleSheet, ToastAndroid } from "react-native";
-
-import axios from "axios"
-
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import axios from "axios";
 import {
   Text,
   Container,
@@ -40,13 +40,18 @@ const ambulance = require("../images/ambulance.jpg");
 const education1 = require("../images/education1.jpeg");
 const food = require("../images/food.jpg");
 const transport = require("../images/transport.jpg");
+
+
 export default function DonationMaterial({ navigation }) {
+
   const [emergency, setEmergency] = React.useState("");
   const [foods, setFoods] = React.useState("");
   const [educatn, setEducatn] = React.useState("");
   const [transports, setTransport] = React.useState("");
   const [state, setstate] = React.useState("");
   const [value, setValue] = React.useState("");
+  const [selected, setSelected] = useState([]);
+
   const options = ["One Month", "Three Months", "Six Months", "Twelve Months"];
   console.log(value);
   const type = [
@@ -66,25 +71,23 @@ export default function DonationMaterial({ navigation }) {
     { label: "Other", value: "Other" },
   ];
 
+
+  const data = [
+    { label: 'Item 1', value: '1' },
+    { label: 'Item 2', value: '2' },
+    { label: 'Item 3', value: '3' },
+    { label: 'Item 4', value: '4' },
+    { label: 'Item 5', value: '5' },
+    { label: 'Item 6', value: '6' },
+    { label: 'Item 7', value: '7' },
+    { label: 'Item 8', value: '8' },
+  ];
+
   const renderInnerView = (title, image, state, setState) => {
     const fn = () => {};
     return (
-
-      <View
-      // style={{
-      //   width: windowWidth * 0.3,
-      //   //  height: windowWidth * 0.2,
-      //   marginVertical: 8,
-      //   borderRadius: 20,
-      //   flexDirection: 'row',
-      //   alignSelf: "center",
-      //   elevation: 20,
-      // }}
-      >
-
       <View>
         
-
         <Image
           source={image}
           style={{
@@ -108,19 +111,15 @@ export default function DonationMaterial({ navigation }) {
               color: "black",
               fontSize: 15,
               fontWeight: "700",
-
-              alignSelf: "center",
-              top: "70%",
-
               alignSelf: "flex-start",
               top: "35%",
-
               left: 20,
             }}
           >
             {title}
           </Text>
-        <Switch
+
+          <Switch
             style={{ right: 15, bottom: 10 }}
             trackColor={{ false: "gray", true: "#81B0FF" }}
             thumbColor={Constants.primaryColor}
@@ -226,30 +225,80 @@ export default function DonationMaterial({ navigation }) {
                   formHorizontal={true}
                 />
                 <Text black>For How Many Months</Text>
+                return(
+    
+   
+      return (
+        <View style={styles.item}>
+          <Text style={styles.selectedTextStyle}>{item.label}</Text>
+          <AntDesign style={styles.icon} color="black" name="Safety" size={20} />
+        </View>
+      );
+   
+  )
+
+    return (
+      <View style={styles.container}>
+        <MultiSelect
+          style={styles.dropdown}
+          placeholderStyle={styles.placeholderStyle}
+          selectedTextStyle={styles.selectedTextStyle}
+          inputSearchStyle={styles.inputSearchStyle}
+          iconStyle={styles.iconStyle}
+          data={data}
+          labelField="label"
+          valueField="value"
+          placeholder="Select item"
+          value={selected}
+          search
+          searchPlaceholder="Search..."
+          onChange={item => {
+            setSelected(item);
+          }}
+          renderLeftIcon={() => (
+            <AntDesign
+              style={styles.icon}
+              color="black"
+              name="Safety"
+              size={20}
+            />
+          )}
+          renderItem={renderItem}
+          renderSelectedItem={(item, unSelect) => (
+            <TouchableOpacity onPress={() => unSelect && unSelect(item)}>
+              <View style={styles.selectedStyle}>
+                <Text style={styles.textSelectedStyle}>{item.label}</Text>
+                <AntDesign color="black" name="delete" size={17} />
+              </View>
+            </TouchableOpacity>
+          )}
+        />
+      </View>
+    );
+  
                 {/* <SelectDropdown
-
-  data={options}
-  onSelect={(selectedItem, index) => {
-    console.log(selectedItem, index)
-  }}
-  buttonTextAfterSelection={(selectedItem, index) => {
-    (slectedItem === "Monthly"){
-
+	data={options}
+	onSelect={(selectedItem, index) => {
+		console.log(selectedItem, index)
+	}}
+	buttonTextAfterSelection={(selectedItem, index) => {
+		(slectedItem === "Monthly"){
+      
     }
-    return selectedItem
-  }}
-  rowTextForSelection={(item, index) => {
-    // text represented for each item in dropdown
-    // if data array is an array of objects then return item.property to represent item in dropdown
-    return item
-  }}
+		 
+		return selectedItem
+	}}
+	rowTextForSelection={(item, index) => {
+		// text represented for each item in dropdown
+		// if data array is an array of objects then return item.property to represent item in dropdown
+		return item
+	}}
 />  */}
               </>
             ) : null}
           </View>
         </ScrollView>
         <TouchableOpacity
-
           onPress={() => {
             navigation.navigate("CreditCard");
             
@@ -268,7 +317,6 @@ export default function DonationMaterial({ navigation }) {
              });
             }
           }
-
           style={{
             paddingVertical: 15,
             paddingHorizontal: 40,
@@ -291,6 +339,7 @@ export default function DonationMaterial({ navigation }) {
       </View>
     </>
   );
+  
 }
 
 const styles = StyleSheet.create({
@@ -316,4 +365,67 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     // alignItems: 'center',
   },
+  container: { padding: 16 },
+    dropdown: {
+      height: 50,
+      backgroundColor: 'white',
+      borderRadius: 12,
+      padding: 12,
+      shadowColor: '#000',
+      shadowOffset: {
+        width: 0,
+        height: 1,
+      },
+      shadowOpacity: 0.2,
+      shadowRadius: 1.41,
+
+      elevation: 2,
+    },
+    placeholderStyle: {
+      fontSize: 16,
+    },
+    selectedTextStyle: {
+      fontSize: 14,
+    },
+    iconStyle: {
+      width: 20,
+      height: 20,
+    },
+    inputSearchStyle: {
+      height: 40,
+      fontSize: 16,
+    },
+    icon: {
+      marginRight: 5,
+    },
+    item: {
+      padding: 17,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+    },
+    selectedStyle: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: 14,
+      backgroundColor: 'white',
+      shadowColor: '#000',
+      marginTop: 8,
+      marginRight: 12,
+      paddingHorizontal: 12,
+      paddingVertical: 8,
+      shadowOffset: {
+        width: 0,
+        height: 1,
+      },
+      shadowOpacity: 0.2,
+      shadowRadius: 1.41,
+
+      elevation: 2,
+    },
+    textSelectedStyle: {
+      marginRight: 5,
+      fontSize: 16,
+    },
 });
