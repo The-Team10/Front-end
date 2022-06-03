@@ -100,7 +100,7 @@ const ContactUs = ({ navigation }) => {
 
       axios({
           method: "post",
-          url: `http://192.168.11.241:3000/api/contact/contact`,
+          url: `http://192.168.11.163:3000/api/contact/contact`,
          data:credentials
         })
         .then((response) => {

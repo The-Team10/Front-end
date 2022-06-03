@@ -23,9 +23,9 @@ const windowHeight = Dimensions.get("window").height;
 const placeholder = require("../images/placeholder-image.png");
 
 export default function DonationMaterial({ navigation }) {
-  const [first_name, setFirstName] = React.useState("");
-  const [last_name, setLastName] = React.useState("");
-  const [Donation_name, setDonationName] = React.useState("");
+  const [firstName, setFirstName] = React.useState("");
+  const [lastName, setLastName] = React.useState("");
+  const [donationName, setDonationName] = React.useState("");
   const [adress, setAdress] = React.useState("");
   const [phone, setPhone] = React.useState("");
   const [description, setDescription] = React.useState("");
@@ -60,7 +60,6 @@ export default function DonationMaterial({ navigation }) {
   };
 
   const input = (title, state, setState) => {
-    const fn =()=>{}
     return (
       <TextInput
         //  label={title}
@@ -77,7 +76,6 @@ export default function DonationMaterial({ navigation }) {
           fontSize: 14,
           margin: 10, 
         }}
-        
       />
     );
   };
@@ -129,14 +127,32 @@ export default function DonationMaterial({ navigation }) {
         </View>
 
         <View style={{ flex: 1, paddingBottom: 100, top: 0 }}>
-          {input("Firstname", first_name, setFirstName)}
-          {input("LastName", last_name, setLastName)}
+          {input("Firstname", firstName, setFirstName)}
+          {input("LastName", lastName, setLastName)}
           {input("Adress", adress, setAdress)}
           {input("Phone", phone, setPhone)}
-          {input("Donation name", Donation_name, setDonationName)}
+          {input("Donation name", donationName, setDonationName)}
           {input("Description", description, setDescription)}
         </View>
         <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("CreditCard");
+              
+                axios({
+                  method :"post",
+                  url:`http://192.168.1.105:3000/api/helpgiver/donnationFin`,
+                 data:{ typeAmount, amount,category},
+           
+               })
+               .then((response)=>{
+                 if(response.status === 200) {
+                   alert("sended succsseful")
+                 }
+               }).catch((error) => {
+                 console.log(error);
+               });
+              }
+            }
           style={{
             paddingVertical: 15,
             paddingHorizontal: 40,
@@ -152,21 +168,6 @@ export default function DonationMaterial({ navigation }) {
             left: 90,
             right: 90,
             borderRadius: 10,
-          }}
-          onPress={()=>{
-            axios({
-              method :"post",
-              url:`http://192.168.11.241:3000/api/helpgiver/donnationMat`,
-             data:{ first_name, last_name,Donation_name, phone,description,adress},
-       
-           })
-           .then((response)=>{
-             if(response.status === 200) {
-               alert("sended succsseful")
-             }
-           }).catch((error) => {
-             console.log(error);
-           });
           }}
         >
           <Text style={{ color: "white", fontSize: 16 }}>Submit</Text>
@@ -246,9 +247,7 @@ export default function DonationMaterial({ navigation }) {
                   justifyContent: "center",
                   alignSelf: "center",
                 }}
-            
                 onPress={() => pickImageLibrary()}
-                
               >
                 <Text
                   style={{ color: "white", fontSize: 15, fontWeight: "600" }}

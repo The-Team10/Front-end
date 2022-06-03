@@ -15,7 +15,7 @@ export const Colors = {
   secondary: "#e5e7eb",
   tertiary: "#1f2937",
   darklight: "#9ca3af",
-  brand: "#B0E0E6",
+  brand: "#2986cc",
   red: "#ef4444",
 };
 const { primary, secondary, tertiary, darklight, brand } = Colors;
@@ -60,7 +60,7 @@ const Reviews = ({ navigation}) => {
 
     axios({
         method: "post",
-        url: `http://192.168.11.241:3000/api/review/postreview`,
+        url: `http://192.168.11.163:3000/api/review/postreview`,
        data:credentials
       })
       .then((response) => {
@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: "bold",
     letterSpacing: 0.2,
-    color: "#6d28d9",
+    color: "#2986cc",
     paddingLeft: 6,
     margin: 12,
   },

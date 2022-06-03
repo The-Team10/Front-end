@@ -10,7 +10,7 @@ export default function StartScreen({ navigation }) {
     <Background>
       <Logo />
       <Header>All in</Header>
-      <Paragraph>Description sur l'application</Paragraph>
+      {/* <Paragraph>Description sur l'application</Paragraph> */}
       <Button
         mode="contained"
         onPress={() => navigation.navigate('LoginScreen')}

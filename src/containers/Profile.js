@@ -28,7 +28,7 @@ const fetchData = async () =>{
   var token =await AsyncStorage.getItem('UsertokenInfo')
   console.log(token,'tokennn')
   try{
-    axios.get('http://192.168.1.105:3000/api/contributors',{headers:{token:token}}
+    axios.get('http://192.168.11.163:3000/api/contributors',{headers:{token:token}}
     ).then((response) =>{
       console.log(response.data)
   setName(response.data[0].first_name)

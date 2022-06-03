@@ -17,7 +17,7 @@ const HelpMe = () => {
   useEffect(() => {
     axios({
       method: "get",
-      url: `http://192.168.1.105:3000/api/helpgiver/listNeeds`,
+      url: `http://192.168.11.163:3000/api/helpgiver/listNeeds`,
 
       //  data:credentials
     })
@@ -56,8 +56,8 @@ const HelpMe = () => {
           <TouchableOpacity
             style={{
               elevation: 40,
-              width: "90%",
-              height: 150,
+              width: "100%",
+              height: 250,
               borderRadius: 25,
               justifyContent: "center",
               alignItems: "center",
@@ -166,12 +166,32 @@ const HelpMe = () => {
             <Text
               style={{ fontSize: 22, fontWeight: "500", letterSpacing: 0.2 }}
             >
-              {elemnt.description}
+              {elemnt.date}
+          
             </Text>
+            <Text
+              style={{ fontSize: 22, fontWeight: "500", letterSpacing: 0.2 }}
+            >
+              {elemnt.categorie}
+          
+            </Text>
+            <Text
+              style={{ fontSize: 22, fontWeight: "500", letterSpacing: 0.2 }}
+            >
+              {elemnt.region}
+          
+            </Text>
+            <Text
+              style={{ fontSize: 22, fontWeight: "500", letterSpacing: 0.2 }}
+            >
+              {elemnt.description}
+          
+            </Text>
+          
           </TouchableOpacity>,
         ])
       ) : (
-        <Text> dfqfgqfqg </Text>
+        <Text> list </Text>
       )}
     </ScrollView>
   );

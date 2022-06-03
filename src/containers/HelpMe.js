@@ -13,7 +13,8 @@ import { Constants } from "../commun/Constants";
 import BackButton from "../components/BackButton";
 import { LinearGradient } from "expo-linear-gradient";
 import axios from "axios";
-// import { Formik } from "formik";
+//  import { Formik } from "formik";
+//  import {Image} from 'react-native';
 const windowWidth = Dimensions.get("window").width;
 
 export default function HelpMe({ navigation }) {
@@ -29,10 +30,10 @@ export default function HelpMe({ navigation }) {
   const input = (title, state, setState) => {
 
 const fn =()=>{
-
+  
  axios({
      method :"post",
-     url:`http://localhost:3000/api/helpseekers/needs`,
+     url:`http://http://192.168.11.163:3000/api/helpseekers/needs`,
     // data:{ firstName, lastName,helpName, cin,description,adress,status},
     data:{ description},
 
@@ -113,8 +114,8 @@ const fn =()=>{
           onPress={()=>{
             axios({
               method :"post",
-              url:`http://192.168.11.241:3000/api/helpseekers/needs`,
-             data:{ first_name, last_name,need_name,CIN,description,adress,status},
+              url:`http://192.168.1.105:3000/api/helpseekers/needs`,
+             data:{ description},
 
            })
            .then((response)=>{

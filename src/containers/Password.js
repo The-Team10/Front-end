@@ -9,7 +9,7 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 import { theme } from "../core/theme";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function confirmPassword({ navigation}) {
+export default function ConfirmPassword({ navigation}) {
   const [password,setPassword]=useState("");
 const [email,setEmail] = useState("")
 

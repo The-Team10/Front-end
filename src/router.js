@@ -11,6 +11,7 @@ import Contact from "./screens/Contact"
 import CreditCard from "./containers/CreditCard";
 import listOfNeeds from "./containers/listOfNeeds";
 import Donation from "./containers/Donation";
+import HelpMe from "./containers/HelpMe";
 
 import { Provider } from "react-native-paper";
 import { theme } from "./core/theme";
@@ -36,6 +37,7 @@ export default function Router() {
             name="DonationFinancial"
             component={DonationFinancial}
           />
+          <Stack.Screen name="HelpMe" component={HelpMe} />
           {/* <Stack.Screen name="DonationFinancial"component={DonationFinancial}/> */}
         
 
