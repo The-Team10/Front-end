@@ -65,7 +65,6 @@ export default function DonationMaterial({ navigation }) {
     { label: "100", value: 100 },
     { label: "Other", value: "Other" },
   ];
-
   const renderInnerView = (title, image, state, setState) => {
     const fn = () => {};
     return (
@@ -120,7 +119,9 @@ export default function DonationMaterial({ navigation }) {
           >
             {title}
           </Text>
-        <Switch
+
+          <Switch
+
             style={{ right: 15, bottom: 10 }}
             trackColor={{ false: "gray", true: "#81B0FF" }}
             thumbColor={Constants.primaryColor}
@@ -192,7 +193,6 @@ export default function DonationMaterial({ navigation }) {
           </View>
           <View>
             <Text black>Donation Amount</Text>
-
             <RadioForm
               radio_props={suggestedAmount}
               initial={2}
@@ -210,7 +210,6 @@ export default function DonationMaterial({ navigation }) {
             {value === "Monthly" ? (
               <>
                 <Text black>Monthly Donation Amount</Text>
-
                 <RadioForm
                   radio_props={suggestedAmounte}
                   initial={2}
@@ -292,7 +291,6 @@ export default function DonationMaterial({ navigation }) {
     </>
   );
 }
-
 const styles = StyleSheet.create({
   box: {
     // width: windowWidth * 0.3,
