@@ -30,6 +30,7 @@ export default function RegisterScreen({ navigation }) {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [role, setRole] = useState("help_givers");
+  const [anonyme, setAnonyme] = useState(false);
 
   let openImagePickerAsync = async () => {
     let permissionResult = await ImagePicker.requestCameraPermissionsAsync();
@@ -102,6 +103,35 @@ export default function RegisterScreen({ navigation }) {
       })
       .catch((err) => console.log(err));
   };
+  let register = () => {
+    let  data= {
+      first_name,
+      last_name,
+      email,
+      password,
+      role,
+      photo,
+      anonyme,
+    }
+    console.log(data,'dataaaaaaa')
+   
+    axios.post(`http://192.168.22.143:3000/api/contributors`, data)
+      .then((response) => {
+        // console.log(response,"response")
+        // if (response.data === "signup successful") {
+        //   navigation.reset({
+        //     routes: [{ name: "LoginScreen" }],
+        //   });
+        //   alert(response.data);
+        // }
+        // // console.log(response.data);
+        // alert(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+  
 
   return (
     <ScrollView>
@@ -224,6 +254,7 @@ export default function RegisterScreen({ navigation }) {
               />
             </View>
           </TouchableRipple>
+
           <TouchableRipple
             onPress={() => setRole("help_seekers")}
             rippleColor="rgba(0, 0, 0, .32)"
@@ -240,6 +271,7 @@ export default function RegisterScreen({ navigation }) {
         </View>
         <Button
           mode="contained"
+
           onPress={() => {}}
           /* onPress={() => {
             axios({
@@ -269,6 +301,9 @@ export default function RegisterScreen({ navigation }) {
                 console.log(error);
               });
           }} */
+
+          onPress={register}
+
           style={{ marginTop: 24 }}
         >
           Sign Up

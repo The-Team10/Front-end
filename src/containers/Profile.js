@@ -19,6 +19,7 @@ export default function Profile({ navigation }) {
   const [password, setPassword] = useState("");
   const [photo, setPhoto] = useState("");
 
+
   useEffect(() => {
     // fetchData()
   });
@@ -41,6 +42,7 @@ export default function Profile({ navigation }) {
       console.log("first");
     }
   };
+
 
   // const populateForm = (params) => {
   //   setEmail({ value: "", error: "" });

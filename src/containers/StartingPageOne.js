@@ -32,7 +32,7 @@ const StartingPageOne = ({ navigation }) => {
         source={startup1}
         style={{
           // flex: 1,
-          width: windowWidth * 0.8,
+          width: windowWidth * 0.6,
           height: windowHeight * 0.3,
           borderRadius: 100,
         }}
@@ -46,10 +46,11 @@ const StartingPageOne = ({ navigation }) => {
           fontWeigth: "bold",
         }}
       >
-        Always together
+        Always Together
       </Text>
       <TouchableOpacity
         style={{
+          
           paddingVertical: 15,
           paddingHorizontal: 40,
           backgroundColor: Constants.primaryColor,
