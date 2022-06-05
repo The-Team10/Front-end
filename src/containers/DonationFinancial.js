@@ -192,7 +192,7 @@ export default function DonationMaterial({ navigation }) {
               onPress={(value) => {
                 ToastAndroid.show(value.toString(), ToastAndroid.SHORT);
               }}
-              buttonSize={15}
+              buttonSize={15}   
               buttonOuterSize={25}
               selectedButtonColor={"blue"}
               selectedLabelColor={"blue"}
@@ -245,16 +245,15 @@ export default function DonationMaterial({ navigation }) {
         <TouchableOpacity
           onPress={() => {
             navigation.navigate("CreditCard");
-            
               axios({
                 method :"post",
-                url:`http://192.168.1.105:3000/api/helpgiver//donnationFin`,
-               data:{ typeAmount, amount,category},
-         
+                url:`http://192.168.1.23:3000/api/payment/payFinancial`,
+               data:{ first_name:'help',last_name:'giver', amount:100},
+              // data:{data}
              })
              .then((response)=>{
                if(response.status === 200) {
-                 alert("sended succsseful")
+                 alert("sended succsseful ")
                }
              }).catch((error) => {
                console.log(error);

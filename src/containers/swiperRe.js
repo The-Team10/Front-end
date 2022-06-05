@@ -9,12 +9,12 @@ import {
   } from "react-native";
   import React from "react";
   import { SwiperFlatList } from "react-native-swiper-flatlist";
-  const img = require("../images/dn.png")
+  
   
   const data = [
     {
-      img: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8d29tZW58ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
-      text: `Thank you so much for this Opportunity, me and my family are very grateful to this application that provided the chance to my little brother to get operated and heal`,
+      img: "https://images.unsplash.com/photo-1542596768-5d1d21f1cf98?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
+      text: `Thank you `,
     },
     {
       img: "https://images.unsplash.com/photo-1588516903720-8ceb67f9ef84?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=444&q=80",
@@ -22,7 +22,7 @@ import {
     },
     {
       img: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8d29tZW58ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
-      text: `thank you`,
+      text: `Thank you so much for this Opportunity, me and my family are very grateful to this application that provided the chance to my little brother to get operated and heal`,
     },
   ];
   
@@ -38,9 +38,9 @@ import {
         >
             <View style={styles.container}>
           <SwiperFlatList
-            autoplay
-            autoplayDelay={5}
-            autoplayLoop
+            // autoplay
+            // autoplayDelay={5}
+            // autoplayLoop
             index={2}
             showPagination
             data={data}
@@ -68,7 +68,7 @@ import {
     child: { width, justifyContent: "center", padding: 10, alignItems: "center" },
     text: { fontSize: 23, textAlign: "center", fontWeight: "400",color:"white" },
     image: { width: 150, height: 170, borderRadius: 65, marginBottom: 90 },
-    back:{width:"100%",height:700}
+    back:{width:"120%",height:800}
   });
   
   export default swiper;

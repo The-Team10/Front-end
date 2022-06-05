@@ -15,7 +15,7 @@ export const Colors = {
   secondary: "#e5e7eb",
   tertiary: "#1f2937",
   darklight: "#9ca3af",
-  brand: "#2986cc",
+  brand: "#1E90FF",
   red: "#ef4444",
 };
 const { primary, secondary, tertiary, darklight, brand } = Colors;
@@ -60,7 +60,7 @@ const Reviews = ({ navigation}) => {
 
     axios({
         method: "post",
-        url: `http://192.168.11.163:3000/api/review/postreview`,
+        url: `http://192.168.1.23:3000/api/review/postreview`,
        data:credentials
       })
       .then((response) => {
@@ -91,7 +91,7 @@ const Reviews = ({ navigation}) => {
             fontSize: 25,
             fontWeight: "500",
             color: brand,
-            paddingLeft: 30,
+            // paddingLeft: 30,
             marginBottom: 20,
           }}
         >
@@ -100,7 +100,7 @@ const Reviews = ({ navigation}) => {
         <KeyboardWrapper>
           <InnerContainer>
             <Formik
-              initialValues={{ first_name: "", last_name: "",description: "",}}
+              initialValues={{ description: "",}}
               onSubmit={(values, { setSubmitting }) => {
                 if(values.first_name == "" || values.last_name == "" || values.description == ""){
                   alert ('champ vide')
@@ -119,7 +119,7 @@ const Reviews = ({ navigation}) => {
                 isSubmitting,
               }) => (
                 <View>
-                  <Input
+                  {/* <Input
                     label="First Name"
                     icon="person"
                     placeholder="your name"
@@ -127,8 +127,8 @@ const Reviews = ({ navigation}) => {
                     onChangeText={handleChange("first_name")}
                     onBlur={handleBlur("first_name")}
                     value={values.first_name}
-                  />
-                  <Input
+                  /> */}
+                  {/* <Input
                     label="Last Name"
                     icon="person"
                     placeholder="dakhli"
@@ -136,8 +136,8 @@ const Reviews = ({ navigation}) => {
                     onChangeText={handleChange("last_name")}
                     onBlur={handleBlur("last_name")}
                     value={values.last_name}
-                  />
-                  <StyledInputLabel>Description</StyledInputLabel>
+                  /> */}
+                  <StyledInputLabel>Review</StyledInputLabel>
                   <StyledTextInput
                     multiline={true}
                     numberOfLines={5}
@@ -180,10 +180,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     letterSpacing: 0.2,
     color: "#2986cc",
-    paddingLeft: 6,
+    // paddingLeft: 6,
     margin: 12,
   },
 });
+//////////////////////////////////
 // import axios from "axios";
 
 // import _ from "lodash";

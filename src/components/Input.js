@@ -5,7 +5,8 @@ import { Octicons } from "@expo/vector-icons";
 const Colors = {
   secondary: "#e5e7eb",
   tertiary: "#1f2937",
-  brand: "#6d28d9",
+  brand: "#00BFFF",
+  
 };
 const { secondary, tertiary, brand } = Colors;
 

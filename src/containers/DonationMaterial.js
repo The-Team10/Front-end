@@ -16,16 +16,17 @@ import BackButton from "../components/BackButton";
 import { LinearGradient } from "expo-linear-gradient";
 import * as ImagePicker from "expo-image-picker";
 import AntDesign from "react-native-vector-icons/AntDesign";
+import Input from "../components/Input";
 import { Alert, Modal, StyleSheet, Pressable } from "react-native";
-import axios from "axios"
+import axios from "axios";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 const placeholder = require("../images/placeholder-image.png");
 
 export default function DonationMaterial({ navigation }) {
-  const [firstName, setFirstName] = React.useState("");
-  const [lastName, setLastName] = React.useState("");
-  const [donationName, setDonationName] = React.useState("");
+  const [first_name, setFirstName] = React.useState("");
+  const [last_name, setLastName] = React.useState("");
+  const [Donation_name, setDonationName] = React.useState("");
   const [adress, setAdress] = React.useState("");
   const [phone, setPhone] = React.useState("");
   const [description, setDescription] = React.useState("");
@@ -74,7 +75,7 @@ export default function DonationMaterial({ navigation }) {
           borderRadius: 10,
           height: 60,
           fontSize: 14,
-          margin: 10, 
+          margin: 10,
         }}
       />
     );
@@ -126,33 +127,59 @@ export default function DonationMaterial({ navigation }) {
           />
         </View>
 
-        <View style={{ flex: 1, paddingBottom: 100, top: 0 }}>
-          {input("Firstname", firstName, setFirstName)}
-          {input("LastName", lastName, setLastName)}
-          {input("Adress", adress, setAdress)}
-          {input("Phone", phone, setPhone)}
-          {input("Donation name", donationName, setDonationName)}
-          {input("Description", description, setDescription)}
+        
+        <View style={{ padding: 12, marginTop: 30 }}>
+          <Input
+            placeholder="adress"
+            placeholderTextColor="#9ca3af"
+            label="adress"
+            icon="location"
+          />
+          <Input
+            placeholder="phone"
+            placeholderTextColor="#9ca3af"
+            label="phone"
+            icon="device-mobile"
+          />
+
+          <Input
+            placeholder="donnation name"
+            placeholderTextColor="#9ca3af"
+            label="donnation name"
+            icon="bookmark"
+          />
+          <Input
+            placeholder="description"
+            placeholderTextColor="#9ca3af"
+            label="description"
+            icon="note"
+          />
         </View>
         <TouchableOpacity
-            onPress={() => {
-              navigation.navigate("CreditCard");
-              
-                axios({
-                  method :"post",
-                  url:`http://192.168.1.105:3000/api/helpgiver/donnationFin`,
-                 data:{ typeAmount, amount,category},
-           
-               })
-               .then((response)=>{
-                 if(response.status === 200) {
-                   alert("sended succsseful")
-                 }
-               }).catch((error) => {
-                 console.log(error);
-               });
-              }
-            }
+          onPress={() => {
+            navigation.navigate("Home");
+
+            axios({
+              method: "post",
+              url: `http://192.168.11.217:3000/api/helpgiver/donnationMat`,
+              data: {
+                first_name,
+                last_name,
+                adress,
+                phone,
+                Donation_name,
+                description,
+              },
+            })
+              .then((response) => {
+                if (response.status === 200) {
+                  alert("sended succsseful you can check your email");
+                }
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          }}
           style={{
             paddingVertical: 15,
             paddingHorizontal: 40,
@@ -163,10 +190,9 @@ export default function DonationMaterial({ navigation }) {
             borderBottomRightRadius: 30,
             alignItems: "center",
             justifyContent: "center",
-            position: "absolute",
-            bottom: 20,
-            left: 90,
-            right: 90,
+           width:"65%",
+            alignSelf:"center",
+            marginTop:40,
             borderRadius: 10,
           }}
         >

@@ -16,15 +16,11 @@ const ResetPassword = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const sendMessage = () => {
-       axios({
-      method: "post",
-      url: `http://192.168.1.105:3000/api/reset`,
-      data: { email },
-    })
+   axios.post('http://192.168.11.217:3000/api/reset',{email:email})
       .then((response) => {
         if(response.data.message === 'email has been send'){
           // alert(response.data.message);
-          console.log(response.data.message);
+        alert(response.data.message);
         AsyncStorage.setItem("resetToken", response.data.resetToken);
         AsyncStorage.getItem("resetToken", (err, result) => {
           setHashedCode(result);
@@ -32,7 +28,7 @@ const ResetPassword = () => {
         setBoolean(false);
         }else{
           // alert(response.data)
-          console.log(response.data)
+          alert(response.data)
         }
         
       })
@@ -44,7 +40,7 @@ const ResetPassword = () => {
   const verify = async() => {
     axios({
       method: "post",
-      url: `http://192.168.1.105:3000/api/verify`,
+      url: `http://192.168.11.217:3000/api/verify`,
       data: { resetCode, hashedCode },
     })
       .then((response) => {
@@ -64,7 +60,7 @@ const ResetPassword = () => {
   const updatePassword = () => {
     axios({
       method: "post",
-      url: `http://1192.168.1.105:3000/api/update`,
+      url: `http://192.168.11.217:3000/api/update`,
       data: { email,newpassword, confirmPassword },
     })
       .then((response) => {
@@ -99,15 +95,11 @@ const ResetPassword = () => {
                 placeholder="  email..."
               />
               <Pressable onPress={sendMessage} style={styles.button}>
-                <Text style={styles.valid}>Send</Text>
+                <Text style={styles.valid}>send</Text>
               </Pressable>
             </>
           ) 
-          
-          
           :
-          
-          
           (
             <>
               <Text style={styles.title}>verify </Text>

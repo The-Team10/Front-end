@@ -112,7 +112,7 @@ export default function RegisterScreen({ navigation }) {
         <Header>Create Account</Header>
 
         <Text style={{ fontWeight: "500", fontSize: 18 }}>
-          Veuillez choisir votre photo de profil
+        Please choose your profile picture
         </Text>
         <Image
           source={{
@@ -135,15 +135,15 @@ export default function RegisterScreen({ navigation }) {
         >
           <Button
             style={{ marginLeft: 10 }}
-            title="Ouvrir la caméra
-            "
+            title="Open the camera"
+            
             onPress={openImagePickerAsync}
           >
             camera
           </Button>
           <Button
-            title="Ouvrir la galerie
-            "
+            title="Open the gallery"
+            
             onPress={openImagePickerAsyn}
           >
             gallery
@@ -259,7 +259,7 @@ export default function RegisterScreen({ navigation }) {
           onPress={() => {
             axios({
               method: "post",
-              url: `http://192.168.11.163:3000/api/contributors/signup`,
+              url: `http://192.168.1.23:3000/api/contributors/signup`,
               data: {
                 first_name,
                 last_name,

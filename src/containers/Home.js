@@ -142,7 +142,7 @@ export default function Home(props) {
 
       <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
         {renderInnerView("calendar-alt", "Events")}
-        {renderInnerView("user-friends", "Contact us", "Contact")}
+        {/* {renderInnerView("user-friends", "Contact us", "Contact")} */}
       </View>
       {role && role === "help_seekers" ? (
         <View style={{  justifyContent: "center", alignItems:"center" }}>

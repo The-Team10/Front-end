@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import {
   Text,
   View,
@@ -13,10 +13,37 @@ import { Constants } from "../commun/Constants";
 import BackButton from "../components/BackButton";
 import Entypo from "react-native-vector-icons/Entypo";
 import AntDesign from "react-native-vector-icons/AntDesign";
+import { FancyAlert } from 'react-native-expo-fancy-alerts';
+
+// import {  useConfirmPayment } from "@stripe/stripe-react-native";
 
 const windowWidth = Dimensions.get("window").width;
+const stripe = ()=>{
+  const [cardDetails, setCardDetails] = useState();
+  const { confirmPayment, loading } = useConfirmPayment();
+  const fetchPaymentIntentClientSecret = async () => {
+    const response = await fetch("http://192.168.11.217:3000/api/payment/payFinancial", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const { clientSecret, error } = await response.json();
+    return { clientSecret, error };
+  };
 
+  
+}
 export default function CreditCard({ navigation }) {
+
+  const [visible, setVisible] = React.useState(false);
+  const toggleAlert = React.useCallback(() => {
+    setVisible(!visible);
+  }, [visible]);
+  const closeAlert = React.useCallback(() => {
+    setVisible(false);
+  });
+
   const onChange = (form) => console.log(form);
   const [selected, setSelected] = React.useState(false);
   return (
@@ -45,6 +72,7 @@ export default function CreditCard({ navigation }) {
       </LinearGradient>
       <View style={{ paddingTop: 30 }}>
         <CreditCardInput onChange={onChange} />
+        
         {/*  <TouchableOpacity
           onPress={() => setSelected(!selected)}
           style={{
@@ -81,8 +109,8 @@ export default function CreditCard({ navigation }) {
             />
           )}
         </TouchableOpacity> */}
-      </View>
-      <TouchableOpacity
+         <TouchableOpacity
+         onPress={toggleAlert}
         style={{
           paddingVertical: 15,
           paddingHorizontal: 40,
@@ -94,7 +122,7 @@ export default function CreditCard({ navigation }) {
           alignItems: "center",
           justifyContent: "center",
           position: "absolute",
-          bottom: 20,
+          bottom: -70,
           left: 90,
           right: 90,
           borderRadius: 10,
@@ -102,6 +130,55 @@ export default function CreditCard({ navigation }) {
       >
         <Text style={{ color: "white", fontSize: 16 }}>Submit</Text>
       </TouchableOpacity>
+      </View>
+     <View>
+     <FancyAlert
+        visible={visible}
+        icon={
+          <View
+            style={{
+              flex: 1,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: "#1E90FF",
+              borderRadius: 50,
+              width: "100%",
+            }}
+          >
+            <Text style={{ color: "#fff", fontSize: 30 }}>✓</Text>
+          </View>
+        }
+        style={{ backgroundColor: "white" }}
+      >
+        <Text style={{ marginTop: -16, marginBottom: 32 }}>sended successful check your email</Text>
+        <TouchableOpacity style={{
+    borderRadius: 32,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingHorizontal: 8,
+    paddingVertical: 8,
+    alignSelf: "stretch",
+    backgroundColor: "#1E90FF",
+    marginTop: -20,
+    minWidth: "41%",
+    paddingHorizontal: 10,
+  }} onPress={closeAlert}>
+        <Text style={{btnText: {
+    color: "#FFFFFF",
+  },}}>OK</Text>
+      </TouchableOpacity>  
+      <Text style={{ fontSize:25, marginTop: -16, marginBottom: 32}}>
+      
+      
+      </Text>
+      
+      </FancyAlert>
+
+
+     </View>
     </View>
   );
 }

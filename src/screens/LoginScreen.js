@@ -1,4 +1,4 @@
-import React, { useState, useEffect ,useContext} from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { TouchableOpacity, StyleSheet, View } from "react-native";
 import { Text } from "react-native-paper";
 import Background from "../components/Background";
@@ -18,8 +18,6 @@ export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-
-
   useEffect(() => {
     AsyncStorage.getAllKeys((err, keys) => {
       AsyncStorage.multiGet(keys, (error, stores) => {
@@ -34,17 +32,14 @@ export default function LoginScreen({ navigation }) {
   const login = () => {
     axios({
       method: "post",
-      url: `http://192.168.11.163:3000/api/contributors/login`,
+      url: `http://192.168.1.23:3000/api/contributors/login`,
       data: { email, password },
     })
       .then((response) => {
         if (response.status == 200) {
           AsyncStorage.setItem("UsertokenInfo", response.data.token);
-        
+
           navigation.navigate("Dashboard");
-      
-       
-          
         } else {
           alert(response.data);
         }
@@ -52,8 +47,8 @@ export default function LoginScreen({ navigation }) {
       .catch((error) => {
         console.log(error);
       });
-      
   };
+
   return (
     <Background>
       <BackButton goBack={navigation.goBack} />

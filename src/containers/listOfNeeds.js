@@ -9,15 +9,19 @@ import {
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Button from "../components/Button";
+import { useNavigation } from "@react-navigation/native";
 
 const HelpMe = () => {
+
   const [needs, setNeeds] = useState();
   const [visible, setVisible] = useState(false);
+  const navigation = useNavigation()
 
   useEffect(() => {
     axios({
       method: "get",
-      url: `http://192.168.11.163:3000/api/helpgiver/listNeeds`,
+      url: `http://192.168.1.23:3000/api/helpgiver/listNeeds`,
 
       //  data:credentials
     })
@@ -57,7 +61,7 @@ const HelpMe = () => {
             style={{
               elevation: 40,
               width: "100%",
-              height: 250,
+              height: 300,
               borderRadius: 25,
               justifyContent: "center",
               alignItems: "center",
@@ -75,7 +79,6 @@ const HelpMe = () => {
               transparent={true}
               visible={visible}
               onRequestClose={() => setVisible(!visible)}
-              key={elemnt.need_id}
             >
               <View
                 style={{
@@ -160,6 +163,22 @@ const HelpMe = () => {
                       close
                     </Text>
                   </Pressable>
+                  <Pressable
+                    onPress={() => {
+                      navigation.navigate("Donation");
+                      setVisible(!visible);
+                    }}
+                    style={{
+                      backgroundColor: "black",
+                      padding: 6,
+                      borderRadius: 15,
+                      marginTop: 20,
+                    }}
+                  >
+                    <Text style={{ color: "white", fontWeight: "600" }}>
+                      choose
+                    </Text>
+                  </Pressable>
                 </View>
               </View>
             </Modal>
@@ -185,14 +204,21 @@ const HelpMe = () => {
               style={{ fontSize: 22, fontWeight: "500", letterSpacing: 0.2 }}
             >
               {elemnt.description}
+              
           
             </Text>
+         
+     
           
           </TouchableOpacity>,
+          
+
+          
         ])
       ) : (
         <Text> list </Text>
       )}
+      
     </ScrollView>
   );
 };
