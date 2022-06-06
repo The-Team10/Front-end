@@ -25,11 +25,14 @@ export default function Router() {
         <Stack.Navigator screenOptions={{ headerShown: false }}>
 
 
+
           <Stack.Screen name="TabNavigator" component={TabNavigator} />
 
 
        
 
+
+         
           <Stack.Screen name="Splash" component={Splash} />
           <Stack.Screen name="StartUpScreens" component={StartUpScreens} />
           <Stack.Screen name="SignInAndOut" component={SignInAndOut} />
@@ -42,13 +45,13 @@ export default function Router() {
           <Stack.Screen name="list of Needs" component={listOfNeeds} />
           <Stack.Screen name="Contact" component={Contact} />
 
-          <Stack.Screen
+
+         <Stack.Screen
             name="DonationFinancial"
             component={DonationFinancial}
           />
 
-          <Stack.Screen name="HelpMe" component={HelpMe} />
-          {/* <Stack.Screen name="DonationFinancial"component={DonationFinancial}/> */}
+         
         
 
 
@@ -56,8 +59,8 @@ export default function Router() {
           
          
        
-         
 
+         
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
