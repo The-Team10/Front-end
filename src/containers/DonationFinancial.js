@@ -103,7 +103,7 @@ export default function DonationMaterial({ navigation }) {
               fontSize: 15,
               fontWeight: "700",
 
-              alignSelf: "center",
+              alignSelf: "center", 
               top: "70%",
               left: 20,
             }}
@@ -253,7 +253,7 @@ export default function DonationMaterial({ navigation }) {
              })
              .then((response)=>{
                if(response.status === 200) {
-                 alert("sended succsseful ")
+                 console.log("sended succsseful ")
                }
              }).catch((error) => {
                console.log(error);

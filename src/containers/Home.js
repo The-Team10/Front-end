@@ -7,6 +7,8 @@ import {
   StyleSheet,
   TouchableOpacity,
   BackHandler,
+  ScrollView,
+
 } from "react-native";
 import Carousel, { Pagination } from "react-native-snap-carousel";
 // import { Header } from "react-native-elements";
@@ -14,26 +16,40 @@ import { Constants } from "../commun/Constants";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import jwt from "jwt-decode";
+import axios from "axios";
+import EventCard from "../components/EventCard";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 const SLIDER_WIDTH = Dimensions.get("window").width + 80;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
-const img1 = require("../images/img1.jpg");
-const img2 = require("../images/img2.jpg");
-const img3 = require("../images/img3.jpg");
+const img1 = require("../images/donate1.jpg");
+const img2 = require("../images/donate2.jpg");
+const img3 = require("../images/donate3.jpg");
 const materialDonationLogo = require("../images/materialDonationLogo.png");
+
 export default function Home(props) {
+  const [event, setEvent] = useState([]);
   const [role, setRole] = useState("");
   useEffect(() => {
     AsyncStorage.getItem("UsertokenInfo").then((res) => {
       const decoded = jwt(res);
       setRole(decoded.user.role);
     });
-
+    axios
+      .get("http://192.168.1.23:3000/api/getEvents")
+      .then((res) => {
+        setEvent(res.data);
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     BackHandler.addEventListener("hardwareBackPress", handleBackPress);
-    return () =>
+    return () => {
+      setEvent([]);
       BackHandler.removeEventListener("hardwareBackPress", handleBackPress);
+    };
   }, []);
   const handleBackPress = () => {
     return true; // Do nothing when back button is pressed
@@ -63,35 +79,34 @@ export default function Home(props) {
   };
 
   const renderInnerView = (IconName, title, route, image) => {
-    return (
-      <>
-        <TouchableOpacity
-          onPress={() => props?.navigation.navigate(route)}
-          style={{
-            backgroundColor: Constants.primaryColor,
-            width: windowWidth * 0.45,
-            height: windowWidth * 0.35,
-            marginVertical: 8,
-            borderRadius: 20,
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          {image ? (
-            <Image source={materialDonationLogo} style={styles.image} />
-          ) : (
-            <FontAwesome5
-              style={{ bottom: 5 }}
-              name={IconName}
-              size={60}
-              color={Constants.white}
-            />
-          )}
-
-          <Text style={{ color: "white" }}>{title}</Text>
-        </TouchableOpacity>
-      </>
-    );
+    // return (
+    //   <>
+    //     <TouchableOpacity
+    //       onPress={() => props?.navigation.navigate(route)}
+    //       style={{
+    //         backgroundColor: Constants.primaryColor,
+    //         width: windowWidth * 0.45,
+    //         height: windowWidth * 0.35,
+    //         marginVertical: 8,
+    //         borderRadius: 20,
+    //         alignItems: "center",
+    //         justifyContent: "center",
+    //       }}
+    //     >
+    //       {image ? (
+    //         <Image source={materialDonationLogo} style={styles.image} />
+    //       ) : (
+    //         <FontAwesome5
+    //           style={{ bottom: 5 }}
+    //           name={IconName}
+    //           size={60}
+    //           color={Constants.white}
+    //         />
+    //       )}
+    //       <Text style={{ color: "white" }}>{title}</Text>
+    //     </TouchableOpacity>
+    //   </>
+    // );
   };
   return (
     <View
@@ -132,23 +147,117 @@ export default function Home(props) {
           tappableDots={true}
         />
       </View>
-
-      {role && role === "help_givers" ? (
-        <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
-          {renderInnerView("hand-holding-heart", "Donation", "Donation")}
-          {renderInnerView("hands-helping", "list of Needs", "list of Needs")}
+      <View style={{}}>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "flex-end",
+            justifyContent: "center",
+            marginBottom: 20,
+          }}
+        >
+          <TouchableOpacity
+            style={{
+              backgroundColor: "darkblue",
+              width: 120,
+              height: 55,
+              padding: 12,
+              alignItems: "center",
+              justifyContent: "center",
+              borderRadius: 7,
+              marginRight: 4,
+            }}
+          >
+            <Text style={{ color: "white", fontSize: 16, letterSpacing: 0.1 }}>
+              Events
+            </Text>
+          </TouchableOpacity>
+          {role && role === "help_givers" ? (
+            <>
+              <TouchableOpacity
+                style={{
+                  backgroundColor: "skyblue",
+                  width: 120,
+                  padding: 12,
+                  height: 50,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  borderRadius: 7,
+                  marginRight: 4,
+                }}
+                onPress={() => {
+                  props.navigation.navigate("list of Needs");
+                }}
+              >
+                <Text
+                  style={{ color: "white", fontSize: 16, letterSpacing: 0.1 }}
+                >
+                  List of Needs
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={{
+                  backgroundColor: "skyblue",
+                  width: 120,
+                  padding: 12,
+                  height: 50,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  borderRadius: 7,
+                }}
+                onPress={() => {
+                  props.navigation.navigate("Donation");
+                }}
+              >
+                <Text
+                  style={{ color: "white", fontSize: 16, letterSpacing: 0.1 }}
+                >
+                  Donnation
+                </Text>
+              </TouchableOpacity>
+            </>
+          ) : (
+            <TouchableOpacity
+              style={{
+                backgroundColor: "skyblue",
+                width: 120,
+                padding: 12,
+                height: 50,
+                alignItems: "center",
+                justifyContent: "center",
+                borderRadius: 7,
+              }}
+              onPress={() => {
+                props.navigation.navigate("HelpMe");
+              }}
+            >
+              <Text
+                style={{ color: "white", fontSize: 16, letterSpacing: 0.1 }}
+              >
+                need help
+              </Text>
+            </TouchableOpacity>
+          )}
         </View>
-      ) : null}
-
-      <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
-        {renderInnerView("calendar-alt", "Events")}
-        {/* {renderInnerView("user-friends", "Contact us", "Contact")} */}
+        <View >
+          <ScrollView style={{ }}>
+            
+           
+        
+            {event ?(
+              event.map((item) => [
+                
+              <EventCard
+              key={item.event_id}
+              item={item}
+              />
+             
+              ])):null}
+            
+            
+          </ScrollView>
+        </View>
       </View>
-      {role && role === "help_seekers" ? (
-        <View style={{  justifyContent: "center", alignItems:"center" }}>
-          {renderInnerView("hand-holding-heart", "help me ", "HelpMe")}
-        </View>
-      ) : null}
     </View>
   );
 }

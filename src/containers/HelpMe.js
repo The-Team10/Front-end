@@ -89,20 +89,20 @@ const fn =()=>{
             placeholder="date"
             placeholderTextColor="#9ca3af"
             label="date"
-            icon="location"
+            icon="calendar"
           />
           <Input
-            placeholder="phone"
+            placeholder="categorie"
             placeholderTextColor="#9ca3af"
-            label="phone"
-            icon="device-mobile"
+            label="categorie"
+            icon="apps"
           />
 
           <Input
-            placeholder="donnation name"
+            placeholder="region"
             placeholderTextColor="#9ca3af"
-            label="donnation name"
-            icon="bookmark"
+            label="region"
+            icon="location"
           />
           <Input
             placeholder="description"

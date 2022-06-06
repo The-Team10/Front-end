@@ -16,7 +16,7 @@ export const Colors = {
   tertiary: "#1f2937",
   darklight: "#9ca3af",
   brand: "#1E90FF",
-  red: "#ef4444",
+  red: "#1E90FF",
 };
 const { primary, secondary, tertiary, darklight, brand } = Colors;
 const InnerContainer = styled.View`
