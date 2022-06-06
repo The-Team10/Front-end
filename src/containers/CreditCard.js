@@ -72,8 +72,7 @@ export default function CreditCard({ navigation }) {
       </LinearGradient>
       <View style={{ paddingTop: 30 }}>
         <CreditCardInput onChange={onChange} />
-        
-        {/*  <TouchableOpacity
+        {/* <TouchableOpacity
           onPress={() => setSelected(!selected)}
           style={{
             margin: 15,
