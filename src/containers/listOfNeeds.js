@@ -23,7 +23,9 @@ const HelpMe = (navigation) => {
   useEffect(() => {
     axios({
       method: "get",
-      url: `http://192.168.1.17:3000/api/helpgiver/listNeeds`,
+
+      url: `http://192.168.11.163:3000/api/helpgiver/listNeeds`,
+
 
       //  data:credentials
     })
@@ -63,6 +65,34 @@ const HelpMe = (navigation) => {
           //   textAlign: "center",
         }}
       >
+
+        List Of needs
+      </Text>
+      {needs ? (
+        needs.map((elemnt) => [
+          <TouchableOpacity
+            style={{
+              elevation: 40,
+              width: "100%",
+              height: 250,
+              borderRadius: 25,
+              justifyContent: "center",
+              alignItems: "center",
+              margin: 10,
+              backgroundColor: "powderblue",
+              alignSelf: "center",
+            }}
+            onPress={() => {
+              setVisible(!visible);
+            }}
+            key={elemnt.need_id}
+          >
+            <Modal
+              animationType="slide"
+              transparent={true}
+              visible={visible}
+              onRequestClose={() => setVisible(!visible)}
+
         <BackButton inTop white goBack={navigation.goBack} />
         <Header white>Material Donate </Header>
       </LinearGradient>
@@ -79,25 +109,7 @@ const HelpMe = (navigation) => {
             marginBottom: 25,
           }}
         >
-          List Of needs
-        </Text>
-        {needs ? (
-          needs.map((elemnt) => [
-            <TouchableOpacity
-              style={{
-                elevation: 40,
-                width: "90%",
-                height: 150,
-                borderRadius: 25,
-                justifyContent: "center",
-                alignItems: "center",
-                margin: 10,
-                backgroundColor: "powderblue",
-                alignSelf: "center",
-              }}
-              onPress={() => {
-                setVisible(!visible);
-              }}
+
               key={elemnt.need_id}
             >
               <Modal
@@ -192,19 +204,43 @@ const HelpMe = (navigation) => {
                     </Pressable>
                   </View>
                 </View>
-              </Modal>
-              <Text
-                style={{ fontSize: 22, fontWeight: "500", letterSpacing: 0.2 }}
-              >
-                {elemnt.description}
-              </Text>
-            </TouchableOpacity>,
-          ])
-        ) : (
-          <Text> dfqfgqfqg </Text>
-        )}
-      </ScrollView>
+
+              </View>
+            </Modal>
+            <Text
+              style={{ fontSize: 22, fontWeight: "500", letterSpacing: 0.2 }}
+            >
+              {elemnt.date}
+          
+            </Text>
+            <Text
+              style={{ fontSize: 22, fontWeight: "500", letterSpacing: 0.2 }}
+            >
+              {elemnt.categorie}
+          
+            </Text>
+            <Text
+              style={{ fontSize: 22, fontWeight: "500", letterSpacing: 0.2 }}
+            >
+              {elemnt.region}
+          
+            </Text>
+            <Text
+              style={{ fontSize: 22, fontWeight: "500", letterSpacing: 0.2 }}
+            >
+              {elemnt.description}
+          
+            </Text>
+          
+          </TouchableOpacity>,
+        ])
+      ) : (
+        <Text> list </Text>
+      )}
+    </ScrollView>
+
     </View>
+
   );
 };
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Text,
   View,
@@ -12,6 +12,8 @@ import Carousel, { Pagination } from "react-native-snap-carousel";
 // import { Header } from "react-native-elements";
 import { Constants } from "../commun/Constants";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import jwt from "jwt-decode";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -22,7 +24,13 @@ const img2 = require("../images/img2.jpg");
 const img3 = require("../images/img3.jpg");
 const materialDonationLogo = require("../images/materialDonationLogo.png");
 export default function Home(props) {
+  const [role, setRole] = useState("");
   useEffect(() => {
+    AsyncStorage.getItem("UsertokenInfo").then((res) => {
+      const decoded = jwt(res);
+      setRole(decoded.user.role);
+    });
+
     BackHandler.addEventListener("hardwareBackPress", handleBackPress);
     return () =>
       BackHandler.removeEventListener("hardwareBackPress", handleBackPress);
@@ -56,31 +64,33 @@ export default function Home(props) {
 
   const renderInnerView = (IconName, title, route, image) => {
     return (
-      <TouchableOpacity
-        onPress={() => props?.navigation.navigate(route)}
-        style={{
-          backgroundColor: Constants.primaryColor,
-          width: windowWidth * 0.45,
-          height: windowWidth * 0.35,
-          marginVertical: 8,
-          borderRadius: 20,
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        {image ? (
-          <Image source={materialDonationLogo} style={styles.image} />
-        ) : (
-          <FontAwesome5
-            style={{ bottom: 5 }}
-            name={IconName}
-            size={60}
-            color={Constants.white}
-          />
-        )}
+      <>
+        <TouchableOpacity
+          onPress={() => props?.navigation.navigate(route)}
+          style={{
+            backgroundColor: Constants.primaryColor,
+            width: windowWidth * 0.45,
+            height: windowWidth * 0.35,
+            marginVertical: 8,
+            borderRadius: 20,
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          {image ? (
+            <Image source={materialDonationLogo} style={styles.image} />
+          ) : (
+            <FontAwesome5
+              style={{ bottom: 5 }}
+              name={IconName}
+              size={60}
+              color={Constants.white}
+            />
+          )}
 
-        <Text style={{ color: "white" }}>{title}</Text>
-      </TouchableOpacity>
+          <Text style={{ color: "white" }}>{title}</Text>
+        </TouchableOpacity>
+      </>
     );
   };
   return (
@@ -123,15 +133,22 @@ export default function Home(props) {
         />
       </View>
 
-      <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
-        {renderInnerView("hand-holding-heart", "Donation", "Donation")}
-        {renderInnerView("hands-helping", "list of Needs", "list of Needs")}
-      </View>
+      {role && role === "help_givers" ? (
+        <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
+          {renderInnerView("hand-holding-heart", "Donation", "Donation")}
+          {renderInnerView("hands-helping", "list of Needs", "list of Needs")}
+        </View>
+      ) : null}
 
       <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
         {renderInnerView("calendar-alt", "Events")}
         {renderInnerView("user-friends", "Contact us", "Contact")}
       </View>
+      {role && role === "help_seekers" ? (
+        <View style={{  justifyContent: "center", alignItems:"center" }}>
+          {renderInnerView("hand-holding-heart", "help me ", "HelpMe")}
+        </View>
+      ) : null}
     </View>
   );
 }

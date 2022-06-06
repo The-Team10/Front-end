@@ -287,12 +287,40 @@ export default function RegisterScreen({ navigation }) {
           </TouchableRipple>
         </View>
 
-        <Button mode="contained" onPress={register} style={{ marginTop: 24 }}>
+        <Button
+          mode="contained"
+          onPress={() => {
+            axios({
+              method: "post",
+              url: `http://192.168.11.163:3000/api/contributors/signup`,
+              data: {
+                first_name,
+                last_name,
+                email,
+                password,
+                confirmPassword,
+                role,
+                photo,
+                anonyme,
+              },
+            })
+              .then((response) => {
+                if (response.data === "signup successful") {
+                  navigation.reset({
+                    routes: [{ name: "LoginScreen" }],
+                  });
+                  alert(response.data);
+                }
+                // console.log(response.data);
+                alert(response.data);
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          }}
+          style={{ marginTop: 24 }}
+        >
 
-
-         
-
-       
           Sign Up
         </Button>
         <View style={styles.row}>

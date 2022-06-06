@@ -14,7 +14,7 @@ import { emailValidator } from "../helpers/emailValidator";
 import { passwordValidator } from "../helpers/passwordValidator";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import jwt from "jwt-decode";
-import { userData } from "../components/Context";
+
 import axios from "axios";
 
 // export default function LoginScreen({ navigation }) {
@@ -38,7 +38,9 @@ import axios from "axios";
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   //  const[data,setData]=useContext(userData)
+
 
   useEffect(() => {
     AsyncStorage.getAllKeys((err, keys) => {
@@ -54,17 +56,21 @@ export default function LoginScreen({ navigation }) {
   const login = () => {
     axios({
       method: "post",
-      url: `http://192.168.1.17:3000/api/contributors/login`,
+
+      url: `http://192.168.11.163:3000/api/contributors/login`,
       data: { email, password },
     })
       .then((response) => {
-       console.log(response.data.message,"response");
-        if (response.data.message === "login successful") {
-         /*  AsyncStorage.setItem("UsertokenInfo", response.data.token);
-          decoded = jwt(response.data.token); */
+        if (response.status == 200) {
+          AsyncStorage.setItem("UsertokenInfo", response.data.token);
+        
           navigation.navigate("Dashboard");
-          //  setData(decoded.user)
-          //  console.log(data)
+      
+       
+          
+        } else {
+          alert(response.data);
+
         }
         else if (response.data.message !== "login successful") alert("login failed")
       })
