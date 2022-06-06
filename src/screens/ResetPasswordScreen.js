@@ -4,9 +4,9 @@ import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Input from "../components/Input";
 
 const ResetPassword = () => {
-  
   const [email, setEmail] = useState("");
   const [boolean, setBoolean] = useState(true);
   const [boolean1, setBoolean1] = useState(true);
@@ -16,41 +16,42 @@ const ResetPassword = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const sendMessage = () => {
-   axios.post('http://192.168.11.217:3000/api/reset',{email:email})
+    axios
+      .post("http://192.168.1.23:3000/api/reset", { email: email })
       .then((response) => {
-        if(response.data.message === 'email has been send'){
+        if (response.data.message === "email has been send") {
           // alert(response.data.message);
-        alert(response.data.message);
-        AsyncStorage.setItem("resetToken", response.data.resetToken);
-        AsyncStorage.getItem("resetToken", (err, result) => {
-          setHashedCode(result);
-        });
-        setBoolean(false);
-        }else{
+          alert(response.data.message);
+          AsyncStorage.setItem("resetToken", response.data.resetToken);
+          AsyncStorage.getItem("resetToken", (err, result) => {
+            setHashedCode(result);
+          });
+          setBoolean(false);
+        } else {
           // alert(response.data)
-          alert(response.data)
+          alert(response.data);
         }
-        
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
-  const verify = async() => {
+  const verify = async () => {
     axios({
       method: "post",
-      url: `http://192.168.11.217:3000/api/verify`,
+      url: `http://192.168.1.23:3000/api/verify`,
       data: { resetCode, hashedCode },
     })
       .then((response) => {
-        if(response.data==='you can change your password'){
-          AsyncStorage.removeItem("resetToken")
-          
+        if (response.data === "you can change your password") {
+          AsyncStorage.removeItem("resetToken");
+
           // alert(response.data);
-          console.log(response.data)
-          setBoolean1(false)
-        }alert(response.data)
+          console.log(response.data);
+          setBoolean1(false);
+        }
+        alert(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -60,20 +61,20 @@ const ResetPassword = () => {
   const updatePassword = () => {
     axios({
       method: "post",
-      url: `http://192.168.11.217:3000/api/update`,
-      data: { email,newpassword, confirmPassword },
+      url: `http://192.168.1.23:3000/api/update`,
+      data: { email, newpassword, confirmPassword },
     })
       .then((response) => {
-        if(response.data==='password updated successfully'){
+        if (response.data === "password updated successfully") {
           alert(response.data);
           navigation.navigate("Login");
-        }alert(response.data)
+        }
+        alert(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
   };
-
 
   const navigation = useNavigation();
 
@@ -81,63 +82,127 @@ const ResetPassword = () => {
     <View>
       <View style={styles.bord}></View>
       <View style={styles.all}>
-        
-        { boolean1 ? 
-        <>{boolean ? (
-            <>
-              <Text style={styles.title}>Your email </Text>
-  
-              <Text>an email will be sent to your email </Text>
-  
-              <TextInput
+        {boolean1 ? (
+          <>
+            {boolean ? (
+              <>
+                <Text style={styles.title}>Your email </Text>
+
+                <Text>an email will be sent to your email </Text>
+                <Input
+                  placeholder="email"
+                  onChangeText={(newText) => setEmail(newText)}
+                  placeholderTextColor="#9ca3af"
+                  label="email"
+                  icon="mail"
+                />
+
+                {/* <TextInput
                 style={styles.input}
                 onChangeText={(newText) => setEmail(newText)}
                 placeholder="  email..."
-              />
-              <Pressable onPress={sendMessage} style={styles.button}>
-                <Text style={styles.valid}>send</Text>
-              </Pressable>
-            </>
-          ) 
-          :
-          (
-            <>
-              <Text style={styles.title}>verify </Text>
-              <Text>put the code here </Text>
-              <TextInput
-                style={styles.input}
-                onChangeText={(newText) => setResetCode(newText)}
-                placeholder="  verify..."
-              />
-              <Pressable style={styles.button} onPress={verify}>
-                <Text style={styles.valid}>verify</Text>
-              </Pressable>
-            </>
-          )}</>
-          
-          :
-          
-          
-          
-          
+              /> */}
+                <Pressable
+                  onPress={sendMessage}
+                  style={{
+                    width: "60%",
+                    height: 50,
+                    borderRadius: 5,
+                    backgroundColor: "#3196f0",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginTop:20,
+
+                  }}
+                >
+                  <Text style={{color:"white",letterSpacing:0.2,}}>send your email</Text>
+                </Pressable>
+              </>
+            ) : (
+              <>
+                <Text style={styles.title}>verify </Text>
+                <Text>put the code here </Text>
+                <Input
+                  placeholder="verify"
+                  onChangeText={(newText) => setResetCode(newText)}
+                  placeholderTextColor="#9ca3af"
+                  label="verify"
+                  
+                />
+                {/* <TextInput
+                  style={styles.input}
+                  onChangeText={(newText) => setResetCode(newText)}
+                  placeholder="  verify..."
+                /> */}
+                 <Pressable
+                  onPress={verify}
+                  style={{
+                    width: "60%",
+                    height: 50,
+                    borderRadius: 5,
+                    backgroundColor: "#3196f0",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginTop:20,
+
+                  }}
+                >
+                  <Text style={{color:"white",letterSpacing:0.2,}}> Verify</Text>
+                </Pressable>
+                {/* <Pressable style={styles.button} onPress={verify}>
+                  <Text style={styles.valid}>verify</Text>
+                </Pressable> */}
+              </>
+            )}
+          </>
+        ) : (
           <>
-              <Text style={styles.title}>update </Text>
-              <Text>update your password </Text>
-              <TextInput
-                style={styles.input}
-                onChangeText={(newText) => setNewPassword(newText)}
-                placeholder="  new password..."
-              />
-                <TextInput
-                style={styles.input}
-                 onChangeText={(newText) => setConfirmPassword(newText)}
-                placeholder="  confirm your new password..."
-              />
-              <Pressable style={styles.button} onPress={updatePassword} >
-                <Text style={styles.valid}>update</Text>
-              </Pressable>
-            </>
-            }
+            <Text style={styles.title}>update </Text>
+            <Text>update your password </Text>
+            <Input
+                  placeholder="new password"
+                  onChangeText={(newText) => setNewPassword(newText)}
+                  placeholderTextColor="#9ca3af"
+                  label="New Password"
+                  
+                />
+            {/* <TextInput
+              style={styles.input}
+              onChangeText={(newText) => setNewPassword(newText)}
+              placeholder="  new password..."
+            /> */}
+                <Input
+                  placeholder="confirm password"
+                  onChangeText={(newText) => setConfirmPassword(newText)}
+                  placeholderTextColor="#9ca3af"
+                  label="confirm password"
+                  
+                />
+            {/* <TextInput
+              style={styles.input}
+              onChangeText={(newText) => setConfirmPassword(newText)}
+              placeholder="  confirm your new password..."
+            /> */}
+             <Pressable
+                  onPress={updatePassword}
+                  style={{
+                    width: "60%",
+                    height: 50,
+                    borderRadius: 5,
+                    backgroundColor: "#3196f0",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginTop:20,
+
+                  }}
+                >
+                  <Text style={{color:"white",letterSpacing:0.2,}}> update</Text>
+                </Pressable>
+            {/* <Pressable style={styles.button} onPress={updatePassword}>
+              <Text style={styles.valid}>update</Text>
+            </Pressable> */}
+          </>
+        )}
       </View>
     </View>
   );
@@ -183,11 +248,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: "5%",
   },
-})
+});
 
 /////////////////////////////////////////
-
-
 
 // import React, { useState } from 'react'
 // import Background from '../components/Background'

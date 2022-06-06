@@ -80,8 +80,10 @@ export default function DonationMaterial({ navigation }) {
               color: "black",
               fontSize: 15,
               fontWeight: "700",
+
               alignSelf: "flex-start",
               top: "35%",
+
               left: 20,
             }}
           >
@@ -214,6 +216,7 @@ export default function DonationMaterial({ navigation }) {
         <TouchableOpacity
           onPress={() => {
             navigation.navigate("CreditCard");
+
             axios({
               method: "post",
               url: `http://192.168.57.70:3000/api/helpgiver//donnationFin`,
@@ -228,6 +231,7 @@ export default function DonationMaterial({ navigation }) {
                 console.log(error);
               });
           }}
+
           style={{
             paddingVertical: 15,
             paddingHorizontal: 40,

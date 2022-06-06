@@ -157,11 +157,11 @@ export default function DonationMaterial({ navigation }) {
         </View>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate("Home");
+            // navigation.navigate("Home");
 
             axios({
               method: "post",
-              url: `http://192.168.11.217:3000/api/helpgiver/donnationMat`,
+              url: `http://192.168.1.23:3000/api/helpgiver/donnationMat`,
               data: {
                 first_name,
                 last_name,
