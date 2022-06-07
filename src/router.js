@@ -47,8 +47,7 @@ export default function Router() {
             component={DonationFinancial}
           />
 
-          <Stack.Screen name="HelpMe" component={HelpMe} />
-          {/* <Stack.Screen name="DonationFinancial"component={DonationFinancial}/> */}
+         
         
 
 
