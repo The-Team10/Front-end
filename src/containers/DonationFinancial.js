@@ -1,27 +1,20 @@
 import React, { Component } from "react";
-// import SelectDropdown from 'react-native-select-dropdown';
 import { Platform, StyleSheet, ToastAndroid } from "react-native";
-import axios from "axios"
+import axios from "axios";
 import {
   Text,
-  Container,
   View,
   ScrollView,
   TouchableOpacity,
-  TextInput,
   Image,
   Dimensions,
   Switch,
   StatusBar,
 } from "react-native";
-import RadioForm, {
-  RadioButton,
-  RadioButtonInput,
-  RadioButtonLabel,
-} from "react-native-simple-radio-button";
 import Header from "../components/Header";
 import { Constants } from "../commun/Constants";
 import BackButton from "../components/BackButton";
+import { LinearGradient } from "expo-linear-gradient";
 const rows = 3;
 const cols = 2;
 const marginHorizontal = 4;
@@ -31,9 +24,6 @@ const width =
 const height =
   Dimensions.get("window").height / rows - marginVertical * (rows + 1);
 const windowWidth = Dimensions.get("window").width;
-//import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import { LinearGradient } from "expo-linear-gradient";
-// import { CheckBox, Button } from "react-native-elements";
 const ambulance = require("../images/ambulance.jpg");
 const education1 = require("../images/education1.jpeg");
 const food = require("../images/food.jpg");
@@ -63,24 +53,10 @@ export default function DonationMaterial({ navigation }) {
     { label: "100", value: 100 },
     { label: "Other", value: "Other" },
   ];
-
   const renderInnerView = (title, image, state, setState) => {
     const fn = () => {};
     return (
-      <View
-      // style={{
-
-      //   width: windowWidth * 0.3,
-      //   //  height: windowWidth * 0.2,
-
-      //   marginVertical: 8,
-      //   borderRadius: 20,
-      //   flexDirection: 'row',
-      //   alignSelf: "center",
-
-      //   elevation: 20,
-      // }}
-      >
+      <View>
         <Image
           source={image}
           style={{
@@ -88,6 +64,8 @@ export default function DonationMaterial({ navigation }) {
             height: windowWidth * 0.2,
             borderTopLeftRadius: 15,
             borderTopRightRadius: 15,
+            borderBottomLeftRadius: 15,
+            borderBottomRightRadius: 15,
           }}
         />
         <View
@@ -102,15 +80,13 @@ export default function DonationMaterial({ navigation }) {
               color: "black",
               fontSize: 15,
               fontWeight: "700",
-
-              alignSelf: "center",
-              top: "70%",
+              alignSelf: "flex-start",
+              top: "35%",
               left: 20,
             }}
           >
             {title}
           </Text>
-
           <Switch
             style={{ right: 15, bottom: 10 }}
             trackColor={{ false: "gray", true: "#81B0FF" }}
@@ -167,7 +143,6 @@ export default function DonationMaterial({ navigation }) {
             <Text black>Donation Type</Text>
             <RadioForm
               radio_props={type}
-             
               initial={2}
               onPress={(value) => {
                 ToastAndroid.show(value.toString(), ToastAndroid.SHORT),
@@ -184,15 +159,13 @@ export default function DonationMaterial({ navigation }) {
           </View>
           <View>
             <Text black>Donation Amount</Text>
-
             <RadioForm
               radio_props={suggestedAmount}
-           
               initial={2}
               onPress={(value) => {
                 ToastAndroid.show(value.toString(), ToastAndroid.SHORT);
               }}
-              buttonSize={15}   
+              buttonSize={15}
               buttonOuterSize={25}
               selectedButtonColor={"blue"}
               selectedLabelColor={"blue"}
@@ -203,10 +176,8 @@ export default function DonationMaterial({ navigation }) {
             {value === "Monthly" ? (
               <>
                 <Text black>Monthly Donation Amount</Text>
-
                 <RadioForm
                   radio_props={suggestedAmounte}
-                 
                   initial={2}
                   onPress={(value) => {
                     ToastAndroid.show(value.toString(), ToastAndroid.SHORT);
@@ -221,22 +192,20 @@ export default function DonationMaterial({ navigation }) {
                 />
                 <Text black>For How Many Months</Text>
                 {/* <SelectDropdown
-	data={options}
-	onSelect={(selectedItem, index) => {
-		console.log(selectedItem, index)
-	}}
-	buttonTextAfterSelection={(selectedItem, index) => {
-		(slectedItem === "Monthly"){
-      
+  data={options}
+  onSelect={(selectedItem, index) => {
+    console.log(selectedItem, index)
+  }}
+  buttonTextAfterSelection={(selectedItem, index) => {
+    (slectedItem === "Monthly"){
     }
-		 
-		return selectedItem
-	}}
-	rowTextForSelection={(item, index) => {
-		// text represented for each item in dropdown
-		// if data array is an array of objects then return item.property to represent item in dropdown
-		return item
-	}}
+    return selectedItem
+  }}
+  rowTextForSelection={(item, index) => {
+    // text represented for each item in dropdown
+    // if data array is an array of objects then return item.property to represent item in dropdown
+    return item
+  }}
 />  */}
               </>
             ) : null}
@@ -245,21 +214,20 @@ export default function DonationMaterial({ navigation }) {
         <TouchableOpacity
           onPress={() => {
             navigation.navigate("CreditCard");
-              axios({
-                method :"post",
-                url:`http://192.168.1.23:3000/api/payment/payFinancial`,
-               data:{ first_name:'help',last_name:'giver', amount:100},
-              // data:{data}
-             })
-             .then((response)=>{
-               if(response.status === 200) {
-                 alert("sended succsseful ")
-               }
-             }).catch((error) => {
-               console.log(error);
-             });
-            }
-          }
+            axios({
+              method: "post",
+              url: `http://192.168.57.70:3000/api/helpgiver//donnationFin`,
+              data: { typeAmount, amount, category },
+            })
+              .then((response) => {
+                if (response.status === 200) {
+                  alert("sended succsseful");
+                }
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          }}
           style={{
             paddingVertical: 15,
             paddingHorizontal: 40,
@@ -283,7 +251,6 @@ export default function DonationMaterial({ navigation }) {
     </>
   );
 }
-
 const styles = StyleSheet.create({
   box: {
     // width: windowWidth * 0.3,

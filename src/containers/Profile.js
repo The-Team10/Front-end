@@ -52,6 +52,7 @@ export default function Profile({ navigation }) {
     }
   };
 
+
   // const populateForm = (params) => {
   //   setEmail({ value: "", error: "" });
   //   setPhone({ value: "", error: "" });
@@ -66,145 +67,70 @@ export default function Profile({ navigation }) {
   };
 
   return (
-    <>
-      <ScrollView style={styles.container}>
-        <View style={styles.avatar}>
-          <Avatar.Image
-            style={{ backgroundColor: theme.colors.secondary }}
-            size={100}
-            source={{ uri: photo }}
-          />
-        </View>
-        <View style={styles.fullname}>
-          <Text style={{ fontSize: 28, fontWeight: "bold" }}>
-            {name}
-            {/* {"_.capitalize(authState.contributors.FirstName)"} */}
-          </Text>
-        </View>
-        <View style={{ flexDirection: "row", justifyContent: "center" }}>
-          {/* <Text style={{ fontSize: 16 }}>{"authState.user.email"}</Text> */}
-        </View>
-        <View style={styles.logout}>
-          <Button
-            mode="text"
-            onPress={logout}
-            icon={() => <AntDesign size={18} name="logout" color="#000" />}
-          >
-            Déconnexion
-          </Button>
-        </View>
-        <View style={{ padding: 12, marginTop: 30 }}>
-          <Input
-            placeholder="First name"
-            placeholderTextColor="#9ca3af"
-            label="First name"
-            icon="person"
-            returnKeyType="next"
-            value={name}
-            onChangeText={(text) => setName({ value: text, error: "" })}
-            error={!!name.error}
-            errorText={name.error}
-          />
-          <Input
-            placeholder="Last name"
-            placeholderTextColor="#9ca3af"
-            label="Last name"
-            icon="person"
-            dense={false}
-            returnKeyType="next"
-            value={lastName}
-            onChangeText={(text) => setName({ value: text, error: "" })}
-            error={!!name.error}
-            errorText={name.error}
-          />
+    <ScrollView style={styles.container}>
+      <View style={styles.avatar}>
+        <Avatar.Image
+          style={{ backgroundColor: theme.colors.secondary }}
+          size={100}
+          source={{ uri: photo }}
+        />
+      </View>
+      <View style={styles.fullname}>
+        <Text style={{ fontSize: 28, fontWeight: "bold" }}>
+          {name}
+          {/* {"_.capitalize(authState.contributors.FirstName)"} */}
+        </Text>
+      </View>
+      <View style={{ flexDirection: "row", justifyContent: "center" }}>
+        {/* <Text style={{ fontSize: 16 }}>{"authState.user.email"}</Text> */}
+      </View>
+      <View style={styles.logout}>
+        <Button
+          mode="text"
+          onPress={() => console.log("signout")}
+          icon={() => <AntDesign size={18} name="logout" color="#000" />}
+        >
+          Déconnexion
+        </Button>
+      </View>
+      <View style={{ paddingHorizontal: 20 }}>
+        <TextInput
+          label="First Name"
+          mode="contained"
+          style={styles.textInput}
+          dense={false}
+          returnKeyType="next"
+          value={name}
+          onChangeText={(text) => setName({ value: text, error: "" })}
+          error={!!name.error}
+          errorText={name.error}
+        />
+        <TextInput
+          label="last Name"
+          mode="contained"
+          style={styles.textInput}
+          dense={false}
+          returnKeyType="next"
+          value={lastName}
+          onChangeText={(text) => setName({ value: text, error: "" })}
+          error={!!name.error}
+          errorText={name.error}
+        />
 
-          <Input
-            placeholder="email"
-            placeholderTextColor="#9ca3af"
-            label="email"
-            icon=""
-            dense={false}
-            returnKeyType="next"
-            value={email}
-            onChangeText={(text) => setPhone({ value: text, error: "" })}
-            error={!!phone.error}
-            errorText={phone.error}
-            autoCapitalize="none"
-          />
-        
-        </View>
-        {/* <View style={{ paddingHorizontal: 20 }}>
-          <TextInput
-            label="First Name"
-            mode="contained"
-            style={styles.textInput}
-            dense={false}
-            returnKeyType="next"
-            value={name}
-            onChangeText={(text) => setName({ value: text, error: "" })}
-            error={!!name.error}
-            errorText={name.error}
-          />
-          <TextInput
-            label="last Name"
-            mode="contained"
-            style={styles.textInput}
-            dense={false}
-            returnKeyType="next"
-            value={lastName}
-            onChangeText={(text) => setName({ value: text, error: "" })}
-            error={!!name.error}
-            errorText={name.error}
-          />
-
-          <TextInput
-            label="email"
-            mode="contained"
-            style={styles.textInput}
-            dense={false}
-            returnKeyType="next"
-            value={email}
-            onChangeText={(text) => setPhone({ value: text, error: "" })}
-            error={!!phone.error}
-            errorText={phone.error}
-            autoCapitalize="none"
-          />
-        </View> */}
-        <View style={{ flexDirection: "row", justifyContent: "center" }}>
-          <Text
-            style={{
-              ...styles.message,
-              color:
-                monitor.type === "error"
-                  ? theme.colors.error
-                  : theme.colors.success,
-            }}
-          >
-            {monitor.message}
-          </Text>
-        </View>
-        <View style={{ margin: 20 }}>
-          <Button
-            mode="contained"
-            color={theme.colors.primary}
-            style={{ borderRadius: 50 }}
-            loading={loading}
-            icon={() => (
-              <AntDesign size={17} name="edit" color={theme.colors.primary} />
-            )}
-            onPress={() => {
-              navigation.navigate("Password");
-            }}
-          >
-            UPDATE
-          </Button>
-        </View>
-      </ScrollView>
-      <TouchableOpacity 
-       onPress={() => {
-        navigation.navigate("Contact");
-      }}
-      style={{backgroundColor:"white", paddingBottom:30,paddingLeft:15}}>
+        <TextInput
+          label="email"
+          mode="contained"
+          style={styles.textInput}
+          dense={false}
+          returnKeyType="next"
+          value={email}
+          onChangeText={(text) => setPhone({ value: text, error: "" })}
+          error={!!phone.error}
+          errorText={phone.error}
+          autoCapitalize="none"
+        />
+      </View>
+      <View style={{ flexDirection: "row", justifyContent: "center" }}>
         <Text
           style={{
             color: "#1E90FF",
@@ -215,8 +141,24 @@ export default function Profile({ navigation }) {
         >
           Contact Us
         </Text>
-      </TouchableOpacity>
-    </>
+      </View>
+      <View style={{ margin: 20 }}>
+        <Button
+          mode="contained"
+          color={theme.colors.primary}
+          style={{ borderRadius: 50 }}
+          loading={loading}
+          icon={() => (
+            <AntDesign size={17} name="edit" color={theme.colors.primary} />
+          )}
+          onPress={() => {
+            navigation.navigate("Password");
+          }}
+        >
+          UPDATE
+        </Button>
+      </View>
+    </ScrollView>
   );
 }
 const styles = StyleSheet.create({

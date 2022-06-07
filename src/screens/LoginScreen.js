@@ -12,12 +12,12 @@ import { emailValidator } from "../helpers/emailValidator";
 import { passwordValidator } from "../helpers/passwordValidator";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import jwt from "jwt-decode";
-
+import { userData } from "../components/Context";
 import axios from "axios";
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  //  const[data,setData]=useContext(userData)
   useEffect(() => {
     AsyncStorage.getAllKeys((err, keys) => {
       AsyncStorage.multiGet(keys, (error, stores) => {
@@ -28,27 +28,27 @@ export default function LoginScreen({ navigation }) {
       });
     });
   });
-
   const login = () => {
     axios({
       method: "post",
-      url: `http://192.168.1.23:3000/api/contributors/login`,
+      url: `http://192.168.57.70:3000/api/contributors/login`,
       data: { email, password },
     })
       .then((response) => {
-        if (response.status == 200) {
-          AsyncStorage.setItem("UsertokenInfo", response.data.token);
-
+       console.log(response.data.message,"response");
+        if (response.data.message === "login successful") {
+         /*  AsyncStorage.setItem("UsertokenInfo", response.data.token);
+          decoded = jwt(response.data.token); */
           navigation.navigate("Dashboard");
-        } else {
-          alert(response.data);
+          //  setData(decoded.user)
+          //  console.log(data)
         }
+        else if (response.data.message !== "login successful") alert("login failed")
       })
       .catch((error) => {
         console.log(error);
       });
   };
-
   return (
     <Background>
       <BackButton goBack={navigation.goBack} />
